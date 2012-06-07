@@ -14,14 +14,15 @@ class Chessboard {
     Piece * kingW;
     Piece * kingB;
     bool player; // white 0, black 1
-    void Capture(Piece * attacker, Piece * captured);
-    void Promote(Piece * promotee, char promoteTo);  
+    void promote(Piece * promotee, char promoteTo);
+    void rollBack();
     
 public:
     Chessboard();
     bool doMove(Move m);
     bool isFree(Position a);
     Piece getPiece (Position a);
+    void capture(Piece * attacker, Piece * captured);
 
     
 }

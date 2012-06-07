@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		A0138E8C1580D48500C1062C /* Scacchiera */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Scacchiera; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0138E901580D48500C1062C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A0138E901580D48500C1062C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Scacchiera/main.cpp; sourceTree = "<group>"; };
 		A0138E921580D48500C1062C /* Scacchiera.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Scacchiera.1; sourceTree = "<group>"; };
 		A0138E991580D4AB00C1062C /* interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interface.h; path = ../interface.h; sourceTree = "<group>"; };
 		A0138E9A1580D85400C1062C /* chessboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessboard.h; path = ../chessboard.h; sourceTree = "<group>"; };
@@ -51,6 +51,7 @@
 				A0138E9C1580DE6500C1062C /* struct.h */,
 				A0138E991580D4AB00C1062C /* interface.h */,
 				A0138E9A1580D85400C1062C /* chessboard.h */,
+				A0138E901580D48500C1062C /* main.cpp */,
 				A0138E9B1580DCE700C1062C /* piece.h */,
 				A0138E8F1580D48500C1062C /* Scacchiera */,
 				A0138E8D1580D48500C1062C /* Products */,
@@ -68,7 +69,6 @@
 		A0138E8F1580D48500C1062C /* Scacchiera */ = {
 			isa = PBXGroup;
 			children = (
-				A0138E901580D48500C1062C /* main.cpp */,
 				A0138E921580D48500C1062C /* Scacchiera.1 */,
 			);
 			path = Scacchiera;

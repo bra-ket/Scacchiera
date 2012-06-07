@@ -17,7 +17,6 @@ class UI {
 public:
     Chessboard();
     void turn(); // big
-    
         
 }
 
