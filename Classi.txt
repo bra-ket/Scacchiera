@@ -1,0 +1,20 @@
+INTERFACE:
+-* scacchiera
+-print
+-prompt
+
+SCACCHIERA:
+-costruttore
+-mossa
+-cattura
+-promozione
+-isoccupied
+-getpiece
+
+PEZZO:
+-* scacchiera
+-muovi
+-get_type
+
+RE:
+-tisentiminacciato?
