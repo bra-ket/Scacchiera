@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A0138E911580D48500C1062C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0138E901580D48500C1062C /* main.cpp */; };
 		A0138E931580D48500C1062C /* Scacchiera.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = A0138E921580D48500C1062C /* Scacchiera.1 */; };
+		A0138E9F1580E41500C1062C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0138E9E1580E41500C1062C /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,8 @@
 		A0138E9A1580D85400C1062C /* chessboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessboard.h; path = ../chessboard.h; sourceTree = "<group>"; };
 		A0138E9B1580DCE700C1062C /* piece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piece.h; sourceTree = "<group>"; };
 		A0138E9C1580DE6500C1062C /* struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = struct.h; path = ../struct.h; sourceTree = "<group>"; };
+		A0138E9D1580E40C00C1062C /* piece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = piece.h; path = ../piece.h; sourceTree = "<group>"; };
+		A0138E9E1580E41500C1062C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,8 @@
 				A0138E9C1580DE6500C1062C /* struct.h */,
 				A0138E991580D4AB00C1062C /* interface.h */,
 				A0138E9A1580D85400C1062C /* chessboard.h */,
+				A0138E9D1580E40C00C1062C /* piece.h */,
+				A0138E9E1580E41500C1062C /* main.cpp */,
 				A0138E901580D48500C1062C /* main.cpp */,
 				A0138E9B1580DCE700C1062C /* piece.h */,
 				A0138E8F1580D48500C1062C /* Scacchiera */,
@@ -126,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0138E911580D48500C1062C /* main.cpp in Sources */,
+				A0138E9F1580E41500C1062C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
