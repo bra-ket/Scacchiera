@@ -1,0 +1,217 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A0138E911580D48500C1062C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0138E901580D48500C1062C /* main.cpp */; };
+		A0138E931580D48500C1062C /* Scacchiera.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = A0138E921580D48500C1062C /* Scacchiera.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A0138E8A1580D48500C1062C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				A0138E931580D48500C1062C /* Scacchiera.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A0138E8C1580D48500C1062C /* Scacchiera */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Scacchiera; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0138E901580D48500C1062C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A0138E921580D48500C1062C /* Scacchiera.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Scacchiera.1; sourceTree = "<group>"; };
+		A0138E991580D4AB00C1062C /* interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interface.h; path = ../interface.h; sourceTree = "<group>"; };
+		A0138E9A1580D85400C1062C /* chessboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessboard.h; path = ../chessboard.h; sourceTree = "<group>"; };
+		A0138E9B1580DCE700C1062C /* piece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piece.h; sourceTree = "<group>"; };
+		A0138E9C1580DE6500C1062C /* struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = struct.h; path = ../struct.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A0138E891580D48500C1062C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A0138E811580D48500C1062C = {
+			isa = PBXGroup;
+			children = (
+				A0138E9C1580DE6500C1062C /* struct.h */,
+				A0138E991580D4AB00C1062C /* interface.h */,
+				A0138E9A1580D85400C1062C /* chessboard.h */,
+				A0138E9B1580DCE700C1062C /* piece.h */,
+				A0138E8F1580D48500C1062C /* Scacchiera */,
+				A0138E8D1580D48500C1062C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A0138E8D1580D48500C1062C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0138E8C1580D48500C1062C /* Scacchiera */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A0138E8F1580D48500C1062C /* Scacchiera */ = {
+			isa = PBXGroup;
+			children = (
+				A0138E901580D48500C1062C /* main.cpp */,
+				A0138E921580D48500C1062C /* Scacchiera.1 */,
+			);
+			path = Scacchiera;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0138E8B1580D48500C1062C /* Scacchiera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0138E961580D48500C1062C /* Build configuration list for PBXNativeTarget "Scacchiera" */;
+			buildPhases = (
+				A0138E881580D48500C1062C /* Sources */,
+				A0138E891580D48500C1062C /* Frameworks */,
+				A0138E8A1580D48500C1062C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Scacchiera;
+			productName = Scacchiera;
+			productReference = A0138E8C1580D48500C1062C /* Scacchiera */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A0138E831580D48500C1062C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Federico D'Ambrosio";
+			};
+			buildConfigurationList = A0138E861580D48500C1062C /* Build configuration list for PBXProject "Scacchiera" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A0138E811580D48500C1062C;
+			productRefGroup = A0138E8D1580D48500C1062C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A0138E8B1580D48500C1062C /* Scacchiera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A0138E881580D48500C1062C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0138E911580D48500C1062C /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A0138E941580D48500C1062C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A0138E951580D48500C1062C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A0138E971580D48500C1062C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A0138E981580D48500C1062C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A0138E861580D48500C1062C /* Build configuration list for PBXProject "Scacchiera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0138E941580D48500C1062C /* Debug */,
+				A0138E951580D48500C1062C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0138E961580D48500C1062C /* Build configuration list for PBXNativeTarget "Scacchiera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0138E971580D48500C1062C /* Debug */,
+				A0138E981580D48500C1062C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A0138E831580D48500C1062C /* Project object */;
+}
