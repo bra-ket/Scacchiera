@@ -19,7 +19,8 @@ class Piece {
 public:
     Piece();
     ~Piece();
-    char getType();
+    char getType() {return type;}
+    bool getPlayer() {return player;}
     bool move(Position d);
     
 };

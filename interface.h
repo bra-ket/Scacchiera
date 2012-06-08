@@ -8,6 +8,7 @@
 
 #ifndef Chessboard_interface_h
 #define Chessboard_interface_h
+#include "chessboard.h"
 
 class UI {
     Chessboard * c; // pointer to the chessboard
@@ -15,10 +16,11 @@ class UI {
     Move prompt(); // prompt the user for the move and check syntax
     
 public:
-    Chessboard();
+    UI();
+    ~UI();
     void turn(); // big
         
-}
+};
 
 
 
