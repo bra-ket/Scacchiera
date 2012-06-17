@@ -8,7 +8,8 @@
 #ifndef CHESSBOARD_H_
 #define CHESSBOARD_H_
 
-#include <structures.h>
+#include "structures.h"
+#include "Piece.h"
 
 class ChessBoard {
 

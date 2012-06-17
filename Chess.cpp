@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include <ChessBoard.h>
-#include <Interface.h>
+#include "Interface.h"
+#include "ChessBoard.h"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main() {
 			Move m = UI->prompt();
 			result = cb->doMove(m);
 
-			switch (m) {
+			switch (result) {
 				case 0:
 					UI->validMove();
 					break;

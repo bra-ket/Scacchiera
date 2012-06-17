@@ -8,6 +8,8 @@
 #ifndef PIECE_H_
 #define PIECE_H_
 
+#include "structures.h"
+
 class Piece {
 public:
 	Piece();

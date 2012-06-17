@@ -8,7 +8,7 @@
 #ifndef INTERFACE_H_
 #define INTERFACE_H_
 
-#include <ChessBoard.h>
+#include "ChessBoard.h"
 #include <iostream>
 
 
