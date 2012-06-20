@@ -16,6 +16,7 @@ public:
 	virtual ~Piece();
 	player getPlayer();
 	char getType();
+	int moveTo(Position p);
 };
 
 #endif /* PIECE_H_ */
