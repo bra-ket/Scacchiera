@@ -56,3 +56,8 @@ int ChessBoard::doMove(Move m) {
 			return 4;
 	} // switch
 }
+
+bool ChessBoard::isFree(Position a){
+    if (!this.board[a.x][a.y]) return true; //Devo mettere il punto e non la freccia perché m'interessa il puntatore non la destinazione, giusto?
+
+}
