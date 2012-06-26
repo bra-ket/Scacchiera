@@ -9,6 +9,7 @@
 
 ChessBoard::ChessBoard() {
 	p = white;
+    //TODO Generate all the pieces and alloc them
 }
 
 ChessBoard::~ChessBoard() {
