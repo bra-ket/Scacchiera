@@ -25,11 +25,8 @@ public:
 	void switchPlayer();
 	int doMove(Move m);
 	bool isCheckmate();
-    void promote(Piece * promotee, char promoteTo);
-    void rollBack();
     bool isFree(Position a);
     Piece * getPiece (Position a);
-    void capture(Piece * attacker, Piece * captured);
 
 };
 
