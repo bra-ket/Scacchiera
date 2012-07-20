@@ -10,12 +10,13 @@
 
 #include "structures.h"
 #include "Piece.h"
+#include "Box.h"
 
 class ChessBoard {
 
 private:
 	 player p;
-	 Piece * board[8][8];
+	 Box * board[8][8];
 	 Piece * kingW;
 	 Piece * kingB;
 
@@ -27,6 +28,8 @@ public:
 	bool isCheckmate();
     bool isFree(Position a);
     Piece * getPiece (Position a);
+    bool castling(Move m);
+    bool enPassant(Move m);
 
 };
 
