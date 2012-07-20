@@ -9,6 +9,7 @@
 
 ChessBoard::ChessBoard() {
 	p = white;
+    //TODO Generate all the pieces and alloc them
 }
 
 ChessBoard::~ChessBoard() {
@@ -54,4 +55,9 @@ int ChessBoard::doMove(Move m) {
 		case 2:
 			return 4;
 	} // switch
+}
+
+bool ChessBoard::isFree(Position a){
+    if (!this.board[a.x][a.y]) return true; //Devo mettere il punto e non la freccia perché m'interessa il puntatore non la destinazione, giusto?
+
 }
