@@ -5,6 +5,8 @@
  *      Author: massimiliano
  */
 
+
+#include "Box.h"
 #include "ChessBoard.h"
 
 ChessBoard::ChessBoard() {
@@ -32,8 +34,8 @@ void ChessBoard::switchPlayer() {
  * - 6: check on the player's move
  */
 int ChessBoard::doMove(Move m) {
-	Piece * ps = this->getPiece(m.s); // piece on the source position
-	Piece * pd = this->getPiece(m.d); // piece on the destination position
+	Piece * ps = this->getPiece(m.s); // content on the source position
+	Piece * pd = this->getPiece(m.d); // content on the destination position
 	if (ps == 0)
 		return 1;
 	if (ps->getPlayer() != p)
@@ -43,8 +45,8 @@ int ChessBoard::doMove(Move m) {
 	int outcome = this->getPiece(m.s)->moveTo(m.d);
 	switch (outcome) {
 		case 0:
-			board[m.d.x][m.d.y] = ps; // moves the piece on the destination position
-			board[m.s.x][m.s.y] = 0; // empties the source position
+			board[m.d.x][m.d.y]->putPiece(ps); // moves the piece on the destination box
+			board[m.s.x][m.s.y]->empty(); // empties the source box
 			/* a questo punto abbiamo ancora in memoria il  puntatore al pezzo eventualmente catturato quindi possiamo fare un controllo sullo scacco
 			 * ed eventualmente annullare la mossa, senza bisogno di metodi esterni per il capture o il rollback. Serve implementare un metodo
 			 * getKing(player) che e` piu` elegante rispetto al fare un if qui dentro per prendere il re bianco o nero a seconda del giocatore
@@ -57,7 +59,6 @@ int ChessBoard::doMove(Move m) {
 	} // switch
 }
 
-bool ChessBoard::isFree(Position a){
-    if (!this.board[a.x][a.y]) return true; //Devo mettere il punto e non la freccia perché m'interessa il puntatore non la destinazione, giusto?
-
-}
+bool ChessBoard::isFree(Position p){
+    return board[p.x][p.y]->isFree();
+} // isFree()

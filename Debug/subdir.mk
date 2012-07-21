@@ -4,25 +4,43 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Bishop.cpp \
+../Box.cpp \
 ../Chess.cpp \
 ../ChessBoard.cpp \
 ../Interface.cpp \
-../Move.cpp \
-../Piece.cpp 
+../King.cpp \
+../Knight.cpp \
+../Pawn.cpp \
+../Piece.cpp \
+../Queen.cpp \
+../Rook.cpp 
 
 OBJS += \
+./Bishop.o \
+./Box.o \
 ./Chess.o \
 ./ChessBoard.o \
 ./Interface.o \
-./Move.o \
-./Piece.o 
+./King.o \
+./Knight.o \
+./Pawn.o \
+./Piece.o \
+./Queen.o \
+./Rook.o 
 
 CPP_DEPS += \
+./Bishop.d \
+./Box.d \
 ./Chess.d \
 ./ChessBoard.d \
 ./Interface.d \
-./Move.d \
-./Piece.d 
+./King.d \
+./Knight.d \
+./Pawn.d \
+./Piece.d \
+./Queen.d \
+./Rook.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

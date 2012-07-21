@@ -1,5 +1,5 @@
 Chess.d: ../Chess.cpp ../Interface.h ../ChessBoard.h ../structures.h \
- ../Piece.h
+ ../Piece.h ../Box.h
 
 ../Interface.h:
 
@@ -8,3 +8,5 @@ Chess.d: ../Chess.cpp ../Interface.h ../ChessBoard.h ../structures.h \
 ../structures.h:
 
 ../Piece.h:
+
+../Box.h:

@@ -1,8 +1,10 @@
-ChessBoard.d: ../ChessBoard.cpp ../ChessBoard.h ../structures.h \
- ../Piece.h
+ChessBoard.d: ../ChessBoard.cpp ../Box.h ../Piece.h ../structures.h \
+ ../ChessBoard.h
 
-../ChessBoard.h:
+../Box.h:
+
+../Piece.h:
 
 ../structures.h:
 
-../Piece.h:
+../ChessBoard.h:
