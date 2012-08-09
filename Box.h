@@ -19,7 +19,7 @@ public:
 	virtual ~Box();
 	bool isFree();
 	Piece * getPiece();
-	void putPiece(Piece* p);
+	void putPiece(Piece* q);
 	void empty();
 };
 

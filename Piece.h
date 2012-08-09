@@ -11,6 +11,11 @@
 #include "structures.h"
 
 class Piece {
+    player pla;
+    char type;
+    Position pos;
+    
+    
 public:
 	Piece();
 	virtual ~Piece();
