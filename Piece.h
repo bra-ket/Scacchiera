@@ -11,6 +11,8 @@
 #include "structures.h"
 
 class Piece {
+    
+protected:
     player pla;
     char type;
     Position pos;

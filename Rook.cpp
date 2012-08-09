@@ -8,11 +8,16 @@
 #include "Rook.h"
 
 Rook::Rook() {
-	// TODO Auto-generated constructor stub
-
+    type={r};
+    
 }
 
 Rook::~Rook() {
 	// TODO Auto-generated destructor stub
 }
 
+bool Rook::isvalid(Move m){
+    if (m.s.x==m.d.x) return true;
+    if (m.s.y==m.d.y) return true;
+    else return false;
+}
