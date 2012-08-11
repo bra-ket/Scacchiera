@@ -9,11 +9,13 @@
 #define BISHOP_H_
 
 #include "Piece.h"
+#include <stdlib.h>
 
 class Bishop: public Piece {
 public:
-	Bishop();
+	Bishop(player p);
 	virtual ~Bishop();
+    bool isvalid(Move m);
 };
 
 #endif /* BISHOP_H_ */

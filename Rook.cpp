@@ -7,9 +7,9 @@
 
 #include "Rook.h"
 
-Rook::Rook() {
-    type={r};
-    
+Rook::Rook(player p) {
+    type='R';
+    pla=p;
 }
 
 Rook::~Rook() {

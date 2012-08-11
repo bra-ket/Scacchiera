@@ -12,8 +12,9 @@
 
 class Pawn: public Piece {
 public:
-	Pawn();
+	Pawn(player p);
 	virtual ~Pawn();
+    bool isvalid(Move m);
 };
 
 #endif /* PAWN_H_ */

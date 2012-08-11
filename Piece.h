@@ -17,13 +17,13 @@ protected:
     char type;
     Position pos;
     
-    
 public:
 	Piece();
 	virtual ~Piece();
 	player getPlayer();
 	char getType();
 	int moveTo(Position p);
+    virtual bool isvalid(Move m);
 };
 
 #endif /* PIECE_H_ */

@@ -15,7 +15,7 @@
 class Rook: public Piece {
     
 public:
-	Rook();
+	Rook(player p);
 	virtual ~Rook();
     bool isvalid(Move m);
 };

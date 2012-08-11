@@ -9,11 +9,13 @@
 #define KNIGHT_H_
 
 #include "Piece.h"
+#include <stdlib.h>
 
 class Knight: public Piece {
 public:
-	Knight();
+	Knight(player p);
 	virtual ~Knight();
+    bool isvalid(Move m);
 };
 
 #endif /* KNIGHT_H_ */

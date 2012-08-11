@@ -9,11 +9,13 @@
 #define QUEEN_H_
 
 #include "Piece.h"
+#include <stdlib.h>
 
 class Queen: public Piece {
 public:
-	Queen();
+	Queen(player p);
 	virtual ~Queen();
+    bool isvalid(Move m);
 };
 
 #endif /* QUEEN_H_ */

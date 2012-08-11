@@ -9,11 +9,13 @@
 #define KING_H_
 
 #include "Piece.h"
+#include <stdlib.h>
 
 class King: public Piece {
 public:
-	King();
+	King(player p);
 	virtual ~King();
+    bool isvalid(Move m);
 };
 
 #endif /* KING_H_ */
