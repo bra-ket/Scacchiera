@@ -36,29 +36,32 @@ void ChessBoard::switchPlayer() {
 int ChessBoard::doMove(Move m) {
 	Piece * ps = this->getPiece(m.s); // content on the source position
 	Piece * pd = this->getPiece(m.d); // content on the destination position
+
 	if (ps == 0)
-		return 1;
+		return 1; // empty source position
+
 	if (ps->getPlayer() != p)
-		return 2;
+		return 2; // player tries to move an opponent's piece
+
 	if (pd->getPlayer() == p)
-		return 3;
-	int outcome = this->getPiece(m.s)->moveTo(m.d);
-	switch (outcome) {
-		case 0:
+		return 3; // player tries to capture an own piece
+
+	switch (detectSpecial(m)) {
+		case 0: // normal move
+			if (!ps->isValid())
+				return 4; // invalid path
 			board[m.d.x][m.d.y]->putPiece(ps); // moves the piece on the destination box
 			board[m.s.x][m.s.y]->empty(); // empties the source box
-			/* a questo punto abbiamo ancora in memoria il  puntatore al pezzo eventualmente catturato quindi possiamo fare un controllo sullo scacco
-			 * ed eventualmente annullare la mossa, senza bisogno di metodi esterni per il capture o il rollback. Serve implementare un metodo
-			 * getKing(player) che e` piu` elegante rispetto al fare un if qui dentro per prendere il re bianco o nero a seconda del giocatore
-			 */
-			return 0;
-		case 1:
-			return 3;
-		case 2:
-			return 4;
+			break;
+		case 1: // castling
+			castling(m);
+			break;
+		case 2: // en passant
+			enPassant(m);
+			break;
 	} // switch
-}
+} // doMove()
 
-bool ChessBoard::isFree(Position p){
+bool ChessBoard::isFree(Position p) {
     return board[p.x][p.y]->isFree();
 } // isFree()

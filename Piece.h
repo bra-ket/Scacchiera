@@ -15,15 +15,16 @@ class Piece {
 protected:
     player pla;
     char type;
-    Position pos;
+    // Position pos;
+    bool hasMoved;
     
 public:
 	Piece();
 	virtual ~Piece();
 	player getPlayer();
 	char getType();
-	int moveTo(Position p);
-    virtual bool isvalid(Move m);
+	// int moveTo(Position p);
+    virtual bool isValid(Move m);
 };
 
 #endif /* PIECE_H_ */
