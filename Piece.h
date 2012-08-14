@@ -15,7 +15,6 @@ class Piece {
 protected:
     player pla;
     char type;
-    // Position pos;
     bool hasMoved;
     
 public:
@@ -23,7 +22,9 @@ public:
 	virtual ~Piece();
 	player getPlayer();
 	char getType();
-	// int moveTo(Position p);
+
+	void setMoved();
+
     virtual bool isValid(Move m);
 };
 
