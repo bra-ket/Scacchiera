@@ -24,4 +24,5 @@ struct Move {
 };
 
 
+
 #endif /* STRUCTURES_H_ */

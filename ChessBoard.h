@@ -11,6 +11,9 @@
 #include "structures.h"
 #include "Piece.h"
 #include "Box.h"
+#include <vector>
+#include <iostream>
+#include <stdlib.h>
 
 class ChessBoard {
 

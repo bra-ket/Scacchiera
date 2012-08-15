@@ -96,4 +96,41 @@ int ChessBoard::doMove(Move m) {
 
 } // doMove()
 
+int ChessBoard::detectCastling(Move m){
+    if (abs(m.d.x-m.s.x)==2 and m.d.y==m.s.y) { //controlla se la mossa è strutturata come un arrocco
+        //come implemento il check se siano mai stati mossi?
+        std::vector<Position> pos(5);
+            for (int i=1; pos[i].x!=m.d.x; i++) {
+                pos[i].x=m.s.x+i;
+                pos[i].y=m.s.y;
+                if(!isFree(pos[i])) return -1; //se non sono liberi
+                if (isAttacked(pos[i])) return -1; //se sono sotto attacco
+            }
+        if (p==white and (m.d.x-m.s.x)==2) return 1;
+        if (p==white and (m.d.x-m.s.x)==-2) return 2;
+        if (p==black and (m.d.x-m.s.x)==2) return 3;
+        if (p==black and (m.d.x-m.s.x)==-2) return 4;
+        else std::cout<<"Nessun tipo di arrocco!";
+        
+        }
+    
+    else return 0; //la mossa non è un arrocco
+}
+// controlla se m e` un arrocco e se e` una mossa valida
+// l'arrocco viene comandato spostando il re di due nella direzione in cui si vuole arroccare
+// valori di ritorno:
+// -1: arrocco non permesso
+// 0: la mossa non e` un arrocco
+// 1: arrocco bianco dx
+// 2: arrocco bianco sx
+// 3: arrocco nero dx
+// 4: arrocco nero sx
+// per controllare se e` permesso deve:
+
+// 1) verificare che la casella di partenza e quella in cui dovrebbe esserci la torre siano occupate
+// 2) verificare che il pezzo sulla casella di partenza e la torre sul lato dell'arrocco non siano mai stati mossi
+// questo garantisce che non possano essere pezzi diversi dal re e dalla torre
+// 2) verificare che le caselle di mezzo siano libere
+// 3) verificare che le caselle di mezzo non siano minacciate (usiamo il metodo isAttacked)
+
 
