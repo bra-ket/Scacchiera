@@ -33,6 +33,9 @@ public:
 	bool isFree(Position a);
 
     Piece * getPiece (Position a);
+    void putPiece (Piece * pc, Position ps);
+    void movePiece(Position s, Position d);
+    void emptyBox(Position p);
 
     int detectCastling(Move m);
     // controlla se m e` un arrocco e se e` una mossa valida
@@ -61,12 +64,13 @@ public:
     // pensa a come implementare il logging delle mosse perche` qui ci serve
     // in linea di massima io farei una classe apposta per la singola entry che contenga la Move e l'eventuale pezzo preso
 
-    bool isAttacked(Position p);
+    bool isAttacked(Position p, player attacker);
     // me ne occupo io
-	bool isCheckmate(player p);
+	bool isCheckmate();
 	// me ne occupo io
 	bool isCheck(player p);
 	// me ne occupo io
+
 };
 
 #endif /* CHESSBOARD_H_ */

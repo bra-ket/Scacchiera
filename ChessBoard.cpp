@@ -57,6 +57,7 @@ int ChessBoard::doMove(Move m) {
 			return 7;
 		case 1:
 			// white right
+			movePiece(m.s,m.d);
 			break;
 		case 2:
 			// white left
@@ -79,14 +80,13 @@ int ChessBoard::doMove(Move m) {
 			return 8;
 		case 1:
 			// effettuare la mossa
+			break;
 		} // switch
 	} else { // normal move
 
-		if (!ps->isValid())
+		if (!ps->isValid(m))
 			return 4; // invalid path
-
-		board[m.d.x][m.d.y]->putPiece(ps); // moves the piece on the destination box
-		board[m.s.x][m.s.y]->empty(); // empties the source box
+		movePiece(m.s,m.d);
 	} // else
 
 	if (isCheck(p)) {
@@ -94,6 +94,7 @@ int ChessBoard::doMove(Move m) {
 		return 6;
 	} // if
 
+	// gestione promozione
 } // doMove()
 
 int ChessBoard::detectCastling(Move m){
@@ -103,7 +104,7 @@ int ChessBoard::detectCastling(Move m){
     	// re: usa il metodo hasMoved()
         std::vector<Position> pos(5);
             for (int i=1; pos[i].x!=m.d.x; i++) {
-                pos[i].x=m.s.x+i; // a che serve un array se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
+                pos[i].x=m.s.x+i; // a che serve un vettore qui se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
                 pos[i].y=m.s.y;
                 if(!isFree(pos[i])) return -1; //se non sono liberi
                 if (isAttacked(pos[i])) return -1; //se sono sotto attacco
@@ -117,21 +118,21 @@ int ChessBoard::detectCastling(Move m){
     
     else return 0; //la mossa non è un arrocco
 }
-// controlla se m e` un arrocco e se e` una mossa valida
-// l'arrocco viene comandato spostando il re di due nella direzione in cui si vuole arroccare
-// valori di ritorno:
-// -1: arrocco non permesso
-// 0: la mossa non e` un arrocco
-// 1: arrocco bianco dx
-// 2: arrocco bianco sx
-// 3: arrocco nero dx
-// 4: arrocco nero sx
-// per controllare se e` permesso deve:
 
-// 1) verificare che la casella di partenza e quella in cui dovrebbe esserci la torre siano occupate
-// 2) verificare che il pezzo sulla casella di partenza e la torre sul lato dell'arrocco non siano mai stati mossi
-// questo garantisce che non possano essere pezzi diversi dal re e dalla torre
-// 2) verificare che le caselle di mezzo siano libere
-// 3) verificare che le caselle di mezzo non siano minacciate (usiamo il metodo isAttacked)
+bool ChessBoard::isAttacked(Position p, player attacker) {
+	// check for attacks from knights
+
+} // isAttacked()
+
+void ChessBoard::movePiece(Position s, Position d) {
+	putPiece(getPiece(s), d);
+	emptyBox(s);
+} // movePiece
+
+void ChessBoard::putPiece(Piece * pc, Position ps) {
+	board[ps.x][ps.y]->putPiece(pc);
+} // putPiece()
+
+
 
 

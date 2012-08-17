@@ -15,7 +15,7 @@ class Piece {
 protected:
     player pla;
     char type;
-    bool hasMoved;
+    bool moved;
     
 public:
 	Piece();
