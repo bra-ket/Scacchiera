@@ -16,6 +16,7 @@ protected:
     player pla;
     char type;
     bool moved;
+    const int nmoves;
     
 public:
 	Piece();

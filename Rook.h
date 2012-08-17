@@ -13,7 +13,7 @@
 #include "Box.h"
 
 class Rook: public Piece {
-    
+    Delta possible_moves[32];
 public:
 	Rook(player p);
 	virtual ~Rook();

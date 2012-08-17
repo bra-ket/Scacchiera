@@ -10,14 +10,23 @@
 Rook::Rook(player p) {
     type='R';
     pla=p;
+	nmoves=56;
+    for (int i=1; i<8; i++) {
+		int j=4*(i-1);
+		possible_moves[j].x=i;
+    	possible_moves[j].y=0;
+    	possible_moves[j+1].x=0;
+    	possible_moves[j+1].y=-i;
+		possible_moves[j+2].x=-i;
+    	possible_moves[j+2].y=0;
+    	possible_moves[j+3].x=0;
+    	possible_moves[j+3].y=+i;
+		}
+
+
 }
 
 Rook::~Rook() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Rook::isvalid(Move m){
-    if (m.s.x==m.d.x) return true;
-    if (m.s.y==m.d.y) return true;
-    else return false;
-}

@@ -10,6 +10,9 @@
 Pawn::Pawn(player p) {
 	type='P';
     pla=p;
+    possible_move.x=0;
+    if (pla==white) possible_move.y=+1;
+    if (pla==black) possible_move.y=-1;
 }
 
 Pawn::~Pawn() {
@@ -17,8 +20,8 @@ Pawn::~Pawn() {
 }
 
 bool Pawn::isvalid(Move m) {
-    if (m.d.y-m.s.y==1) return true;
-    //prima mossa doppio
-    //presa
+    Delta d=m.getdelta();
+    if (d.x==possible_move.x and d.y==possible_move.y) return true;
+    //TANTE COSE STRANE
     else return false;
 }

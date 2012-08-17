@@ -17,10 +17,9 @@ struct Position {
     int y;
 };
 
-struct Move {
-    Position s; // position of the piece moved
-    Position d; // destination of the piece moved
-
+struct Delta {
+	   int x;
+	   int y;
 };
 
 

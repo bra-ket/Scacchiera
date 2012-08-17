@@ -11,6 +11,7 @@
 #include "Piece.h"
 
 class Pawn: public Piece {
+	  Delta possible_move;
 public:
 	Pawn(player p);
 	virtual ~Pawn();

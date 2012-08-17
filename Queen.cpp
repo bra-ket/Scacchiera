@@ -10,17 +10,31 @@
 Queen::Queen(player p) {
 	type='Q';
     pla=p;
+    for (int i=1; i<8; i++) {
+		int j=8*(i-1);
+		possible_moves[j].x=i;
+    	possible_moves[j].y=i;
+    	possible_moves[j+1].x=i;
+    	possible_moves[j+1].y=-i;
+		possible_moves[j+2].x=-i;
+    	possible_moves[j+2].y=-i;
+    	possible_moves[j+3].x=-i;
+    	possible_moves[j+3].y=+i;
+    	possible_moves[j+4].x=0;
+    	possible_moves[j+4].y=i;
+    	possible_moves[j+5].x=i;
+    	possible_moves[j+5].y=0;
+    	possible_moves[j+6].x=0;
+    	possible_moves[j+6].y=-i;
+    	possible_moves[j+7].x=-i;
+    	possible_moves[j+7].y=0;
+		}
+	nmoves=56;
 }
 
 Queen::~Queen() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Queen::isvalid(Move m){
-    if (m.s.x==m.d.x) return true;
-    if (m.s.y==m.d.y) return true;
-    if (abs(m.d.x-m.s.x) == abs(m.d.y-m.s.y)) return true;    
-    else return false;
-}
 
 

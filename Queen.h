@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 class Queen: public Piece {
+	  Delta possible_moves[56];
 public:
 	Queen(player p);
 	virtual ~Queen();

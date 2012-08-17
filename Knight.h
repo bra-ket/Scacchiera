@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 class Knight: public Piece {
+	  Delta possible_moves[32];
 public:
 	Knight(player p);
 	virtual ~Knight();

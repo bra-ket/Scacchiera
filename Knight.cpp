@@ -10,14 +10,20 @@
 Knight::Knight(player p) {
 	type='N';
     pla=p;
+    for (int i=1; i<8; i++) {
+		possible_moves[4*i].x=i;
+    	possible_moves[4*i].y=i;
+    	possible_moves[4*i+1].x=i;
+    	possible_moves[4*i+1].y=-i;
+		possible_moves[4*i+2].x=-i;
+    	possible_moves[4*i+2].y=-i;
+    	possible_moves[4*i+3].x=-i;
+    	possible_moves[4*i+3].y=+i;
+		}
+	nmoves=32;
 }
 
 Knight::~Knight() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Knight::isvalid(Move m) {
-    if (abs(m.d.x-m.s.x)==2 and abs(m.d.y-m.s.y)==1) return true;
-    if (abs(m.d.y-m.s.y)==2 and abs(m.d.x-m.s.x)==1) return true;
-    else return false;
-}
