@@ -98,22 +98,37 @@ int ChessBoard::doMove(Move m) {
 } // doMove()
 
 int ChessBoard::detectCastling(Move m){
-    if (abs(m.d.x-m.s.x)==2 and m.d.y==m.s.y) { //controlla se la mossa è strutturata come un arrocco
-    	// re: ha piu` senso che confronti con un array delle quattro mosse che possono essere arrocchi, cosi` eviti la serie di if sotto.
-        //come implemento il check se siano mai stati mossi?
-    	// re: usa il metodo hasMoved()
-        std::vector<Position> pos(5);
-            for (int i=1; pos[i].x!=m.d.x; i++) {
-                pos[i].x=m.s.x+i; // a che serve un vettore qui se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
-                pos[i].y=m.s.y;
-                if(!isFree(pos[i])) return -1; //se non sono liberi
-                if (isAttacked(pos[i])) return -1; //se sono sotto attacco
-            }
-        if (p==white and (m.d.x-m.s.x)==2) return 1;
-        if (p==white and (m.d.x-m.s.x)==-2) return 2;
-        if (p==black and (m.d.x-m.s.x)==2) return 3;
-        if (p==black and (m.d.x-m.s.x)==-2) return 4;
-        
+	if (p==white) if (kingW->hasMoved()) return -1;
+	if (p==black) if (kingB->hasMoved()) return -1;
+	
+	Delta d[2];
+	d[0].x=2;
+	d[0].y=d[1].y=0;
+	d[1].x=-2;
+	
+	if (m.getdelta().x==d[0].x and m.getdelta().y==d[0].y){
+ 	   for (int i=1; i<2; i++) {
+	   	   Position pos;
+           pos.x=m.s.x+i; // a che serve un vettore qui se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
+           pos.y=m.s.y;
+           if(!isFree(pos[i])) return -1; //se non sono liberi
+           if (isAttacked(pos[i])) return -1; //se sono sotto attacco
+           }
+   		if (p==white) return 1;
+   		if (p==black) return 3;
+		}
+	
+	if (m.getdelta().x==d[1].x and m.getdelta().y==d[1].y){
+ 	   for (int i=1; i<2; i++) {
+	   	   Position pos;
+           pos.x=m.s.x-i; // a che serve un vettore qui se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
+           pos.y=m.s.y;
+           if(!isFree(pos[i])) return -1; //se non sono liberi
+           if (isAttacked(pos[i])) return -1; //se sono sotto attacco
+           }
+   		if (p==white) return 2;
+   		if (p==black) return 4;
+		} 
         }
     
     else return 0; //la mossa non è un arrocco
