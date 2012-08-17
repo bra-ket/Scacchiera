@@ -24,6 +24,7 @@ public:
 	char getType();
 
 	void setMoved();
+	bool hasMoved();
 
     virtual bool isValid(Move m);
 };

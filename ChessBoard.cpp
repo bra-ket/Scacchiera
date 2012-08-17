@@ -98,10 +98,12 @@ int ChessBoard::doMove(Move m) {
 
 int ChessBoard::detectCastling(Move m){
     if (abs(m.d.x-m.s.x)==2 and m.d.y==m.s.y) { //controlla se la mossa è strutturata come un arrocco
+    	// re: ha piu` senso che confronti con un array delle quattro mosse che possono essere arrocchi, cosi` eviti la serie di if sotto.
         //come implemento il check se siano mai stati mossi?
+    	// re: usa il metodo hasMoved()
         std::vector<Position> pos(5);
             for (int i=1; pos[i].x!=m.d.x; i++) {
-                pos[i].x=m.s.x+i;
+                pos[i].x=m.s.x+i; // a che serve un array se comunque la i-esima posizione la costruisci ad ogni giro del ciclo?
                 pos[i].y=m.s.y;
                 if(!isFree(pos[i])) return -1; //se non sono liberi
                 if (isAttacked(pos[i])) return -1; //se sono sotto attacco
@@ -110,7 +112,6 @@ int ChessBoard::detectCastling(Move m){
         if (p==white and (m.d.x-m.s.x)==-2) return 2;
         if (p==black and (m.d.x-m.s.x)==2) return 3;
         if (p==black and (m.d.x-m.s.x)==-2) return 4;
-        else std::cout<<"Nessun tipo di arrocco!";
         
         }
     
