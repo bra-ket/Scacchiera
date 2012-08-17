@@ -29,7 +29,7 @@ Queen::Queen(player p) {
     	possible_moves[j+7].x=-i;
     	possible_moves[j+7].y=0;
 		}
-	nmoves=56;
+	nmoves=56; // non riesci a farlo con cicli annidati? sarebbe piu` elegante
 }
 
 Queen::~Queen() {

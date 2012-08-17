@@ -10,7 +10,7 @@
 Rook::Rook(player p) {
     type='R';
     pla=p;
-	nmoves=56;
+	nmoves=56; // io ne conto 28 al massimo. 7 in ogni direzione
     for (int i=1; i<8; i++) {
 		int j=4*(i-1);
 		possible_moves[j].x=i;

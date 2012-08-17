@@ -20,7 +20,7 @@ Knight::Knight(player p) {
     	possible_moves[4*i+3].x=-i;
     	possible_moves[4*i+3].y=+i;
 		}
-	nmoves=32;
+	nmoves=32; // come fanno a essere 32? ne ha solo 8 a disposizione! c'e` qualcosa di sbagliato
 }
 
 Knight::~Knight() {

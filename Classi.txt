@@ -1,20 +1,3 @@
-INTERFACE:
--* scacchiera
--print
--prompt
+Cerca di sistemare bene la cosa dei pezzi (quindi con l'opportuna dichiarazione dell'array possibile moves etc.)
 
-SCACCHIERA:
--costruttore
--mossa
--cattura
--promozione
--isoccupied
--getpiece
-
-PEZZO:
--* scacchiera
--muovi
--get_type
-
-RE:
--tisentiminacciato?
+inizia a predisporre il metodo per il controllo dell'en passant

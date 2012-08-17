@@ -24,4 +24,5 @@ bool Pawn::isvalid(Move m) {
     if (d.x==possible_move.x and d.y==possible_move.y) return true;
     //TANTE COSE STRANE
     else return false;
+    // fai in modo che autorizzi la mossa di due solo se non si e` mai mosso prima. l'enpassant lo becchiamo separatamente
 }
