@@ -9,6 +9,8 @@
 #define PIECE_H_
 
 #include "structures.h"
+#include "Move.h"
+#include <vector>
 
 class Piece {
     
@@ -16,7 +18,8 @@ protected:
     player pla;
     char type;
     bool moved;
-    const int nmoves;
+    std::vector<Delta> possibleMoves; 
+    
     
 public:
 	Piece();

@@ -10,9 +10,17 @@
 Pawn::Pawn(player p) {
 	type='P';
     pla=p;
-    possible_move.x=0;
-    if (pla==white) possible_move.y=+1;
-    if (pla==black) possible_move.y=-1;
+    possibleMoves.get_allocator().allocate(1);
+    possibleMoves[0].x=0;
+    possibleMoves[1].x=0;
+    if (pla==white) {
+		possibleMoves[0].y=+1;
+		possibleMoves[1].y=+2;
+    }
+    if (pla==black) {
+		possibleMoves[0].y=-1;
+		possibleMoves[1].y=-2;
+    }
 }
 
 Pawn::~Pawn() {
@@ -21,8 +29,8 @@ Pawn::~Pawn() {
 
 bool Pawn::isvalid(Move m) {
     Delta d=m.getdelta();
-    if (d.x==possible_move.x and d.y==possible_move.y) return true;
-    //TANTE COSE STRANE
+    if (d.x==possibleMoves[0].x and d.y==possibleMoves[0].y) return true;
+    if (!this.hasMoved() and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
     else return false;
     // fai in modo che autorizzi la mossa di due solo se non si e` mai mosso prima. l'enpassant lo becchiamo separatamente
 }

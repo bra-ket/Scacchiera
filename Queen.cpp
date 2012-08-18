@@ -10,26 +10,26 @@
 Queen::Queen(player p) {
 	type='Q';
     pla=p;
+    possibleMoves.get_allocator().allocate(56);
     for (int i=1; i<8; i++) {
 		int j=8*(i-1);
-		possible_moves[j].x=i;
-    	possible_moves[j].y=i;
-    	possible_moves[j+1].x=i;
-    	possible_moves[j+1].y=-i;
-		possible_moves[j+2].x=-i;
-    	possible_moves[j+2].y=-i;
-    	possible_moves[j+3].x=-i;
-    	possible_moves[j+3].y=+i;
-    	possible_moves[j+4].x=0;
-    	possible_moves[j+4].y=i;
-    	possible_moves[j+5].x=i;
-    	possible_moves[j+5].y=0;
-    	possible_moves[j+6].x=0;
-    	possible_moves[j+6].y=-i;
-    	possible_moves[j+7].x=-i;
-    	possible_moves[j+7].y=0;
+		possibleMoves[j].x=i;
+    	possibleMoves[j].y=i;
+    	possibleMoves[j+1].x=i;
+    	possibleMoves[j+1].y=-i;
+		possibleMoves[j+2].x=-i;
+    	possibleMoves[j+2].y=-i;
+    	possibleMoves[j+3].x=-i;
+    	possibleMoves[j+3].y=+i;
+    	possibleMoves[j+4].x=0;
+    	possibleMoves[j+4].y=i;
+    	possibleMoves[j+5].x=i;
+    	possibleMoves[j+5].y=0;
+    	possibleMoves[j+6].x=0;
+    	possibleMoves[j+6].y=-i;
+    	possibleMoves[j+7].x=-i;
+    	possibleMoves[j+7].y=0;
 		}
-	nmoves=56; // non riesci a farlo con cicli annidati? sarebbe piu` elegante
 }
 
 Queen::~Queen() {

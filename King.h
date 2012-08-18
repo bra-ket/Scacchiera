@@ -13,7 +13,6 @@
 #include <stdlib.h>
 
 class King: public Piece {
-	  Delta possible_moves[8];
 public:
 	King(player p);
 	virtual ~King();

@@ -12,11 +12,9 @@
 #include <stdlib.h>
 
 class Queen: public Piece {
-	  Delta possible_moves[56];
 public:
 	Queen(player p);
 	virtual ~Queen();
-    bool isvalid(Move m);
 };
 
 #endif /* QUEEN_H_ */
