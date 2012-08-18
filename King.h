@@ -16,7 +16,6 @@ class King: public Piece {
 public:
 	King(player p);
 	virtual ~King();
-    bool isvalid(Move m);
 };
 
 #endif /* KING_H_ */

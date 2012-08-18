@@ -10,7 +10,7 @@
 Pawn::Pawn(player p) {
 	type='P';
     pla=p;
-    possibleMoves.get_allocator().allocate(1);
+    possibleMoves.get_allocator().allocate(2);
     possibleMoves[0].x=0;
     possibleMoves[1].x=0;
     if (pla==white) {

@@ -23,7 +23,4 @@ struct Delta {
 };
 
 
-	  
-
-
 #endif /* STRUCTURES_H_ */

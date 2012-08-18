@@ -23,7 +23,14 @@ void ChessBoard::switchPlayer() {
 } // switchPlayer
 
 bool ChessBoard::isFree(Position p) {
-    return board[p.x][p.y]->isFree();
+    return board[p.x-1][p.y-1]->isFree();
+}
+
+bool isFree(int x,int y){
+	Position a;
+	a.x=x;
+	a.y=y;
+	return this.isFree(a);
 } // isFree()
 
 
@@ -104,45 +111,44 @@ int ChessBoard::doMove(Move m) {
 // switch sull'indice per fare le verifiche a seconda del caso, mettendo eventualmente in AND le condizioni sulle caselle
 // visto che sono due o tre
 int ChessBoard::detectCastling(Move m){
-	if (p==white) if (kingW->hasMoved()) return -1;
-	if (p==black) if (kingB->hasMoved()) return -1;
-	// in realta` e` inessenziale controllare quale sia il giocatore. doMove controlla di suo che il pezzo muovente sia di proprieta`
-	// del giocatore corrente. manca il controllo sul fatto che la torre si sia mossa o meno
-	Delta d[2];
-	d[0].x=2;
-	d[0].y=d[1].y=0;
-	d[1].x=-2;
-	// non capisco il perche` di un array a questo punto, visto che non devi iterare e devi solo controllare due casi.
-	// l'array ha senso se fai un array di Move che contiene i quattro arrocchi possibili e confronti m con quello
+	std::vector<* Move> castling(4);
+	castling[0]=new Move(5,1,7,1);
+	castling[1]=new Move(5,1,3,1);
+	castling[2]=new Move(5,8,7,8);
+	castling[3]=new Move(5,8,3,8);
 	
-	if (m.getdelta().x==d[0].x and m.getdelta().y==d[0].y){
- 	   for (int i=1; i<2; i++) { // un ciclo con due sole iterazioni e che controlla posizioni predeterminate? forse conviene un OR
-	   	   Position pos;
-           pos.x=m.s.x+i;
-           pos.y=m.s.y; // resta uguale, non ha senso assegnarlo ad ogni giro del for
-           // questa cosa di costruire la pos apposta mi pare brutta, facciamo un overload di isFree(int x, int y) ?
-           if(!isFree(pos[i])) return -1; //se non sono liberi
-           if (isAttacked(pos[i])) return -1; //se sono sotto attacco
-           // devi controllare anche che il re non sia sotto attacco
-           }
-   		if (p==white) return 1;
-   		if (p==black) return 3;
+	int caso=0;
+	for(int i=0; i<castling.size();i++){
+		if (castling[i]==m) {
+			nrook=i+1;
+			break;
 		}
+	}
 	
-	if (m.getdelta().x==d[1].x and m.getdelta().y==d[1].y){
- 	   for (int i=1; i<2; i++) {
-	   	   Position pos;
-           pos.x=m.s.x-i;
-           pos.y=m.s.y;
-           if(!isFree(pos[i])) return -1; //se non sono liberi
-           if (isAttacked(pos[i])) return -1; //se sono sotto attacco
-           }
-   		if (p==white) return 2;
-   		if (p==black) return 4;
-		} 
-        }
-    
-    else return 0; //la mossa non è un arrocco
+	if (nrook==0) return 0; //non un arrocco
+	if(this.getPiece(m.getS())->hasMoved()) return -1;
+	if (nrook==1) {
+		if (this.getPiece(8,1)->hasMoved()) return -1;
+		if (this.isAttacked(1,7,black) or this.isAttacked(1,6,black) or this.isAttacked(1,5,black)) return -1;
+		if (!this.isFree(1,7) or !this.isFree(1,6)) return -1;
+	}
+	if (nrook==2) {
+		if (this.getPiece(1,1)->hasMoved()) return -1;
+		if (this.isAttacked(1,3,black) or this.isAttacked(1,4,black) or this.isAttacked(1,5,black)) return -1;
+		if (!this.isFree(1,2) or !this.isFree(1,3) or !this.isFree(1,4)) return -1;
+	}
+	if (nrook==3) {
+		if (this.getPiece(8,8)->hasMoved()) return -1;
+		if (this.isAttacked(8,7,white) or this.isAttacked(8,6,white) or this.isAttacked(8,5,white)) return -1;
+		if (!this.isFree(8,7) or !this.isFree(8,6)) return -1;
+	}
+	if (nrook==4) {
+		if (this.getPiece(1,8)->hasMoved()) return -1;
+		if (this.isAttacked(8,3,white) or this.isAttacked(8,4,white) or this.isAttacked(8,5,white)) return -1;
+		if (!this.isFree(8,2) or !this.isFree(8,3) or !this.isFree(8,4)) return -1;
+	}
+
+	return nrook;
 }
 
 bool ChessBoard::isAttacked(Position p, player attacker) {
@@ -159,6 +165,12 @@ void ChessBoard::putPiece(Piece * pc, Position ps) {
 	board[ps.x][ps.y]->putPiece(pc);
 } // putPiece()
 
-
-
+Piece * getPiece(int x, int y){
+	return board[x-1][y-1];
+}
+Piece * getPiece (Position a){
+	x=a.x;
+	y=a.y;
+	return this.getPiece(x,y);
+}
 

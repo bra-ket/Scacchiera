@@ -31,8 +31,10 @@ public:
 	int doMove(Move m);
 
 	bool isFree(Position a);
+	bool isFree(int x,int y);
 
     Piece * getPiece (Position a);
+    Piece * getPiece(int x, int y);
     void putPiece (Piece * pc, Position ps);
     void movePiece(Position s, Position d);
     void emptyBox(Position p);
@@ -64,7 +66,7 @@ public:
     // pensa a come implementare il logging delle mosse perche` qui ci serve
     // in linea di massima io farei una classe apposta per la singola entry che contenga la Move e l'eventuale pezzo preso
 
-    bool isAttacked(Position p, player attacker);
+    bool isAttacked(Position p, player attacker); //fammi l'overloading nella forma (x,y,p)
     // me ne occupo io
 	bool isCheckmate();
 	// me ne occupo io

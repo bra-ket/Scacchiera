@@ -6,7 +6,12 @@ Move::Move(Position _s, Position _d){
 					s.y=_s.y;
 					d.y=_d.y;
 					}
-					
+Move::Move(int sx, int sy, int dx, int dy){
+	s.x=sx;
+	s.y=sy;
+	d.x=dx;
+	d.y=dy;
+}
 Move::~Move(){}
 
 Delta Move::getdelta(){
@@ -16,3 +21,10 @@ Delta Move::getdelta(){
 	  return d;
 	  
 	  }
+	  
+Position Move::getS{
+	return s;
+	}
+Position Move::getP{
+	return p;
+	}
