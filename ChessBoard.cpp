@@ -26,11 +26,11 @@ bool ChessBoard::isFree(Position p) {
     return board[p.x-1][p.y-1]->isFree();
 }
 
-bool isFree(int x,int y){
+bool ChessBoard::isFree(int x,int y){
 	Position a;
 	a.x=x;
 	a.y=y;
-	return this.isFree(a);
+	return (this->isFree(a));
 } // isFree()
 
 
@@ -47,8 +47,8 @@ bool isFree(int x,int y){
  * - 8: en passant not allowed
  */
 int ChessBoard::doMove(Move m) {
-	Piece * ps = this->getPiece(m.s); // content on the source position
-	Piece * pd = this->getPiece(m.d); // content on the destination position
+	Piece * ps = this->getPiece(m.getS()); // content on the source position
+	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 	if (ps == 0)
 		return 1; // empty source position
 	if (ps->getPlayer() != p)
@@ -59,7 +59,7 @@ int ChessBoard::doMove(Move m) {
 	int castling = detectCastling(m);
 
 	if (castling) {
-		movePiece(m.s,m.d); // moves the king
+		movePiece(m.getS(),m.getD()); // moves the king
 		switch (castling) {
 		case -1:
 			return 7;
@@ -158,6 +158,15 @@ bool ChessBoard::isAttacked(Position p, player attacker) {
 void ChessBoard::movePiece(Position s, Position d) {
 	putPiece(getPiece(s), d);
 	emptyBox(s);
+} // movePiece
+
+void ChessBoard::movePiece(sx,sy,dx,dy) {
+	Position s,d;
+    s.x=sx;
+    s.y=sy;
+    d.x=dx;
+    d.y=dy;
+    this->movePiece(s,d);
 } // movePiece
 
 void ChessBoard::putPiece(Piece * pc, Position ps) {

@@ -16,15 +16,16 @@ Move::~Move(){}
 
 Delta Move::getdelta(){
 	  Delta d;
-	  d.x=m.d.x-m.s.x;
-	  d.y=m.d.y-m.s.y;
+	  d.x=this->d.x-this->s.x;
+	  d.y=this->d.y-this->s.y;
 	  return d;
 	  
 	  }
 	  
-Position Move::getS{
+Position Move::getS(){
 	return s;
 	}
-Position Move::getP{
-	return p;
+
+Position Move::getD(){
+	return d;
 	}

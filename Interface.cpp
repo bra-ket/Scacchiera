@@ -6,6 +6,7 @@
  */
 
 #include "Interface.h"
+#include "Move.h"
 
 int lettertonumber(char l);
 

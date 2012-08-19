@@ -36,6 +36,7 @@ public:
     Piece * getPiece (Position a);
     Piece * getPiece(int x, int y);
     void putPiece (Piece * pc, Position ps);
+    void movePiece(int sx, int sy,int dx, int dy);
     void movePiece(Position s, Position d);
     void emptyBox(Position p);
 

@@ -11,15 +11,15 @@ public:
 	   Move(int sx, int sy, int dx, int dy);
 	   ~Move();
 	   Delta getdelta();
-	   Position getS;
-	   Position getP;
+	   Position getS();
+	   Position getD();
 	   
-		bool Move::operator==(const Move &other) const {
-    		if (this->s.x==other->s.x && this->s.y==other->s.y && this->d.x==other->d.x 
-    		&& this->d.y==other->d.y) return true;
-    		else false;
+		bool operator==(const Move &other) const{
+            if (other.getS().x==s.x and other.getS().y==s.y and other.getD().x==d.x and other.getD().y==d.y) return true; //non capisco l'errore: "
+    		else return false;
       	}
-      	bool Move::operator!=(const Move &other) const {
+    
+      	bool operator!=(const Move &other) const {
     		return !(*this == other);
   		}
 };
