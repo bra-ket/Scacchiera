@@ -59,21 +59,25 @@ int ChessBoard::doMove(Move m) {
 	int castling = detectCastling(m);
 
 	if (castling) {
+		movePiece(m.s,m.d); // moves the king
 		switch (castling) {
 		case -1:
 			return 7;
 		case 1:
 			// white right
-			movePiece(m.s,m.d);
+			movePiece(1,8,6,1); // moves the white tower to the right
 			break;
 		case 2:
 			// white left
+			movePiece(1,1,4,1); // moves the white tower to the left
 			break;
 		case 3:
 			// black right
+			movePiece(1,8,4,8); // moves the black tower to the right
 			break;
 		case 4:
 			// black left
+			movePiece(8,8,6,8); // moves the black tower to the left
 			break;
 		} // switch
 		return 0;
@@ -105,11 +109,6 @@ int ChessBoard::doMove(Move m) {
 } // doMove()
 
 
-// ti consiglio di rifarlo facendo una cosa del genere:
-// array di Move con i quattro arrocchi
-// for che cerca la mossa nell'array e si ferma se la trova
-// switch sull'indice per fare le verifiche a seconda del caso, mettendo eventualmente in AND le condizioni sulle caselle
-// visto che sono due o tre
 int ChessBoard::detectCastling(Move m){
 	std::vector<* Move> castling(4);
 	castling[0]=new Move(5,1,7,1);
