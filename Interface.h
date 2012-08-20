@@ -10,6 +10,7 @@
 
 #include "ChessBoard.h"
 #include <iostream>
+#include "Move.h"
 
 
 class Interface {

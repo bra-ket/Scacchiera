@@ -8,6 +8,7 @@
 #include "Pawn.h"
 
 Pawn::Pawn(player p) {
+    enPassant=false;
 	type='P';
     pla=p;
     possibleMoves.get_allocator().allocate(2);
@@ -30,7 +31,20 @@ Pawn::~Pawn() {
 bool Pawn::isvalid(Move m) {
     Delta d=m.getdelta();
     if (d.x==possibleMoves[0].x and d.y==possibleMoves[0].y) return true;
-    if (!this.hasMoved() and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
+    if (!this->hasMoved() and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
     else return false;
     // fai in modo che autorizzi la mossa di due solo se non si e` mai mosso prima. l'enpassant lo becchiamo separatamente
+}
+
+bool Pawn::getEnPassant(){
+    return enPassant;
+    
+}
+
+void Pawn::setEnPassant(){
+    enPassant=true;
+}
+
+void Pawn::removeEnPassant(){
+    enPassant=false;
 }

@@ -15,6 +15,12 @@ enum player { white, black };
 struct Position {
     int x;
     int y;
+    Position(){}
+    Position & operator=(const Position &rhs){
+        x=rhs.x;
+        y=rhs.y;
+        return *this;
+    };
 };
 
 struct Delta {

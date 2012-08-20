@@ -6,7 +6,6 @@
  */
 
 #include "Interface.h"
-#include "Move.h"
 
 int lettertonumber(char l);
 
@@ -50,9 +49,7 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4 b3"
     else fin.x=lettertonumber(m[3]);
     fin.y=m[4];
     
-    Move mossa;
-    mossa.s=in;
-    mossa.d=fin;
+    Move mossa(in,fin);
     return mossa;
 }
 

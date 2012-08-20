@@ -8,19 +8,19 @@
 #include "Knight.h"
 
 Knight::Knight(player p) {
+    possibleMoves.get_allocator().allocate(56);
 	type='N';
     pla=p;
     for (int i=1; i<8; i++) {
-		possible_moves[4*i].x=i;
-    	possible_moves[4*i].y=i;
-    	possible_moves[4*i+1].x=i;
-    	possible_moves[4*i+1].y=-i;
-		possible_moves[4*i+2].x=-i;
-    	possible_moves[4*i+2].y=-i;
-    	possible_moves[4*i+3].x=-i;
-    	possible_moves[4*i+3].y=+i;
+		possibleMoves[4*i].x=i;
+    	possibleMoves[4*i].y=i;
+    	possibleMoves[4*i+1].x=i;
+    	possibleMoves[4*i+1].y=-i;
+		possibleMoves[4*i+2].x=-i;
+    	possibleMoves[4*i+2].y=-i;
+    	possibleMoves[4*i+3].x=-i;
+    	possibleMoves[4*i+3].y=+i;
 		}
-	nmoves=32; // come fanno a essere 32? ne ha solo 8 a disposizione! c'e` qualcosa di sbagliato
 }
 
 Knight::~Knight() {

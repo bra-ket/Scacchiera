@@ -1,17 +1,20 @@
 #include "Move.h"
 
 Move::Move(Position _s, Position _d){
-					s.x=_s.x;
-					d.x=_d.x;
-					s.y=_s.y;
-					d.y=_d.y;
-					}
+    s=_s;
+    d=_d;
+}
+        
+					
 Move::Move(int sx, int sy, int dx, int dy){
+    Position s(sx,sy);
+    Position d(dx,dy);
 	s.x=sx;
 	s.y=sy;
 	d.x=dx;
 	d.y=dy;
 }
+
 Move::~Move(){}
 
 Delta Move::getdelta(){

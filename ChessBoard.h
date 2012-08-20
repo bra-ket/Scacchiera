@@ -13,17 +13,19 @@
 #include "Box.h"
 #include <vector>
 #include <iostream>
+#include "Pawn.h"
 #include <stdlib.h>
 
 class ChessBoard {
 
 private:
-	 player p;
-	 Box * board[8][8];
-	 Piece * kingW;
-	 Piece * kingB;
+    player p;
+    Box * board[8][8];
+    Piece * kingW;
+    Piece * kingB;
+        
 
-public:
+public: //valutiamo quali metodi trasformare in privati
 	ChessBoard();
 	virtual ~ChessBoard();
 	void switchPlayer();
@@ -66,14 +68,20 @@ public:
     // 1: e` una presa en passant valida
     // pensa a come implementare il logging delle mosse perche` qui ci serve
     // in linea di massima io farei una classe apposta per la singola entry che contenga la Move e l'eventuale pezzo preso
+    
+    void resetEnPassant();
 
-    bool isAttacked(Position p, player attacker); //fammi l'overloading nella forma (x,y,p)
+    bool isAttacked(Position p, player attacker);
+    bool isAttacked(int x, int y, player attacker);
     // me ne occupo io
 	bool isCheckmate();
 	// me ne occupo io
 	bool isCheck(player p);
 	// me ne occupo io
 
+    friend void Pawn::setEnPassant();
+    friend void Pawn::removeEnPassant();
+    
 };
 
 #endif /* CHESSBOARD_H_ */

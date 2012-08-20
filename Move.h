@@ -1,27 +1,29 @@
-#ifndef MOVE_H
+#ifndef MOVE_H_
 #define MOVE_H_
+
 #include "structures.h"
 #include <stdlib.h>
 
 class Move {
-	  Position s; // position of the piece moved
-      Position d; // destination of the piece moved
+	  const Position s; // position of the piece moved
+      const Position d; // destination of the piece moved
 public:
-	   Move(Position _s, Position _d);
-	   Move(int sx, int sy, int dx, int dy);
-	   ~Move();
-	   Delta getdelta();
-	   Position getS();
-	   Position getD();
+        Move(Position _s, Position _d);
+        Move(int sx, int sy, int dx, int dy);
+        ~Move();
+        Delta getdelta();
+	    Position getS();
+	    Position getD();
 	   
-		bool operator==(const Move &other) const{
+		bool operator==(Move &other) const{ //workaround
             if (other.getS().x==s.x and other.getS().y==s.y and other.getD().x==d.x and other.getD().y==d.y) return true;
-            //non capisco l'errore: "/Volumes/Scatolanera/C++/Scacchiera/Move.h:18:17: Member function 'getS' not viable: 'this' argument has type 'const Move', but function is not marked const"
+            
     		else return false;
       	}
     
-      	bool operator!=(const Move &other) const {
+      	bool operator!=(Move &other) const {
     		return !(*this == other);
   		}
 };
+
 #endif

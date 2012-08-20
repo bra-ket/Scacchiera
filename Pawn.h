@@ -11,10 +11,14 @@
 #include "Piece.h"
 
 class Pawn: public Piece {
+    bool enPassant; //flag if liable of enpassant
+    void setEnPassant();
+    void removeEnPassant();
 public:
 	Pawn(player p);
 	virtual ~Pawn();
     bool isvalid(Move m);
+    bool getEnPassant();
 };
 
 #endif /* PAWN_H_ */

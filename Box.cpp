@@ -8,15 +8,15 @@
 #include "Box.h"
 
 Box::Box() {
-    p=0;
+    p=NULL;
 }
 
 Box::~Box() {
-    if (p!=0) delete p;
+    if (p!=NULL) delete p;
 }
 
 bool Box::isFree(){
-    if (p==0) return true;
+    if (p==NULL) return true;
     else return false;
 }
 
@@ -29,5 +29,5 @@ void Box::putPiece(Piece* q){
 }
 
 void Box::empty(){
-    p=0;
+    p=NULL;
 }

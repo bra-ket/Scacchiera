@@ -7,7 +7,9 @@
 
 
 #include "Box.h"
+#include "Move.h"
 #include "ChessBoard.h"
+#include "Pawn.h"
 
 ChessBoard::ChessBoard() {
 	p = white;
@@ -82,7 +84,7 @@ int ChessBoard::doMove(Move m) {
 		} // switch
 		return 0;
 	} // if
-
+    //aggiungi un if che faccia il check dell'enpassant solo per i pedoni
 	int enps = detectEnPassant(m);
 
 	if (enps) {
@@ -97,7 +99,7 @@ int ChessBoard::doMove(Move m) {
 
 		if (!ps->isValid(m))
 			return 4; // invalid path
-		movePiece(m.s,m.d);
+		movePiece(m.getS(),m.getD());
 	} // else
 
 	if (isCheck(p)) {
@@ -106,47 +108,69 @@ int ChessBoard::doMove(Move m) {
 	} // if
 
 	// gestione promozione
+
+    //fine turno, svuoto enPassant avversari
+    resetEnPassant();
+    
 } // doMove()
 
+int ChessBoard::detectEnPassant(Move m){
+    if (this->getPiece(m.getS())->hasMoved()==false and m.getS().y-m.getD().y==1) this->getPiece(m.getS())->setEnPassant(); //come evito questo errore? 
+    int c;
+    if (p==white) c=1;
+    else c=-1;
+    if (m.getS().y!=5 and m.getD().y!=5+c) return 0;
+    if (abs(m.getS().x-m.getD().x)!=1) return 0;
+    if (this->isFree(m.getS().x,5+2*c)==false and this->getPiece(m.getS().x,5+2*c)->getType()=='P' and this->getPiece(m.getS().x,5+2*c)->getEnPassant()==true) return 1; //come faccio ad evitare questo errore?
+    else return -1;
+}
+
+void ChessBoard::resetEnPassant(){
+    int c;
+    if (p==black) c=3;
+    if (p==white) c=6;
+    for (int i=1;i<=8;i++) if(!this->isFree(i,c) and this->getPiece(i,c)->getType()=='P') this->getPiece(i,c)->removeEnPassant();
+}
 
 int ChessBoard::detectCastling(Move m){
-	std::vector<* Move> castling(4);
+	std::vector<Move *> castling(4);
 	castling[0]=new Move(5,1,7,1);
 	castling[1]=new Move(5,1,3,1);
 	castling[2]=new Move(5,8,7,8);
 	castling[3]=new Move(5,8,3,8);
 	
-	int caso=0;
+	int nrook=0;
 	for(int i=0; i<castling.size();i++){
-		if (castling[i]==m) {
+		if (*castling[i]==m) {
 			nrook=i+1;
 			break;
 		}
 	}
 	
 	if (nrook==0) return 0; //non un arrocco
-	if(this.getPiece(m.getS())->hasMoved()) return -1;
+	if(this->getPiece(m.getS())->hasMoved()) return -1;
 	if (nrook==1) {
-		if (this.getPiece(8,1)->hasMoved()) return -1;
-		if (this.isAttacked(1,7,black) or this.isAttacked(1,6,black) or this.isAttacked(1,5,black)) return -1;
-		if (!this.isFree(1,7) or !this.isFree(1,6)) return -1;
+		if (this->getPiece(8,1)->hasMoved()) return -1;
+		if (this->isAttacked(1,7,black) or this->isAttacked(1,6,black) or this->isAttacked(1,5,black)) return -1;
+		if (!this->isFree(1,7) or !this->isFree(1,6)) return -1;
 	}
 	if (nrook==2) {
-		if (this.getPiece(1,1)->hasMoved()) return -1;
-		if (this.isAttacked(1,3,black) or this.isAttacked(1,4,black) or this.isAttacked(1,5,black)) return -1;
-		if (!this.isFree(1,2) or !this.isFree(1,3) or !this.isFree(1,4)) return -1;
+		if (this->getPiece(1,1)->hasMoved()) return -1;
+		if (this->isAttacked(1,3,black) or this->isAttacked(1,4,black) or this->isAttacked(1,5,black)) return -1;
+		if (!this->isFree(1,2) or !this->isFree(1,3) or !this->isFree(1,4)) return -1;
 	}
 	if (nrook==3) {
-		if (this.getPiece(8,8)->hasMoved()) return -1;
-		if (this.isAttacked(8,7,white) or this.isAttacked(8,6,white) or this.isAttacked(8,5,white)) return -1;
-		if (!this.isFree(8,7) or !this.isFree(8,6)) return -1;
+		if (this->getPiece(8,8)->hasMoved()) return -1;
+		if (this->isAttacked(8,7,white) or this->isAttacked(8,6,white) or this->isAttacked(8,5,white)) return -1;
+		if (!this->isFree(8,7) or !this->isFree(8,6)) return -1;
 	}
 	if (nrook==4) {
-		if (this.getPiece(1,8)->hasMoved()) return -1;
-		if (this.isAttacked(8,3,white) or this.isAttacked(8,4,white) or this.isAttacked(8,5,white)) return -1;
-		if (!this.isFree(8,2) or !this.isFree(8,3) or !this.isFree(8,4)) return -1;
+		if (this->getPiece(1,8)->hasMoved()) return -1;
+		if (this->isAttacked(8,3,white) or this->isAttacked(8,4,white) or this->isAttacked(8,5,white)) return -1;
+		if (!this->isFree(8,2) or !this->isFree(8,3) or !this->isFree(8,4)) return -1;
 	}
-
+    for (int i=0; i<4; i++) delete castling[i];
+    
 	return nrook;
 }
 
@@ -155,12 +179,19 @@ bool ChessBoard::isAttacked(Position p, player attacker) {
 
 } // isAttacked()
 
+bool ChessBoard::isAttacked(int x, int y, player attacker){
+    Position p;
+    p.x=x;
+    p.y=y;
+    return(this->isAttacked(p,attacker));
+}
+
 void ChessBoard::movePiece(Position s, Position d) {
 	putPiece(getPiece(s), d);
 	emptyBox(s);
 } // movePiece
 
-void ChessBoard::movePiece(sx,sy,dx,dy) {
+void ChessBoard::movePiece(int sx,int sy,int dx, int dy) {
 	Position s,d;
     s.x=sx;
     s.y=sy;
@@ -173,12 +204,16 @@ void ChessBoard::putPiece(Piece * pc, Position ps) {
 	board[ps.x][ps.y]->putPiece(pc);
 } // putPiece()
 
-Piece * getPiece(int x, int y){
-	return board[x-1][y-1];
+Piece * ChessBoard::getPiece(int x, int y){
+	return (board[x-1][y-1]->getPiece());
 }
-Piece * getPiece (Position a){
-	x=a.x;
-	y=a.y;
-	return this.getPiece(x,y);
+Piece * ChessBoard::getPiece (Position a){
+	int x=a.x;
+	int y=a.y;
+	return this->getPiece(x,y);
+}
+
+void ChessBoard::emptyBox(Position p){
+    board[p.x-1][p.y-1]->empty();
 }
 
