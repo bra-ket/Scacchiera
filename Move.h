@@ -15,7 +15,8 @@ public:
 	   Position getD();
 	   
 		bool operator==(const Move &other) const{
-            if (other.getS().x==s.x and other.getS().y==s.y and other.getD().x==d.x and other.getD().y==d.y) return true; //non capisco l'errore: "
+            if (other.getS().x==s.x and other.getS().y==s.y and other.getD().x==d.x and other.getD().y==d.y) return true;
+            //non capisco l'errore: "/Volumes/Scatolanera/C++/Scacchiera/Move.h:18:17: Member function 'getS' not viable: 'this' argument has type 'const Move', but function is not marked const"
     		else return false;
       	}
     
