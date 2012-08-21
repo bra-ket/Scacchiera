@@ -10,6 +10,7 @@
 #include "Move.h"
 #include "ChessBoard.h"
 #include "Pawn.h"
+#include "structures.h"
 
 ChessBoard::ChessBoard() {
 	p = white;
@@ -115,13 +116,13 @@ int ChessBoard::doMove(Move m) {
 } // doMove()
 
 int ChessBoard::detectEnPassant(Move m){
-    if (this->getPiece(m.getS())->hasMoved()==false and m.getS().y-m.getD().y==1) this->getPiece(m.getS())->setEnPassant(); //come evito questo errore? 
+    // if (this->getPiece(m.getS().y-m.getD().y==2) this->getPiece(m.getS())->setEnPassant(); //come evito questo errore? va spostato
     int c;
     if (p==white) c=1;
     else c=-1;
     if (m.getS().y!=5 and m.getD().y!=5+c) return 0;
     if (abs(m.getS().x-m.getD().x)!=1) return 0;
-    if (this->isFree(m.getS().x,5+2*c)==false and this->getPiece(m.getS().x,5+2*c)->getType()=='P' and this->getPiece(m.getS().x,5+2*c)->getEnPassant()==true) return 1; //come faccio ad evitare questo errore?
+    if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P' and this->getPiece(m.getD().x,5+2*c)->getEnPassant()==true) return 1; //come faccio ad evitare questo errore?
     else return -1;
 }
 
