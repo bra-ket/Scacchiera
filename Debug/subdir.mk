@@ -11,6 +11,7 @@ CPP_SRCS += \
 ../Interface.cpp \
 ../King.cpp \
 ../Knight.cpp \
+../Move.cpp \
 ../Pawn.cpp \
 ../Piece.cpp \
 ../Queen.cpp \
@@ -24,6 +25,7 @@ OBJS += \
 ./Interface.o \
 ./King.o \
 ./Knight.o \
+./Move.o \
 ./Pawn.o \
 ./Piece.o \
 ./Queen.o \
@@ -37,6 +39,7 @@ CPP_DEPS += \
 ./Interface.d \
 ./King.d \
 ./Knight.d \
+./Move.d \
 ./Pawn.d \
 ./Piece.d \
 ./Queen.d \
