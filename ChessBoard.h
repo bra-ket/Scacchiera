@@ -16,6 +16,10 @@
 #include "Pawn.h"
 #include <stdlib.h>
 
+#include <algorithm>
+
+using namespace std;
+
 class ChessBoard {
 
 private:
@@ -78,6 +82,10 @@ public: //valutiamo quali metodi trasformare in privati
 	// me ne occupo io
 	bool isCheck(player p);
 	// me ne occupo io
+
+	bool isValid(int x, int y);
+
+	Position getKingPosition(player p);
 
     friend void Pawn::setEnPassant();
     friend void Pawn::removeEnPassant();
