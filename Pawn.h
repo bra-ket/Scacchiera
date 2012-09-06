@@ -12,13 +12,14 @@
 
 class Pawn: public Piece {
     bool enPassant; //flag if liable of enpassant
-    void setEnPassant();
-    void removeEnPassant();
+    
 public:
 	Pawn(player p);
 	virtual ~Pawn();
     bool isvalid(Move m);
     bool getEnPassant();
+	void setEnPassant();
+    void removeEnPassant();
 };
 
 #endif /* PAWN_H_ */
