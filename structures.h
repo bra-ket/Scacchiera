@@ -21,6 +21,10 @@ struct Position {
         y=rhs.y;
         return *this;
     };
+    Position (int _x, int _y){
+    	x=_x;
+    	y=_y;
+    }
 };
 
 struct Delta {

@@ -121,8 +121,11 @@ int ChessBoard::detectEnPassant(Move m){
     if (p==white) c=1;
     else c=-1;
     if (m.getS().y!=5 and m.getD().y!=5+c) return 0;
-    if (abs(m.getS().x-m.getD().x)!=1) return 0;
-    if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P' and this->getPiece(m.getD().x,5+2*c)->(Pawn*)getEnPassant()==true) return 1; //come faccio ad evitare questo errore?
+    else if (abs(m.getS().x-m.getD().x)!=1) return 0;
+    else if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P') {
+    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,5+2*c));
+    		if (pa->getEnPassant()==true) return 1;
+    }
     else return -1;
 }
 
@@ -130,7 +133,12 @@ void ChessBoard::resetEnPassant(){
     int c;
     if (p==black) c=3;
     if (p==white) c=6;
-    for (int i=1;i<=8;i++) if(!this->isFree(i,c) and this->getPiece(i,c)->getType()=='P') this->(Pawn*)getPiece(i,c)->removeEnPassant();
+    for (int i=1;i<=8;i++) {
+    	if(!this->isFree(i,c) and this->getPiece(i,c)->getType()=='P') {
+    		Pawn * pa = (Pawn *) (this->getPiece(i,c));
+    		pa->removeEnPassant();
+    	}
+    }
 }
 
 int ChessBoard::detectCastling(Move m){
@@ -335,6 +343,5 @@ void ChessBoard::emptyBox(Position p){
 }
 
 bool isValid(int x, int y) {
-	return (x >= 1 AND x <= 8 AND y >= 1 AND y <= 8);
+	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
-}

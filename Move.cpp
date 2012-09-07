@@ -1,7 +1,7 @@
 #include "Move.h"
 
 Move::Move(Position _s, Position _d){
-    s=_s;
+    s=_s; //errore che non comprendo
     d=_d;
 }
         
