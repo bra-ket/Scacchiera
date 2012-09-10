@@ -49,7 +49,7 @@ bool ChessBoard::isFree(int x,int y){
  * - 7: castling not allowed
  * - 8: en passant not allowed
  */
-int ChessBoard::doMove(Move m) {
+int ChessBoard::doMove(Move m, char promotion='0') {
 	Piece * ps = this->getPiece(m.getS()); // content on the source position
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 	if (ps == 0)
@@ -87,7 +87,7 @@ int ChessBoard::doMove(Move m) {
 	} // if
     //aggiungi un if che faccia il check dell'enpassant solo per i pedoni
 	int enps = detectEnPassant(m);
-
+	resetEnPassant();
 	if (enps) {
 		switch (enps) {
 		case -1:
@@ -108,11 +108,16 @@ int ChessBoard::doMove(Move m) {
 		return 6;
 	} // if
 
+	//qua va fatta la vera e propria mossa
+
 	// gestione promozione
+	if (p==white) if (m.getD().y==8) promote(getPiece(m.getD()),promotion);
+	if (p==black) if (m.getD().y==1) promote(getPiece(m.getD()),promotion);
+
 
     //fine turno, svuoto enPassant avversari
-    resetEnPassant();
     
+
 } // doMove()
 
 int ChessBoard::detectEnPassant(Move m){
@@ -346,15 +351,5 @@ bool isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
 
-Piece * Chessboard::promote(Piece * p, char type){
-	pla=p->getPlayer();
-	delete &p;
-	if (type=='B') p=new Bishop(pla);
-	if (type=='N') p=new Knight(pla);
-	if (type=='R') p=new Rook(pla);
-	if (type=='Q') p=new Queen(pla);
-	if (type=='P') p=new Pawn(pla);
-	p->setMoved();
-	return p;
-}
+
 
