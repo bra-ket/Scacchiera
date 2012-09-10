@@ -48,3 +48,5 @@ void Pawn::setEnPassant(){
 void Pawn::removeEnPassant(){
     enPassant=false;
 }
+
+

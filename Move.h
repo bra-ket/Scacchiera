@@ -5,10 +5,10 @@
 #include <stdlib.h>
 
 class Move {
-	  const Position s; // position of the piece moved
-      const Position d; // destination of the piece moved
+	  Position s; // position of the piece moved
+      Position d; // destination of the piece moved
 public:
-        Move(Position _s, Position _d);
+        Move(const Position _s, const Position _d);
         Move(int sx, int sy, int dx, int dy);
         ~Move();
         Delta getdelta();

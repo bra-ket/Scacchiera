@@ -1,3 +1,5 @@
-Move.d: ../Move.cpp ../Move.h
+Move.d Move.o: ../Move.cpp ../Move.h ../structures.h
 
 ../Move.h:
+
+../structures.h:

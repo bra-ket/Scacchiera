@@ -89,6 +89,7 @@ public: //valutiamo quali metodi trasformare in privati
 
     friend void Pawn::setEnPassant();
     friend void Pawn::removeEnPassant();
+    Piece * promote(Piece * p, char type);
     
 };
 

@@ -345,3 +345,16 @@ void ChessBoard::emptyBox(Position p){
 bool isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
+
+Piece * Chessboard::promote(Piece * p, char type){
+	pla=p->getPlayer();
+	delete &p;
+	if (type=='B') p=new Bishop(pla);
+	if (type=='N') p=new Knight(pla);
+	if (type=='R') p=new Rook(pla);
+	if (type=='Q') p=new Queen(pla);
+	if (type=='P') p=new Pawn(pla);
+	p->setMoved();
+	return p;
+}
+
