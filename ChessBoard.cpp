@@ -48,6 +48,7 @@ bool ChessBoard::isFree(int x,int y){
  * - 6: check on the player's move
  * - 7: castling not allowed
  * - 8: en passant not allowed
+ * - 9: promotion
  */
 int ChessBoard::doMove(Move m, char promotion='0') {
 	Piece * ps = this->getPiece(m.getS()); // content on the source position
@@ -62,7 +63,7 @@ int ChessBoard::doMove(Move m, char promotion='0') {
 	int castling = detectCastling(m);
 
 	if (castling) {
-		movePiece(m.getS(),m.getD()); // moves the king
+		movePiece(m); // moves the king
 		switch (castling) {
 		case -1:
 			return 7;
@@ -85,7 +86,9 @@ int ChessBoard::doMove(Move m, char promotion='0') {
 		} // switch
 		return 0;
 	} // if
+
     //aggiungi un if che faccia il check dell'enpassant solo per i pedoni
+	// da fare, in effetti
 	int enps = detectEnPassant(m);
 	resetEnPassant();
 	if (enps) {
@@ -93,38 +96,44 @@ int ChessBoard::doMove(Move m, char promotion='0') {
 		case -1:
 			return 8;
 		case 1:
-			// effettuare la mossa
+			movePiece(m); // moves the attacker's pawn
+			pd = getPiece(m.getS().y, m.getD().x); // store the captured pawn
+			emptyBox(m.getS().y, m.getD().x); // empties the captured position
+			if (isCheck(p)) {
+				movePiece(m.getD(), m.getS()); // reverts the attacker's move
+				putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
+				return 6;
+			} // if
 			break;
 		} // switch
-	} else { // normal move
-
-		if (!ps->isValid(m))
-			return 4; // invalid path
-		movePiece(m.getS(),m.getD());
-	} // else
-
-	if (isCheck(p)) {
-		// rollback
-		return 6;
 	} // if
 
-	//qua va fatta la vera e propria mossa
+	else
 
-	// gestione promozione
-	if (p==white) if (m.getD().y==8) promote(getPiece(m.getD()),promotion);
-	if (p==black) if (m.getD().y==1) promote(getPiece(m.getD()),promotion);
+	{ // normal move
+		if (!ps->isValid(m))
+			return 4; // invalid path
+		movePiece(m);
+		if (isCheck(p)) {
+			movePiece(m.getD(), m.getS()); // reverts the move
+			putPiece(pd, m.getS()); // restored the caputerd piece
+			return 6;
+		} // if
+	} // else
 
+	// gestione promozione: se e` una promozione il doMove() NON effettua la promozione ma ritorna un valore che poi il main gestira` opportunamente chiedendo all'interfaccia
 
-    //fine turno, svuoto enPassant avversari
-    
+    return 0;
 
 } // doMove()
 
 int ChessBoard::detectEnPassant(Move m){
-    // if (this->getPiece(m.getS().y-m.getD().y==2) this->getPiece(m.getS())->setEnPassant(); //come evito questo errore? va spostato
+	// sostituire l'if con l'istruzione ? :
     int c;
-    if (p==white) c=1;
-    else c=-1;
+    if (p==white)
+    	c=1;
+    else
+    	c=-1;
     if (m.getS().y!=5 and m.getD().y!=5+c) return 0;
     else if (abs(m.getS().x-m.getD().x)!=1) return 0;
     else if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P') {
@@ -304,7 +313,7 @@ bool ChessBoard::isAttacked(Position p, player attacker) {
 			return true;
 
 
-
+	return false;
 
 
 } // isAttacked()
@@ -350,6 +359,3 @@ void ChessBoard::emptyBox(Position p){
 bool isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
-
-
-
