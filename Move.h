@@ -11,11 +11,11 @@ public:
         Move(const Position _s, const Position _d);
         Move(int sx, int sy, int dx, int dy);
         ~Move();
-        Delta getdelta();
+        Delta getDelta();
 	    Position getS();
 	    Position getD();
 	   
-		bool operator==(Move &other) const{ //workaround
+		bool operator==(Move &other) const {
             if (other.getS().x==s.x and other.getS().y==s.y and other.getD().x==d.x and other.getD().y==d.y) return true;
             
     		else return false;

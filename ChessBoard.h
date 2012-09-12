@@ -42,9 +42,14 @@ public: //valutiamo quali metodi trasformare in privati
     Piece * getPiece (Position a);
     Piece * getPiece(int x, int y);
     void putPiece (Piece * pc, Position ps);
+    void putPiece (Piece * pc, int x, int y);
     void movePiece(int sx, int sy,int dx, int dy);
     void movePiece(Position s, Position d);
+    void movePiece(Move m);
     void emptyBox(Position p);
+    void emptyBox(int x, int y);
+
+    void promote(Position p, char type);
 
     int detectCastling(Move m);
     // controlla se m e` un arrocco e se e` una mossa valida
@@ -89,7 +94,6 @@ public: //valutiamo quali metodi trasformare in privati
 
     friend void Pawn::setEnPassant();
     friend void Pawn::removeEnPassant();
-    Piece * promote(Piece * p, char type);
     
 };
 

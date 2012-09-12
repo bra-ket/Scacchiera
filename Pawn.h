@@ -12,7 +12,7 @@
 
 class Pawn: public Piece {
     bool enPassant; //flag if liable of enpassant
-    
+
 public:
 	Pawn(player p);
 	virtual ~Pawn();

@@ -25,6 +25,7 @@ class Interface {
 		void invalidMove(); // prints an invalid move notice
 		void validMove(); // prints a valid move notice
 		void endGame();
+		char getPromotionType();
 };
 
 #endif /* INTERFACE_H_ */

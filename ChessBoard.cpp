@@ -50,7 +50,7 @@ bool ChessBoard::isFree(int x,int y){
  * - 8: en passant not allowed
  * - 9: promotion
  */
-int ChessBoard::doMove(Move m, char promotion='0') {
+int ChessBoard::doMove(Move m) {
 	Piece * ps = this->getPiece(m.getS()); // content on the source position
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 	if (ps == 0)
@@ -69,43 +69,47 @@ int ChessBoard::doMove(Move m, char promotion='0') {
 			return 7;
 		case 1:
 			// white right
-			movePiece(1,8,6,1); // moves the white tower to the right
+			movePiece(1,1,6,1); // moves the white tower to the right
+			getPiece(6,1)->setMoved();
 			break;
 		case 2:
 			// white left
 			movePiece(1,1,4,1); // moves the white tower to the left
+			getPiece(4,1)->setMoved();
 			break;
 		case 3:
 			// black right
 			movePiece(1,8,4,8); // moves the black tower to the right
+			getPiece(4,8)->setMoved();
 			break;
 		case 4:
 			// black left
 			movePiece(8,8,6,8); // moves the black tower to the left
+			getPiece(6,8)->setMoved();
 			break;
 		} // switch
 		return 0;
 	} // if
 
-    //aggiungi un if che faccia il check dell'enpassant solo per i pedoni
-	// da fare, in effetti
-	int enps = detectEnPassant(m);
-	resetEnPassant();
-	if (enps) {
-		switch (enps) {
-		case -1:
-			return 8;
-		case 1:
-			movePiece(m); // moves the attacker's pawn
-			pd = getPiece(m.getS().y, m.getD().x); // store the captured pawn
-			emptyBox(m.getS().y, m.getD().x); // empties the captured position
-			if (isCheck(p)) {
-				movePiece(m.getD(), m.getS()); // reverts the attacker's move
-				putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
-				return 6;
-			} // if
-			break;
-		} // switch
+	// detects and manages an "en passant" capture
+	if (ps->getType() == 'P') {
+		int enps = detectEnPassant(m);
+		if (enps) {
+			switch (enps) {
+			case -1:
+				return 8;
+			case 1:
+				movePiece(m); // moves the attacker's pawn
+				pd = getPiece(m.getS().y, m.getD().x); // stores the captured pawn
+				emptyBox(m.getS().y, m.getD().x); // empties the captured position
+				if (isCheck(p)) {
+					movePiece(m.getD(), m.getS()); // reverts the attacker's move
+					putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
+					return 6;
+				} // if
+				break;
+			} // switch
+		} // if
 	} // if
 
 	else
@@ -113,35 +117,50 @@ int ChessBoard::doMove(Move m, char promotion='0') {
 	{ // normal move
 		if (!ps->isValid(m))
 			return 4; // invalid path
-		movePiece(m);
+		// the path is valid
+		movePiece(m); // moves the piece
+		// checks for a check status
 		if (isCheck(p)) {
 			movePiece(m.getD(), m.getS()); // reverts the move
-			putPiece(pd, m.getS()); // restored the caputerd piece
+			putPiece(pd, m.getS()); // restores the captured piece
 			return 6;
+		} // if
+
+		if (!ps->hasMoved())
+			ps->setMoved();
+
+		resetEnPassant();
+
+		if (ps->getType() == 'P') {
+			if (m.getDelta().y == 2)
+				((Pawn*)ps)->setEnPassant(); // can be captured "en passant" on the next turn
+			else if (m.getD().x == '1' or m.getD().y == '8')
+				return 9; // promotion
 		} // if
 	} // else
 
-	// gestione promozione: se e` una promozione il doMove() NON effettua la promozione ma ritorna un valore che poi il main gestira` opportunamente chiedendo all'interfaccia
 
-    return 0;
+
+    return 0; // normal move executed
 
 } // doMove()
 
+
 int ChessBoard::detectEnPassant(Move m){
 	// sostituire l'if con l'istruzione ? :
-    int c;
-    if (p==white)
-    	c=1;
-    else
-    	c=-1;
-    if (m.getS().y!=5 and m.getD().y!=5+c) return 0;
-    else if (abs(m.getS().x-m.getD().x)!=1) return 0;
-    else if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P') {
+    int c = (p == white) ? 1 : -1; // look, how smart!
+
+    if (m.getS().y!=5 and m.getD().y!=5+c)
+    	return 0;
+    if (abs(m.getS().x-m.getD().x)!=1)
+    	return 0;
+    if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P') {
     		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,5+2*c));
     		if (pa->getEnPassant()==true) return 1;
     }
-    else return -1;
-}
+
+    return -1;
+} // detectEnPassant()
 
 void ChessBoard::resetEnPassant(){
     int c;

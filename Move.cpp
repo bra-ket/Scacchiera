@@ -1,8 +1,8 @@
 #include "Move.h"
 
-Move::Move(Position _s, Position _d){
-    s=_s; //errore che non comprendo
-    d=_d;
+Move::Move(Position ns, Position nd){
+    s = ns;
+    d = nd;
 }
         
 					
@@ -17,7 +17,7 @@ Move::Move(int sx, int sy, int dx, int dy){
 
 Move::~Move(){}
 
-Delta Move::getdelta(){
+Delta Move::getDelta(){
 	  Delta d;
 	  d.x=this->d.x-this->s.x;
 	  d.y=this->d.y-this->s.y;

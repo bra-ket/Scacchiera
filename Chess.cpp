@@ -14,8 +14,8 @@
 using namespace std;
 
 int main() {
-	ChessBoard * cb = new ChessBoard();
-	Interface * UI = new Interface(cb);
+	ChessBoard * CB = new ChessBoard();
+	Interface * UI = new Interface(CB);
 	int result = 0; // result of a move
 	bool checkmate = 0; // checkmate status
 
@@ -23,7 +23,7 @@ int main() {
 		UI->printBoard();
 		do {
 			Move m = UI->prompt();
-			result = cb->doMove(m);
+			result = CB->doMove(m);
 
 			switch (result) {
 				case 0:
@@ -32,9 +32,13 @@ int main() {
 				case 1:
 					UI->invalidMove();
 					break;
+				case 9:
+					char type = UI->getPromotionType();
+					CB->promote(m.getD(), type);
+					break;
 			} // switch
 		} while(result);
-		checkmate = cb-> isCheckmate();
+		checkmate = CB-> isCheckmate();
 	} while (!checkmate);
 	UI->endGame();
 	return 0;
