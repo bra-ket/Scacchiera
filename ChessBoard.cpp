@@ -358,6 +358,12 @@ void ChessBoard::movePiece(int sx,int sy,int dx, int dy) {
     this->movePiece(s,d);
 } // movePiece
 
+void ChessBoard::movePiece(Move m){
+	Position s=m.getS();
+	Position d=m.getD();
+	this->movePiece(s,d);
+}
+
 void ChessBoard::putPiece(Piece * pc, Position ps) {
 	board[ps.x][ps.y]->putPiece(pc);
 } // putPiece()
@@ -375,6 +381,11 @@ void ChessBoard::emptyBox(Position p){
     board[p.x-1][p.y-1]->empty();
 }
 
-bool isValid(int x, int y) {
+void ChessBoard::emptyBox(int x, int y){
+	Position p(x,y);
+	this->emptyBox(p);
+}
+
+bool ChessBoard::isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
