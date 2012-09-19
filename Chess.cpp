@@ -35,10 +35,11 @@ int main() {
 				case 9:
 					char type = UI->getPromotionType();
 					CB->promote(m.getD(), type);
+					result = 0;
 					break;
 			} // switch
 		} while(result);
-		checkmate = CB-> isCheckmate();
+		checkmate = CB-> isCheckMate();
 	} while (!checkmate);
 	UI->endGame();
 	return 0;
