@@ -344,42 +344,42 @@ vector<Position> ChessBoard::checkAttackingPositions(Position p, player attacker
     			and !isFree(p.x + 1, p.y + 2)
     			and getPiece(p.x + 1, p.y + 2)->getType()=='N'
     			and getPiece(p.x + 1, p.y + 2)->getPlayer() == attacker )
-    		return true;
+			return positions;
     	if ( isValid(p.x + 1, p.y - 2)
     			and !isFree(p.x + 1, p.y - 2)
     			and getPiece(p.x + 1, p.y - 2)->getType()=='N'
     			and getPiece(p.x + 1, p.y - 2)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x - 1, p.y + 2)
     			and !isFree(p.x - 1, p.y + 2)
     			and getPiece(p.x - 1, p.y + 2)->getType()=='N'
     			and getPiece(p.x - 1, p.y + 2)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x - 1, p.y - 2)
     			and !isFree(p.x - 1, p.y - 2)
     			and getPiece(p.x - 1, p.y - 2)->getType()=='N'
     			and getPiece(p.x - 1, p.y - 2)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x + 2, p.y + 1)
     			and !isFree(p.x + 2, p.y + 1)
     			and getPiece(p.x + 2, p.y + 1)->getType()=='N'
     			and getPiece(p.x + 2, p.y + 1)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x + 2, p.y - 1)
     			and !isFree(p.x + 2, p.y - 1)
     			and getPiece(p.x + 2, p.y - 1)->getType()=='N'
     			and getPiece(p.x + 2, p.y - 1)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x - 2, p.y + 1)
     			and !isFree(p.x - 2, p.y + 1)
     			and getPiece(p.x - 2, p.y + 1)->getType()=='N'
     			and getPiece(p.x - 2, p.y + 1)->getPlayer() == attacker )
-    		return true;
+    		return positions;
     	if ( isValid(p.x - 2, p.y - 1)
     			and !isFree(p.x - 2, p.y - 1)
     			and getPiece(p.x - 2, p.y - 1)->getType()=='N'
     			and getPiece(p.x - 2, p.y - 1)->getPlayer() == attacker )
-    		return true;
+    		return positions;
 
 
         // checks from attacks from pawns
@@ -388,12 +388,12 @@ vector<Position> ChessBoard::checkAttackingPositions(Position p, player attacker
                         and !isFree(p.x + 1, p.y + dY)
                         and getPiece(p.x + 1, p.y + dY)->getType()=='P'
                         and getPiece(p.x + 1, p.x - dY)->getPlayer() == attacker )
-                return true;
+        	return positions;
         if ( isValid(p.x - 1, p.y + dY)
                         and !isFree(p.x - 1, p.y + dY)
                         and getPiece(p.x - 1, p.y + dY)->getType()=='P'
                         and getPiece(p.x - 1, p.x - dY)->getPlayer() == attacker )
-                return true;
+        	return positions;
 
         // checks for attacks from the King
         // this could be included as a special case in the code which checks
@@ -404,55 +404,55 @@ vector<Position> ChessBoard::checkAttackingPositions(Position p, player attacker
                         or ( abs(p.x - q.x) == 1 and (p.y - q.y) == 0 ) // adjacent on the row
                         or ( abs(p.x - q.x) == 0 and (p.y - q.y) == 1 ) // adjacent on the column
                 ) // the attacker's king is on an adjacent cell
-                return true;
+        	return positions;
 
         // checks for attacks from the column
         for (int i = p.y + 1; i <= 8; i++)
                 if ( !isFree(p.x, i)
                                 and getPiece(p.x, i)->getPlayer() == attacker
                                 and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
         for (int i = p.y - 1; i >= 1; i--)
                 if ( !isFree(p.x, i)
                                 and getPiece(p.x, i)->getPlayer() == attacker
                                 and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
 
         // checks for attacks from the row
         for (int i = p.x + 1; i <= 8; i++)
                 if ( !isFree(i, p.y)
                                 and getPiece(i, p.y)->getPlayer() == attacker
                                 and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
         for (int i = p.x - 1; i >= 1; i--)
                 if ( !isFree(i, p.y)
                                 and getPiece(i, p.y)->getPlayer() == attacker
                                 and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
 
         // checks for attacks from the NE-SW diagonal
         for (int i = 1; i <= min(8 - p.x, 8 - p.y); i++)
                 if ( !isFree(p.x + i, p.y + i)
                                 and getPiece(p.x + i, p.y + i)->getPlayer() == attacker
                                 and ( getPiece(p.x + i, p.y + i)->getType() == 'B' or getPiece(p.x + i, p.y + i)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
         for (int i = 1; i <= min(p.x - 1, p.y - 1); i++)
                 if ( !isFree(p.x - i, p.y - i)
                                 and getPiece(p.x - i, p.y - i)->getPlayer() == attacker
                                 and ( getPiece(p.x - i, p.y - i)->getType() == 'B' or getPiece(p.x - i, p.y - i)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
 
         // checks for attacks from the NW-SE diagonal
         for (int i = 1; i <= min(p.x - 1, 8 - p.y); i++)
                 if ( !isFree(p.x - i, p.y + i)
                                 and getPiece(p.x - i, p.y + i)->getPlayer() == attacker
                                 and ( getPiece(p.x - i, p.y + i)->getType() == 'B' or getPiece(p.x - i, p.y + i)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
         for (int i = 1; i <= min(8 - p.x, p.y - 1); i++)
                 if ( !isFree(p.x + 1, p.y - 1)
                                 and getPiece(p.x + 1, p.y - 1)->getPlayer() == attacker
                                 and ( getPiece(p.x + 1, p.y - 1)->getType() == 'B' or getPiece(p.x + 1, p.y - 1)->getType() == 'Q' ) )
-                        return true;
+                	return positions;
 
 
         return positions;
