@@ -91,6 +91,7 @@ int ChessBoard::doMove(Move m) {
 			getPiece(6,8)->setMoved();
 			break;
 		} // switch
+		moveKing(p,m.getD());
 		return 0;
 	} // if
 
