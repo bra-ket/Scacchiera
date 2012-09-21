@@ -14,6 +14,9 @@
 
 ChessBoard::ChessBoard() {
 	p = white;
+	Position pKingW(1,5);
+    Position pKingB(8,5);
+
     //TODO Generate all the pieces and alloc them
 }
 
@@ -137,6 +140,10 @@ int ChessBoard::doMove(Move m) {
 			else if (m.getD().x == '1' or m.getD().y == '8')
 				return 9; // promotion
 		} // if
+
+		if (ps->getType() == 'K') {
+			moveKing(p,m.getD());
+		}
 	} // else
 
 
@@ -532,3 +539,12 @@ bool ChessBoard::isCheckMate(player attacker) {
 
 } // isCheckmate
 
+void ChessBoard::moveKing(player p, Position d){
+	if (p == white) pKingW=d;
+	if (p == black) pKingB=d;
+}
+
+Position ChessBoard::getKingPosition(player p){
+	if (p == white) return pKingW;
+	if (p == black) return pKingB
+}

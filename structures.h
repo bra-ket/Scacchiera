@@ -15,7 +15,7 @@ enum player { white, black };
 struct Position {
     int x;
     int y;
-    Position(){}
+    Position(){};
 
     Position& operator=(const Position &rhs) {
         x = rhs.x;
@@ -26,7 +26,7 @@ struct Position {
     Position (int _x, int _y){
     	x=_x;
     	y=_y;
-    }
+    };
 };
 
 struct Delta {

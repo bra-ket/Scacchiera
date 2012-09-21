@@ -27,7 +27,9 @@ private:
     Box * board[8][8];
     Piece * kingW;
     Piece * kingB;
-        
+    Position pKingW;
+    Position pKingB;
+
 
 public: //valutiamo quali metodi trasformare in privati
 	ChessBoard();
@@ -90,6 +92,7 @@ public: //valutiamo quali metodi trasformare in privati
 	bool isValid(int x, int y);
 
 	Position getKingPosition(player p);
+	void moveKing(player p, Position d);
 
 	vector<Position> checkAttackingPositions(Position p, player attacker);
 
