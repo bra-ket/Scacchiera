@@ -580,11 +580,24 @@ Position ChessBoard::getKingPosition(player p){
 	if (p == black) return pKingB
 }
 
-bool Chessboard::isCheck(player p){
+bool ChessBoard::isCheck(player p){
 	if (p==white) Player attacker=black;
 	else Player attacker=white;
 	
 	Position kp = this->getKingPosition(p);
 	return (isAttacked(kp,attacker));
 	}
+
+bool ChessBoard::simMove(Move m){
+	Piece * ps = this->getPiece(m.getS()); // content on the source position
+	Piece * pd = this->getPiece(m.getD()); // content on the destination position
+	if (this->doMove(m)==6) return true; //under check
+	else {
+		Move b(m.getD(),m.getS()); //backwards move
+		putPiece(pd,m.getS().y,m.getD().x); //restore captured piece
+		return false
+		}
 	
+}
+
+
