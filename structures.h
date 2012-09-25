@@ -32,6 +32,10 @@ struct Position {
 struct Delta {
 	   int x;
 	   int y;
+    Delta(){
+        x=0;
+        y=0;
+    }
 };
 
 

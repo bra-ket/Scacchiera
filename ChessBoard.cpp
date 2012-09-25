@@ -15,12 +15,67 @@
 #include "Queen.h"
 #include "Rook.h"
 #include "Bishop.h"
+#include "King.h"
 
 ChessBoard::ChessBoard() {
 	p = white;
 	Position pKingW(1,5);
-    	Position pKingB(8,5);
-
+    Position pKingB(8,5);
+    for (int i=0;i<8;i++){
+        for (int j=0; j<8; j++){
+            board[i][j]= new Box;
+        }
+    }
+    for (int i=0; i<8; i++) {
+        Pawn * pw = new Pawn(white);
+        Pawn * pb = new Pawn(black);
+        this->putPiece(pw, 1,i);
+        this->putPiece(pb, 6,i);
+    }
+    
+    Rook * r1w = new Rook(white);
+    this->putPiece(r1w, 0,0);
+    Rook * r2w = new Rook(white);
+    this->putPiece(r2w, 0,7);
+    
+    Rook * r1b = new Rook(black);
+    this->putPiece(r1b, 7,0);
+    Rook * r2b = new Rook(black);
+    this->putPiece(r2b, 7,7);
+    
+    Knight * n1w = new Knight(white);
+    this->putPiece(n1w,0,1);
+    Knight * n2w = new Knight(white);
+    this->putPiece(n2w,0,6);
+    
+    Knight * n1b = new Knight(black);
+    this->putPiece(n1b,7,1);
+    Knight * n2b = new Knight(black);
+    this->putPiece(n2b,7,6);
+    
+    Bishop * b1w = new Bishop(white);
+    this->putPiece(b1w,0,2);
+    Bishop * b2w = new Bishop(white);
+    this->putPiece(b2w,0,5);
+    
+    Bishop * b1b = new Bishop(black);
+    this->putPiece(b1b,7,2);
+    Bishop * b2b = new Bishop(black);
+    this->putPiece(b2b,7,5);
+    
+    Queen * qw = new Queen(white);
+    this->putPiece(qw, 0,3);
+    
+    Queen * qb = new Queen(black);
+    this->putPiece(qb, 7,3);
+    
+    King * kw = new King(white);
+    this->putPiece(kw,0,4);
+    
+    King * kb = new King(black);
+    this->putPiece(kb,7,4);
+    
+    
     //TODO Generate all the pieces and alloc them
 }
 
@@ -38,8 +93,8 @@ bool ChessBoard::isFree(Position p) {
 
 bool ChessBoard::isFree(int x,int y){
 	Position a;
-	a.x=x;
-	a.y=y;
+	a.x=x+1;
+	a.y=y+1;
 	return (this->isFree(a));
 } // isFree()
 
@@ -502,12 +557,11 @@ void ChessBoard::putPiece(Piece * pc, Position ps) {
 } // putPiece()
 
 void ChessBoard::putPiece(Piece * pc, int x, int y){
-    Position p(x,y);
-    this->putPiece(pc, p);
+    board[x][y]->putPiece(pc);
 }
 
 Piece * ChessBoard::getPiece(int x, int y){
-	return (board[x-1][y-1]->getPiece());
+	return (board[x][y]->getPiece());
 }
 Piece * ChessBoard::getPiece (Position a){
 	int x=a.x;
@@ -528,7 +582,7 @@ bool ChessBoard::isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
 
-bool ChessBoard::isCheckMate(player attacker) {
+/*bool ChessBoard::isCheckMate(player attacker) {
 	player defender = (attacker == white) ? black : white;
 
 	Position kp = this->getKingPosition(defender);
@@ -577,7 +631,9 @@ bool ChessBoard::isCheckMate(player attacker) {
 	} // if
 
 
-}
+}*/
+
+bool ChessBoard::isCheckMate(player p){return false;}
 
 bool ChessBoard::isCheckMate(){
     return(this->isCheck(p));

@@ -10,7 +10,8 @@
 Rook::Rook(player p) {
     type='R';
     pla=p;
-	possibleMoves.get_allocator().allocate(28);
+    Delta d;
+    for (int i=0; i<28; i++) possibleMoves.push_back(d);
     for (int i=1; i<8; i++) {
 		int j=4*(i-1);
 		possibleMoves[j].x=i;

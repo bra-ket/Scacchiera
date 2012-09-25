@@ -8,26 +8,28 @@
 #include "Box.h"
 
 Box::Box() {
-    p=NULL;
+    free=true;
 }
 
 Box::~Box() {
-    if (p!=NULL) delete p;
+    if (!free) delete p;
 }
 
 bool Box::isFree(){
-    if (p==NULL) return true;
-    else return false;
+    return free;
 }
 
 Piece * Box::getPiece(){
-    return p;
+    if (!free) return p;
+    else return NULL;
 }
 
 void Box::putPiece(Piece* q){
     p=q;
+    free=false;
 }
 
 void Box::empty(){
     p=NULL;
+    free=true;
 }

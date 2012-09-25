@@ -10,7 +10,8 @@
 Bishop::Bishop(player p) {
 	type='B';
     pla=p;
-    possibleMoves.get_allocator().allocate(32);
+    Delta d;
+    for (int i=0; i<32; i++) possibleMoves.push_back(d);
      for (int i=1; i<8; i++) {
 		possibleMoves[4*i].x=i;
     	possibleMoves[4*i].y=i;

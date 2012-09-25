@@ -11,7 +11,9 @@ Pawn::Pawn(player p) {
     enPassant=false;
 	type='P';
     pla=p;
-    possibleMoves.get_allocator().allocate(2);
+    Delta d;
+    possibleMoves.push_back(d);
+    possibleMoves.push_back(d);
     possibleMoves[0].x=0;
     possibleMoves[1].x=0;
     if (pla==white) {

@@ -10,7 +10,8 @@
 King::King(player p) {
 	type='K';
     pla=p;
-    possibleMoves.get_allocator().allocate(8);
+    Delta d;
+    for (int i=0; i<8; i++) possibleMoves.push_back(d);
     possibleMoves[0].x=1;
     possibleMoves[0].y=1;
     possibleMoves[1].x=1;

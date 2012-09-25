@@ -13,6 +13,7 @@
 class Box {
 private:
 	Piece * p;
+    bool free;
 
 public:
 	Box();

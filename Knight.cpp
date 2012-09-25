@@ -8,7 +8,8 @@
 #include "Knight.h"
 
 Knight::Knight(player p) {
-    possibleMoves.get_allocator().allocate(56);
+    Delta d;
+    for (int i=0; i<56; i++) possibleMoves.push_back(d);
 	type='N';
     pla=p;
     for (int i=1; i<8; i++) {
