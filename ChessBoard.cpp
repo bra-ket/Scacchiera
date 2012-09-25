@@ -15,7 +15,7 @@
 ChessBoard::ChessBoard() {
 	p = white;
 	Position pKingW(1,5);
-    Position pKingB(8,5);
+    	Position pKingB(8,5);
 
     //TODO Generate all the pieces and alloc them
 }
@@ -600,4 +600,16 @@ bool ChessBoard::simMove(Move m){
 	
 }
 
-
+void ChessBoard::promote(Position p, char type){ //condition already checked
+	if (type==B) Bishop* piece = new Bishop (this->p);
+	if (type==N) Knight* piece = new Knight (this->p);
+	if (type==Q) Queen* piece = new Queen (this->p);
+	if (type==R) Rook* piece = new Rook (this->p);
+	this->emptyBox(p);
+	this->putPiece(piece,p);
+	}
+	
+	
+	
+	
+	
