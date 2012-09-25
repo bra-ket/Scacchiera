@@ -54,24 +54,24 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4 b3"
 }
 
 char Interface::getPromotionType(){
-	bool ok==false;
+	bool ok=false;
+    char m;
 	while (ok==false){
 		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<endl;
-		char m;
 		std:cin.get(m);
-		if (m==b) m=B;
-		if (m==q) m=Q;
-		if (m==n) m=N;
-		if (m==r) m=R;
-		if (m==x) m=X;
-		if (m=B or m=Q or m=N or m=R or m=X) ok=true;
+		if (m=='b') m='B';
+		if (m=='q') m='Q';
+		if (m=='n') m='N';
+		if (m=='r') m='R';
+		if (m=='x') m='X';
+		if (m=='B' or m=='Q' or m=='N' or m=='R' or m=='X') ok=true;
 	}
 	
-	if (m==B) std::cout<<"Promosso ad alfiere"<<endl;
-	if (m==Q) std::cout<<"Promosso a regina"<<endl;
-	if (m==N) std::cout<<"Promosso a cavallo"<<endl;
-	if (m==R) std::cout<<"Promosso a torre"<<endl;
-	if (m==X) std::cout<<"Nessuna promozione"<<endl;
+	if (m=='B') std::cout<<"Promosso ad alfiere"<<endl;
+	if (m=='Q') std::cout<<"Promosso a regina"<<endl;
+	if (m=='N') std::cout<<"Promosso a cavallo"<<endl;
+	if (m=='R') std::cout<<"Promosso a torre"<<endl;
+	if (m=='X') std::cout<<"Nessuna promozione"<<endl;
 	
 	return m;
 	
@@ -92,4 +92,8 @@ void Interface::invalidMove(){
 
 void Interface::validMove(){
 	std::cout<<"Mossa effettuata con successo"<<endl;
+}
+
+void Interface::endGame(){
+    std::cout<<"Good game"<<std::endl;
 }

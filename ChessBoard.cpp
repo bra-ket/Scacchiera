@@ -11,6 +11,10 @@
 #include "ChessBoard.h"
 #include "Pawn.h"
 #include "structures.h"
+#include "Knight.h"
+#include "Queen.h"
+#include "Rook.h"
+#include "Bishop.h"
 
 ChessBoard::ChessBoard() {
 	p = white;
@@ -494,8 +498,13 @@ void ChessBoard::movePiece(Move m){
 }
 
 void ChessBoard::putPiece(Piece * pc, Position ps) {
-	board[ps.x][ps.y]->putPiece(pc);
+	board[ps.x-1][ps.y-1]->putPiece(pc);
 } // putPiece()
+
+void ChessBoard::putPiece(Piece * pc, int x, int y){
+    Position p(x,y);
+    this->putPiece(pc, p);
+}
 
 Piece * ChessBoard::getPiece(int x, int y){
 	return (board[x-1][y-1]->getPiece());
@@ -568,7 +577,11 @@ bool ChessBoard::isCheckMate(player attacker) {
 	} // if
 
 
-} // isCheckmate
+}
+
+bool ChessBoard::isCheckMate(){
+    return(this->isCheck(p));
+}
 
 void ChessBoard::moveKing(player p, Position d){
 	if (p == white) pKingW=d;
@@ -577,39 +590,39 @@ void ChessBoard::moveKing(player p, Position d){
 
 Position ChessBoard::getKingPosition(player p){
 	if (p == white) return pKingW;
-	if (p == black) return pKingB
+	else return pKingB;
 }
 
 bool ChessBoard::isCheck(player p){
-	if (p==white) Player attacker=black;
-	else Player attacker=white;
+    player attacker;
+	if (p==white) attacker=black;
+	else attacker=white;
 	
 	Position kp = this->getKingPosition(p);
 	return (isAttacked(kp,attacker));
 	}
 
 bool ChessBoard::simMove(Move m){
-	Piece * ps = this->getPiece(m.getS()); // content on the source position
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 	if (this->doMove(m)==6) return true; //under check
 	else {
 		Move b(m.getD(),m.getS()); //backwards move
 		putPiece(pd,m.getS().y,m.getD().x); //restore captured piece
-		return false
+		return false;
 		}
 	
 }
 
 void ChessBoard::promote(Position p, char type){ //condition already checked
-	if (type==B) Bishop* piece = new Bishop (this->p);
-	if (type==N) Knight* piece = new Knight (this->p);
-	if (type==Q) Queen* piece = new Queen (this->p);
-	if (type==R) Rook* piece = new Rook (this->p);
+    Piece* piece=NULL;
+	if (type=='B') piece = new Bishop (this->p);
+	if (type=='N') piece = new Knight (this->p);
+	if (type=='Q') piece = new Queen (this->p);
+	if (type=='R') piece = new Rook (this->p);
 	this->emptyBox(p);
 	this->putPiece(piece,p);
 	}
 	
-	
-	
+
 	
 	

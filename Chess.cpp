@@ -34,7 +34,7 @@ int main() {
 					break;
 				case 9:
 					char type = UI->getPromotionType();
-					if (type!=X) CB->promote(m.getD(), type); //X se non si vuole fare promozione
+					if (type!='X') CB->promote(m.getD(), type); //X se non si vuole fare promozione
 					result = 0;
 					break;
 			} // switch
