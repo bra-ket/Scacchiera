@@ -10,6 +10,7 @@
 
 #include "ChessBoard.h"
 #include <iostream>
+#include <vector>
 #include "Move.h"
 
 

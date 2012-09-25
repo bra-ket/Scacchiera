@@ -56,7 +56,7 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4 b3"
 char Interface::getPromotionType(){
 	bool ok==false;
 	while (ok==false){
-		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere";
+		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<endl;
 		char m;
 		std:cin.get(m);
 		if (m==b) m=B;
@@ -67,11 +67,11 @@ char Interface::getPromotionType(){
 		if (m=B or m=Q or m=N or m=R or m=X) ok=true;
 	}
 	
-	if (m==B) std::cout<<"Promosso ad alfiere";
-	if (m==Q) std::cout<<"Promosso a regina";
-	if (m==N) std::cout<<"Promosso a cavallo";
-	if (m==R) std::cout<<"Promosso a torre";
-	if (m==X) std::cout<<"Nessuna promozione";
+	if (m==B) std::cout<<"Promosso ad alfiere"<<endl;
+	if (m==Q) std::cout<<"Promosso a regina"<<endl;
+	if (m==N) std::cout<<"Promosso a cavallo"<<endl;
+	if (m==R) std::cout<<"Promosso a torre"<<endl;
+	if (m==X) std::cout<<"Nessuna promozione"<<endl;
 	
 	return m;
 	
@@ -86,3 +86,10 @@ int lettertonumber(char l) { //converte la lettera nella coordinata
     return i;
 }
 
+void Interface::invalidMove(){
+	std::cout<<"Attenzione, mossa non valida. Riprovare."<<endl;
+}
+
+void Interface::validMove(){
+	std::cout<<"Mossa effettuata con successo"<<endl;
+}
