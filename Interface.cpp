@@ -52,21 +52,20 @@ void Interface::printBoard() {
 } // printBoard()
 
 Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
-    bool status[4];
-    for (int i=0;i<4;i++) status[i]=false;
     std::string m;
-    while (!(status[0]+status[1]+status[2]+status[3])) {
+    bool check=false;
+    while (!check) {
         m.clear();
         std::cout<<"Mossa: ";
         std::cin>>m;
-        if (m[0]!='a' and m[0]!='b'and m[0]!='c' and m[0]!='d' and m[0]!='e' and m[0]!='f' and m[0]!='g' and m[0]!='h') status[0]=true;
-        else if (atoi(&m[0])>0 and atoi(&m[0])<9) status[0]=true;
-        if (atoi(&m[1])>0 and atoi(&m[1])<9) status[1]=true;
-        if (m[2]!='a' and m[2]!='b'and m[2]!='c' and m[2]!='d' and m[2]!='e' and m[2]!='f' and m[2]!='g' and m[2]!='h') status[2]=true;
-        else if (atoi(&m[2])>0 and atoi(&m[2])<9) status[2]=true;
-        if (atoi(&m[3])>0 and atoi(&m[3])<9) status[1]=true;
-        
-        if(!(status[0]+status[1]+status[2]+status[3])) std::cout<<"Formato della mossa non valido. Riprova."<<std::endl;
+        check=true;
+        if (m.size()!=4) check=false;
+        else if (m[0]!='a' and m[0]!='b' and m[0]!='c' and m[0]!='d' and m[0]!='e' and m[0]!='f' and m[0]!='g' and m[0]!='h') check=false;
+        else if (atoi(&m[1])>8 or atoi(&m[1])<1) check=false;
+        else if (m[2]!='a' and m[2]!='b' and m[2]!='c' and m[2]!='d' and m[2]!='e' and m[2]!='f' and m[2]!='g' and m[2]!='h') check=false;
+        else if (atoi(&m[3])>8 or atoi(&m[3])<1) check=false;
+        if (check==false) std::cout<<"Mossa in formato non valido (es. a2a4). Riprovare."<<std::endl;
+
     }
         
         
