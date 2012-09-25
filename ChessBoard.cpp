@@ -570,8 +570,8 @@ Piece * ChessBoard::getPiece(int x, int y){
 	return (board[x][y]->getPiece());
 }
 Piece * ChessBoard::getPiece (Position a){
-	int x=a.x;
-	int y=a.y;
+	int x=a.x-1;
+	int y=a.y-1;
 	return this->getPiece(x,y);
 }
 

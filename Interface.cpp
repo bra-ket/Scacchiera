@@ -32,20 +32,20 @@ void Interface::printBoard() {
 	}
 }
 
-Move Interface::prompt(){ //presumiamo un formato es. "a4 b3"
+Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     std::string m;
     std::cout<<"Mossa: ";
     std::cin>>m;
-    if (m.length()!=5) throw "string_lenght"; //non ricordo se funzionano così le eccezioni, puoi darci un'occhiata?
     
     Position in,fin;
-    if (isdigit(m[0])) in.x=m[0];
+    if (isdigit(m[0])) in.x=atoi(&m[0]);
     else in.x=lettertonumber(m[0]); //se usa il formato con le lettere viene convertito in numero: la fila a è la 1 vedi funzione di conversione
-    in.y=m[1];
+    in.y=atoi(&m[1]);
+
     
-    if (isdigit(m[3])) fin.x=m[3];
-    else fin.x=lettertonumber(m[3]);
-    fin.y=m[4];
+    if (isdigit(m[2])) fin.x=atoi(&m[2]);
+    else fin.x=lettertonumber(m[2]);
+    fin.y=atoi(&m[3]);
     
     Move mossa(in,fin);
     return mossa;
@@ -76,12 +76,14 @@ char Interface::getPromotionType(){
 }
 
 int lettertonumber(char l) { //converte la lettera nella coordinata
-    std::string m="abcdefgh";
-    int i=1;
-    while (l!=m[i]) {
-        i++;
-    }
-    return i;
+    if (l=='a') return 1;
+    if (l=='b') return 2;
+    if (l=='c') return 3;
+    if (l=='d') return 4;
+    if (l=='e') return 5;
+    if (l=='f') return 6;
+    if (l=='g') return 7;
+    if (l=='h') return 8;
 }
 
 void Interface::noPiece(){
