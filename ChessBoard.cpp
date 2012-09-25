@@ -579,3 +579,12 @@ Position ChessBoard::getKingPosition(player p){
 	if (p == white) return pKingW;
 	if (p == black) return pKingB
 }
+
+bool Chessboard::isCheck(player p){
+	if (p==white) Player attacker=black;
+	else Player attacker=white;
+	
+	Position kp = this->getKingPosition(p);
+	return (isAttacked(kp,attacker));
+	}
+	
