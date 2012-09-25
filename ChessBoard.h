@@ -94,11 +94,13 @@ public: //valutiamo quali metodi trasformare in privati
 	Position getKingPosition(player p);
 	void moveKing(player p, Position d);
 
-	vector<Position> checkAttackingPositions(Position p, player attacker);
+	vector<Position> getAttackingPositions(Position p, player attacker);
 
     friend void Pawn::setEnPassant();
     friend void Pawn::removeEnPassant();
     
+    bool simMove(Move m); // simulates a Move to test if it puts the player's king under check
+
 };
 
 #endif /* CHESSBOARD_H_ */

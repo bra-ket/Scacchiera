@@ -39,7 +39,7 @@ int main() {
 					break;
 			} // switch
 		} while(result);
-		checkmate = CB-> isCheckMate();
+		checkmate = CB->isCheckMate();
 	} while (!checkmate);
 	UI->endGame();
 	return 0;
