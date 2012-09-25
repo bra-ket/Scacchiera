@@ -475,51 +475,57 @@ vector<Position> ChessBoard::getAttackingPositions(Position p, player attacker) 
 
         // checks for attacks from the column
         for (int i = p.y + 1; i <= 8; i++)
-                if ( !isFree(p.x, i)
-                                and getPiece(p.x, i)->getPlayer() == attacker
-                                and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x, i));
+                if ( !isFree(p.x, i) ) {
+                	if (getPiece(p.x, i)->getPlayer() == attacker and (getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
+                		positions.push_back(Position(p.x, i));
+                	break;
+                } // if
         for (int i = p.y - 1; i >= 1; i--)
-                if ( !isFree(p.x, i)
-                                and getPiece(p.x, i)->getPlayer() == attacker
-                                and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x, i));
-
+                if ( !isFree(p.x, i)) {
+                	if (getPiece(p.x, i)->getPlayer() == attacker and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
+                		positions.push_back(Position(p.x, i));
+                	break;
+                } // if
         // checks for attacks from the row
         for (int i = p.x + 1; i <= 8; i++)
-                if ( !isFree(i, p.y)
-                                and getPiece(i, p.y)->getPlayer() == attacker
-                                and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
-                	positions.push_back(Position(i, p.y));
+                if ( !isFree(i, p.y)) {
+                	if ( getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ))
+                		positions.push_back(Position(i, p.y));
+                	break;
+                } // if
         for (int i = p.x - 1; i >= 1; i--)
-                if ( !isFree(i, p.y)
-                                and getPiece(i, p.y)->getPlayer() == attacker
-                                and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
-                	positions.push_back(Position(i, p.y));
+                if ( !isFree(i, p.y)) {
+                	if (getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
+                		positions.push_back(Position(i, p.y));
+					break;
+                } // if
 
         // checks for attacks from the NE-SW diagonal
         for (int i = 1; i <= min(8 - p.x, 8 - p.y); i++)
-                if ( !isFree(p.x + i, p.y + i)
-                                and getPiece(p.x + i, p.y + i)->getPlayer() == attacker
-                                and ( getPiece(p.x + i, p.y + i)->getType() == 'B' or getPiece(p.x + i, p.y + i)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x + i, p.y + i));
+                if ( !isFree(p.x + i, p.y + i)) {
+                	if (getPiece(p.x + i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x + i, p.y + i)->getType() == 'B' or getPiece(p.x + i, p.y + i)->getType() == 'Q' ) )
+                		positions.push_back(Position(p.x + i, p.y + i));
+                	break;
+                } // if
         for (int i = 1; i <= min(p.x - 1, p.y - 1); i++)
-                if ( !isFree(p.x - i, p.y - i)
-                                and getPiece(p.x - i, p.y - i)->getPlayer() == attacker
-                                and ( getPiece(p.x - i, p.y - i)->getType() == 'B' or getPiece(p.x - i, p.y - i)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x - i, p.y - 1));
-
+                if ( !isFree(p.x - i, p.y - i)) {
+                	if (getPiece(p.x - i, p.y - i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y - i)->getType() == 'B' or getPiece(p.x - i, p.y - i)->getType() == 'Q' ) )
+                		positions.push_back(Position(p.x - i, p.y - 1));
+                	break;
+                } // if
         // checks for attacks from the NW-SE diagonal
         for (int i = 1; i <= min(p.x - 1, 8 - p.y); i++)
-                if ( !isFree(p.x - i, p.y + i)
-                                and getPiece(p.x - i, p.y + i)->getPlayer() == attacker
-                                and ( getPiece(p.x - i, p.y + i)->getType() == 'B' or getPiece(p.x - i, p.y + i)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x - i, p.y + i));
+                if ( !isFree(p.x - i, p.y + i)) {
+                	if (getPiece(p.x - i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y + i)->getType() == 'B' or getPiece(p.x - i, p.y + i)->getType() == 'Q' ) )
+                		positions.push_back(Position(p.x - i, p.y + i));
+                	break;
+                } // if
         for (int i = 1; i <= min(8 - p.x, p.y - 1); i++)
-                if ( !isFree(p.x + 1, p.y - 1)
-                                and getPiece(p.x + 1, p.y - 1)->getPlayer() == attacker
-                                and ( getPiece(p.x + 1, p.y - 1)->getType() == 'B' or getPiece(p.x + 1, p.y - 1)->getType() == 'Q' ) )
-                	positions.push_back(Position(p.x + 1, p.y - 1));
+                if ( !isFree(p.x + 1, p.y - 1)) {
+                	if (getPiece(p.x + 1, p.y - 1)->getPlayer() == attacker and ( getPiece(p.x + 1, p.y - 1)->getType() == 'B' or getPiece(p.x + 1, p.y - 1)->getType() == 'Q' ) )
+                		positions.push_back(Position(p.x + 1, p.y - 1));
+                	break;
+                } // if
 
         return positions;
 
