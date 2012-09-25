@@ -17,20 +17,39 @@ Interface::~Interface() {
 }
 
 void Interface::printBoard() {
-	Position p;
-	for (int i=0; i<8; i++) { // coordinata verticale della posizione
-		for (int j=0; j<8; j++) { //coordinata orizzontale della posizione
-			if (cb->isFree(i,j)==true)
-				std::cout << 0 << "\t"; // se la casella è vuota printa uno zero
-			else {
-				if (cb->getPiece(i,j)->getPlayer()== white) std::cout << "W"; // se è il pezzo è bianco
-				else std::cout << "B"; // se è il pezzo è nero
-				std::cout<<cb->getPiece(i,j)->getType()<<"\t"; // se c'è un pezzo printa il char del tipo di pezzo
-			}
-		}
-		std::cout << std::endl;
-	}
-}
+        Position p;
+        for (int i = 0; i < 8; i++) {
+
+                // prints the upper horizontal row
+                for (int j = 0; j < 8; j++)
+                    std::cout << " __";
+                std::cout << endl;
+
+                // prints the left column element
+                std::cout << "|";
+
+                for (int j = 0; j < 8; j++) {
+                    // horizontal scan
+                    if (cb->isFree(i,j)==true)
+                        std::cout << "00" << "|"; // se la casella è vuota printa uno zero
+                    else {
+                        if (cb->getPiece(i,j)->getPlayer()== white)
+                            std::cout << "W"; // se è il pezzo è bianco
+                        else std::cout << "B"; // se è il pezzo è nero
+
+                        std::cout << cb->getPiece(i,j)->getType() << "|"; // se c'è un pezzo printa il char del tipo di pezzo
+
+
+                    } // else
+                } // for
+
+                std::cout << std::endl;
+
+                for (int j = 0; j < 8; j++)
+                    std::cout << "|__";
+                std::cout << "|" << std::endl;
+        } // for
+} // printBoard()
 
 Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     std::string m;
@@ -84,6 +103,7 @@ int lettertonumber(char l) { //converte la lettera nella coordinata
     if (l=='f') return 6;
     if (l=='g') return 7;
     if (l=='h') return 8;
+    return -1;
 }
 
 void Interface::noPiece(){
