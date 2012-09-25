@@ -53,6 +53,30 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4 b3"
     return mossa;
 }
 
+char Interface::getPromotionType(){
+	bool ok==false;
+	while (ok==false){
+		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere";
+		char m;
+		std:cin.get(m);
+		if (m==b) m=B;
+		if (m==q) m=Q;
+		if (m==n) m=N;
+		if (m==r) m=R;
+		if (m==x) m=X;
+		if (m=B or m=Q or m=N or m=R or m=X) ok=true;
+	}
+	
+	if (m==B) std::cout<<"Promosso ad alfiere";
+	if (m==Q) std::cout<<"Promosso a regina";
+	if (m==N) std::cout<<"Promosso a cavallo";
+	if (m==R) std::cout<<"Promosso a torre";
+	if (m==X) std::cout<<"Nessuna promozione";
+	
+	return m;
+	
+}
+
 int lettertonumber(char l) { //converte la lettera nella coordinata
     std::string m="abcdefgh";
     int i=1;
@@ -61,3 +85,4 @@ int lettertonumber(char l) { //converte la lettera nella coordinata
     }
     return i;
 }
+
