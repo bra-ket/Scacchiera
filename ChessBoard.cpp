@@ -249,7 +249,7 @@ int ChessBoard::detectCastling(Move m){
 	castling[3]=new Move(5,8,3,8);
 	
 	int nrook=0;
-	for(int i=0; i<castling.size();i++){
+	for(int i=0; i< (int)castling.size();i++){
 		if (*castling[i]==m) {
 			nrook=i+1;
 			break;
@@ -582,58 +582,85 @@ bool ChessBoard::isValid(int x, int y) {
 	return (x >= 1 and x <= 8 and y >= 1 and y <= 8);
 } // isValid
 
-/*bool ChessBoard::isCheckMate(player attacker) {
-	player defender = (attacker == white) ? black : white;
+bool ChessBoard::isCheckMate(player attacker) {
+        player defender = (attacker == white) ? black : white;
 
-	Position kp = this->getKingPosition(defender);
+        Position kp = this->getKingPosition(defender);
 
-	// checks if the king is attacked
-	if (!isAttacked(kp, attacker))
-		// the king is not under attack
-		return false;
-	// isvalid!
-	// checks if the king can move
-	if (		( isValid(kp.x, kp.y + 1) 	and ( isFree(kp.x, kp.y + 1)		or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker		)	and !isAttacked(kp.x, kp.y + 1, attacker) 	) // N
-			or	( isValid(kp.x + 1, kp.y + 1) and ( isFree(kp.x + 1, kp.y + 1)	or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker	)	and !isAttacked(kp.x + 1, kp.y + 1, attacker)	) // NE
-			or	( isValid(kp.x + 1, kp.y) 	and ( isFree(kp.x + 1, kp.y)		or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker		)	and !isAttacked(kp.x + 1, kp.y, attacker)		) // E
-			or	( isValid(kp.x + 1, kp.y - 1) and ( isFree(kp.x + 1, kp.y - 1)	or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker	)	and !isAttacked(kp.x + 1, kp.y - 1, attacker)	) // SE
-			or	( isValid(kp.x, kp.y -1) 		and ( isFree(kp.x, kp.y - 1)		or getPiece(kp.x, kp.y -1)->getPlayer() == attacker		)	and !isAttacked(kp.x, kp.y - 1, attacker)		) // S
-			or  ( isValid(kp.x - 1, kp.y -1) 	and ( isFree(kp.x - 1, kp.y -1)	or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker	)	and !isAttacked(kp.x - 1, kp.y - 1, attacker)	) // SW
-			or  ( isValid(kp.x - 1, kp.y) 	and ( isFree(kp.x - 1, kp.y)		or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker 		)	and !isAttacked(kp.x - 1, kp.y, attacker)		) // W
-			or  ( isValid(kp.x - 1, kp.y + 1)	and ( isFree(kp.x - 1, kp.y + 1)	or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker 	)	and !isAttacked(kp.x - 1, kp.y + 1, attacker)	) // NW
-		)
-			// the king can move on at least one adjacent box
-			return false;
+        // checks if the king is attacked
+        if (!isAttacked(kp, attacker))
+                // the king is not under attack
+                return false;
+        // isvalid!
+        // checks if the king can move
+        if (            ( isValid(kp.x, kp.y + 1)       and ( isFree(kp.x, kp.y + 1)            or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker            )       and !isAttacked(kp.x, kp.y + 1, attacker)       ) // N
+                        or      ( isValid(kp.x + 1, kp.y + 1) and ( isFree(kp.x + 1, kp.y + 1)  or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y + 1, attacker)   ) // NE
+                        or      ( isValid(kp.x + 1, kp.y)       and ( isFree(kp.x + 1, kp.y)            or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x + 1, kp.y, attacker)               ) // E
+                        or      ( isValid(kp.x + 1, kp.y - 1) and ( isFree(kp.x + 1, kp.y - 1)  or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y - 1, attacker)   ) // SE
+                        or      ( isValid(kp.x, kp.y -1)                and ( isFree(kp.x, kp.y - 1)            or getPiece(kp.x, kp.y -1)->getPlayer() == attacker             )       and !isAttacked(kp.x, kp.y - 1, attacker)               ) // S
+                        or  ( isValid(kp.x - 1, kp.y -1)        and ( isFree(kp.x - 1, kp.y -1) or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker )       and !isAttacked(kp.x - 1, kp.y - 1, attacker)   ) // SW
+                        or  ( isValid(kp.x - 1, kp.y)   and ( isFree(kp.x - 1, kp.y)            or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x - 1, kp.y, attacker)               ) // W
+                        or  ( isValid(kp.x - 1, kp.y + 1)       and ( isFree(kp.x - 1, kp.y + 1)        or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x - 1, kp.y + 1, attacker)   ) // NW
+                )
+                        // the king can move on at least one adjacent box
+                        return false;
 
-	vector<Position> atcPos = getAttackingPositions(kp, attacker);
+        vector<Position> atcPos = getAttackingPositions(kp, attacker);
 
-	if (atcPos.size() > 1)
-		// multiple check, since the king can't move this is a checkmate situation
-		return true;
+        if (atcPos.size() > 1)
+                // multiple attack, since the king can't move this is a checkmate situation
+                return true;
 
-	Position ap = atcPos[0];
+        // single attack, may not be a checkmate situation
+        Position ap = atcPos[0];
+        int dx = ap.x - kp.x; // x distance
+        int dy = ap.y - kp.y; // y distance
 
-	if (getPiece(ap)->getType() != 'N') {
-		// the piece is not a Knight, the attack may be shielded
-		int dX = ap.x - kp.x;
-		int dY = ap.y - kp.y;
-		int i = 1;
-		int j = 1;
-
-		while (i < dX and j < dY) {
-			if (isAttacked(ap.x + i, ap.y + j, defender)) {
-				// the attack can be shielded if the move doesn't put the king under check
-				vector<Position> ps = getAttackingPositions(Position(ap.x + i, ap.y + j), defender);
-
-			} // if
-		} // while
-
-	} // if
+        if ((getPiece(ap)->getType() != 'N') and (abs(dx) > 1 or abs(dy) > 1)) {
+                // the attack may be shielded if
+                // (1) the attacker is not a knight
+                // (2) there is at least one space between the attacker and the king
 
 
-}*/
+                // we have to scan each box between the attacker and the king
+                // so we define a step for each coordinate, depending on the path to be scanned
+                // if either dx or dy are zero, the corresponding step is set to zero and the coordinate will be kept constant
+                int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
+                int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
 
-bool ChessBoard::isCheckMate(player p){return false;}
+                int i = sx, j = sy;
+
+                do {
+                    if (isAttacked(ap.x + i, ap.y + j, defender)) {
+                        // the position is reachable from at least one defender's piece, but it may be pinned
+                        vector<Position> ps = getAttackingPositions(Position(ap.x + i, ap.y + j), defender);
+                        for (int k = 0; k < (int)ps.size(); k++)
+                            if (simMove(Move(ps[k], Position(ap.x + i, ap.y + j))))
+                                // the attack can be shielded
+                                return false;
+                    } // if
+
+                    i += sx;
+                    j += sy;
+
+                // while moving on the column i == dx == 0 but j != dy
+                // while moving on the row j == dy == 0 but x != dx
+                // while moving on the diagonal j != dy and x != dx
+                // when the attacking piece's position is reached i == dx and j == dx, the cycle exits
+                } while ((i != dx) or (j != dy));
+        } // if
+
+        // the attack can't be shielded
+        // the only remaining possibility is that the attacking piece can be taken
+        // the case in which the piece can be taken by the king itself is managed in the first if-block
+        vector<Position> ps = getAttackingPositions(Position(ap), defender);
+        for (int k = 0; k < (int)ps.size(); k++)
+            if (simMove(Move(ps[k], ap)))
+            	// the attacker can be taken
+                return false;
+
+        return true;
+} // isCheckmate
 
 bool ChessBoard::isCheckMate(){
     return(this->isCheck(p));

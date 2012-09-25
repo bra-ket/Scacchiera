@@ -84,7 +84,6 @@ public: //valutiamo quali metodi trasformare in privati
 
     bool isAttacked(Position p, player attacker);
     bool isAttacked(int x, int y, player attacker);
-    // me ne occupo io
     bool isCheckMate();
 	bool isCheckMate(player p);
 	bool isCheck(player p);

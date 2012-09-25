@@ -56,7 +56,7 @@ char Interface::getPromotionType(){
     char m;
 	while (ok==false){
 		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<endl;
-		std:cin.get(m);
+		std::cin.get(m);
 		if (m=='b') m='B';
 		if (m=='q') m='Q';
 		if (m=='n') m='N';
