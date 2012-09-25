@@ -17,6 +17,8 @@
 #include "Bishop.h"
 #include "King.h"
 
+using namespace std;
+
 ChessBoard::ChessBoard() {
 	p = white;
 	Position pKingW(1,5);
@@ -113,12 +115,24 @@ bool ChessBoard::isFree(int x,int y){
  * - 9: promotion
  */
 int ChessBoard::doMove(Move m) {
+	cout << "entered doMove" << endl;
+
 	Piece * ps = this->getPiece(m.getS()); // content on the source position
+
+	cout << "getting piece on destination:" << m.getD().x << " " << m.getD().y << endl;
+
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
-	if (ps == 0)
+
+	cout << "got piece on destination " << pd << " " << pd->getType() << endl;
+
+	if (isFree(m.getS())) {
+		cout << "doMove returning 1" << endl;
 		return 1; // empty source position
+	}
+
 	if (ps->getPlayer() != p)
 		return 2; // player tries to move an opponent's piece
+
 	if (pd->getPlayer() == p)
 		return 3; // player tries to capture an own piece
 
@@ -453,9 +467,12 @@ void ChessBoard::putPiece(Piece * pc, int x, int y){
     board[x][y]->putPiece(pc);
 }
 
-Piece * ChessBoard::getPiece(int x, int y){
-	return (board[x][y]->getPiece());
-}
+Piece * ChessBoard::getPiece(int x, int y) {
+	if (!board[x][y]->isFree())
+		return (board[x][y]->getPiece());
+	else return 0;
+} // getPiece
+
 Piece * ChessBoard::getPiece (Position a){
 	int x=a.x-1;
 	int y=a.y-1;
