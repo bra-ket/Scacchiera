@@ -52,10 +52,24 @@ void Interface::printBoard() {
 } // printBoard()
 
 Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
+    bool status[4];
+    for (int i=0;i<4;i++) status[i]=false;
     std::string m;
-    std::cout<<"Mossa: ";
-    std::cin>>m;
-    
+    while (!(status[0]+status[1]+status[2]+status[3])) {
+        m.clear();
+        std::cout<<"Mossa: ";
+        std::cin>>m;
+        if (m[0]!='a' and m[0]!='b'and m[0]!='c' and m[0]!='d' and m[0]!='e' and m[0]!='f' and m[0]!='g' and m[0]!='h') status[0]=true;
+        else if (atoi(&m[0])>0 and atoi(&m[0])<9) status[0]=true;
+        if (atoi(&m[1])>0 and atoi(&m[1])<9) status[1]=true;
+        if (m[2]!='a' and m[2]!='b'and m[2]!='c' and m[2]!='d' and m[2]!='e' and m[2]!='f' and m[2]!='g' and m[2]!='h') status[2]=true;
+        else if (atoi(&m[2])>0 and atoi(&m[2])<9) status[2]=true;
+        if (atoi(&m[3])>0 and atoi(&m[3])<9) status[1]=true;
+        
+        if(!(status[0]+status[1]+status[2]+status[3])) std::cout<<"Formato della mossa non valido. Riprova."<<std::endl;
+    }
+        
+        
     Position in,fin;
     if (isdigit(m[0])) in.x=atoi(&m[0]);
     else in.x=lettertonumber(m[0]); //se usa il formato con le lettere viene convertito in numero: la fila a è la 1 vedi funzione di conversione
