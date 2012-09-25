@@ -30,8 +30,22 @@ int main() {
 					UI->validMove();
 					break;
 				case 1:
-					UI->invalidMove();
+					UI->noPiece();
 					break;
+                case 2:
+                    UI->wrongPlayer();
+                case 3:
+                    UI->selfCapture();
+                case 4:
+                    UI->invalidPath();
+                case 5:
+                    UI->obstructedPath();
+                case 6:
+                    UI->moveCheck();
+                case 7:
+                    UI->castlingNotAllowed();
+                case 8:
+                    UI->enPassantNotAllowed();
 				case 9:
 					char type = UI->getPromotionType();
 					if (type!='X') CB->promote(m.getD(), type); //X se non si vuole fare promozione

@@ -55,7 +55,7 @@ char Interface::getPromotionType(){
 	bool ok=false;
     char m;
 	while (ok==false){
-		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<endl;
+		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<std::endl;
 		std::cin.get(m);
 		if (m=='b') m='B';
 		if (m=='q') m='Q';
@@ -65,11 +65,11 @@ char Interface::getPromotionType(){
 		if (m=='B' or m=='Q' or m=='N' or m=='R' or m=='X') ok=true;
 	}
 	
-	if (m=='B') std::cout<<"Promosso ad alfiere"<<endl;
-	if (m=='Q') std::cout<<"Promosso a regina"<<endl;
-	if (m=='N') std::cout<<"Promosso a cavallo"<<endl;
-	if (m=='R') std::cout<<"Promosso a torre"<<endl;
-	if (m=='X') std::cout<<"Nessuna promozione"<<endl;
+	if (m=='B') std::cout<<"Promosso ad alfiere"<<std::endl;
+	if (m=='Q') std::cout<<"Promosso a regina"<<std::endl;
+	if (m=='N') std::cout<<"Promosso a cavallo"<<std::endl;
+	if (m=='R') std::cout<<"Promosso a torre"<<std::endl;
+	if (m=='X') std::cout<<"Nessuna promozione"<<std::endl;
 	
 	return m;
 	
@@ -84,14 +84,42 @@ int lettertonumber(char l) { //converte la lettera nella coordinata
     return i;
 }
 
-void Interface::invalidMove(){
-	std::cout<<"Attenzione, mossa non valida. Riprovare."<<endl;
+void Interface::noPiece(){
+	std::cout<<"Quella casella è vuota. Riprovare."<<std::endl;
 }
 
 void Interface::validMove(){
-	std::cout<<"Mossa effettuata con successo"<<endl;
+	std::cout<<"Mossa effettuata con successo"<<std::endl;
 }
 
 void Interface::endGame(){
     std::cout<<"Good game"<<std::endl;
+}
+
+void Interface::wrongPlayer(){
+    std::cout<<"Quel pezzo non è tuo. Riprovare"<<std::endl;
+}
+
+void Interface::selfCapture(){
+    std::cout<<"Non puoi catturare un pezzo tuo. Riprovare"<<std::endl;
+}
+
+void Interface::invalidPath(){
+    std::cout<<"Quel pezzo non può muoversi là. Riprovare"<<std::endl;
+}
+
+void Interface::obstructedPath(){
+    std::cout<<"Il percorso del tuo pezzo è ostruito. Riprovare"<<std::endl;
+}
+
+void Interface::moveCheck(){
+    std::cout<<"Questa mossa mette il tuo re sotto scacco. Riprovare"<<std::endl;
+}
+
+void Interface::castlingNotAllowed(){
+    std::cout<<"Questo arrocco non è permesso. Riprovare"<<std::endl;
+}
+
+void Interface::enPassantNotAllowed(){
+    std::cout<<"Questa mossa in en passant non è permessa. Riprovare."<<std::endl;
 }

@@ -23,7 +23,14 @@ class Interface {
 		virtual ~Interface();
 		Move prompt();
 		void printBoard(); // prints the current state of the chessboard
-		void invalidMove(); // prints an invalid move notice
+        void noPiece(); // prints an invalid move notice
+        void wrongPlayer();
+        void selfCapture();
+        void invalidPath();
+        void obstructedPath();
+        void moveCheck();
+        void castlingNotAllowed();
+        void enPassantNotAllowed();
 		void validMove(); // prints a valid move notice
 		void endGame();
 		char getPromotionType();
