@@ -224,33 +224,38 @@ int ChessBoard::doMove(Move m) {
 	{ // normal move
 
 		cout << "normal move" << endl;
-		if (!ps->isValid(m))
-			return 4; // invalid path
 
+		// checking if the path is allowed for the piece
+		if (!ps->isValid(m))
+			// invalid path
+			return 4;
+
+		// checking if the move is allowed for the pawn
 		if (ps->getType() == 'P') {
 			if (!isFree(m.getD()) and m.getS().x == m.getD().x)
 				// the pawn can't capture on forward
 				return 4;
+
 			if (isFree(m.getD()) and m.getS().x != m.getD().x)
 				// the pawn can't move on diagonal if it's not capturing
 				return 4;
+
+			int step = (p == white) ? 1 : -1;
+			if (m.getDelta().y == 2 and !isFree(m.getS().x, m.getS().y + step))
+				// the pawn tries to move of two but the path blocked
+				return 6;
 		} // if
 
+		// checking if the path is free
+        int dx = m.getDelta().x; // x distance
+        int dy = m.getDelta().y; // y distance
 
-		if (ps->getType() == 'K' and isAttacked(m.getD(), oppositePlayer()))
-			// the king can't capture a defended piece
-			return 6;
-
-		// checking for obstructed path
-
-        int dx = m.getD().x - m.getS().x; // x distance
-        int dy = m.getD().y - m.getS().y; // y distance
-        char type = getPiece(m.getS())->getType();
+        char type = getPiece(m.getS())->getType(); // type of the moving piece
 
 		if ((type == 'Q' or type == 'R' or type == 'B') and (abs(dx) > 1 or abs(dy) > 1)) {
 			cout << "checking for obstructed path" << endl;
 			// (1) only queens, rooks or bishops are subject to obstructed path issues
-			// (2) no need to check if the destination is an adjacent box
+			// (2) no need to check the path if the destination is an adjacent box
 
 		    // we have to scan each box between the source and the destination
 		    // so we define a step for each coordinate, depending on the path to be scanned
@@ -262,6 +267,7 @@ int ChessBoard::doMove(Move m) {
 
 			do {
 				if (!isFree(m.getS().x + i, m.getS().y + j))
+				// found an occupied box
 						return 5;
 				i += sx;
 				j += sy;
@@ -275,13 +281,21 @@ int ChessBoard::doMove(Move m) {
 		// the path is valid
 		cout << "moving piece" << endl;
 		movePiece(m); // moves the piece
+
+		// if the moved piece is a king, updates its position
+		if (ps->getType() == 'K')
+			moveKing(p, m.getD());
+
 		cout << "piece moved" << endl;
 
 		// checks for a check status
 		if (isCheck(p)) {
+			// check! rollbacks the move
 			cout << "check!" << endl;
 			movePiece(m.getD(), m.getS()); // reverts the move
 			putPiece(pd, m.getD()); // restores the captured piece
+			if (ps->getType() == 'K')
+				moveKing(p, m.getS());
 			return 6;
 		} // if
 
@@ -292,19 +306,21 @@ int ChessBoard::doMove(Move m) {
 		cout << "set moved" << endl;
 		resetEnPassant(this->oppositePlayer());
 		cout << "reset enps" << endl;
+
+
+		// checking for special cases about pawns
 		if (ps->getType() == 'P') {
-			if (abs(m.getDelta().y) == 2){
-                ((Pawn*)ps)->setEnPassant(); // can be captured "en passant" on the next turn
+			if (abs(m.getDelta().y) == 2) {
+				// en passant capture allowed on the next turn
+                ((Pawn*)ps)->setEnPassant();
                 std::cout<<"En Passant has been set"<<std::endl;
-            }
+            } // if
 				
 			else if (m.getD().x == '1' or m.getD().y == '8')
-				return 9; // promotion
+				// pawn can be promoted
+				return 9;
 		} // if
 
-		if (ps->getType() == 'K') {
-			moveKing(p,m.getD());
-		}
 	} // else
 
 
@@ -315,14 +331,24 @@ int ChessBoard::doMove(Move m) {
 
 
 int ChessBoard::detectEnPassant(Move m) {
+
+	if (getPiece(m.getS())->getType() != 'P')
+		// moving piece is not a pawn
+		return 0;
+
+	if (!isFree(m.getD()))
+		// the pawn is capturing another piece
+		return 0;
+
     int c = (p == white) ? 1 : -1;
 
-    if (m.getS().y!=5 and m.getD().y!=5+c){
+    if (m.getS().y != 5 and m.getD().y ! = 5 + c)
+    	// the moving pawn is not on the fifth rank
     	return 0;
-    }
-    if (m.getS().x-m.getD().x!=1 and m.getS().x-m.getD().x!=-1){
+
+    if (m.getS().x - m.getD().x != 1 and m.getS().x - m.getD().x != -1)
+    	// the move is not a pawn capture
     	return 0;
-    }
     
 
     if (this->isFree(m.getD().x,m.getS().y)==false and this->getPiece(m.getD().x,m.getS().y)->getType()=='P') {

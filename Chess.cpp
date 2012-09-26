@@ -1,8 +1,6 @@
 #include "Interface.h"
 #include "ChessBoard.h"
 
-using namespace std;
-
 int main() {
 	// creating the chessboard
 	ChessBoard * CB = new ChessBoard();
@@ -20,6 +18,8 @@ int main() {
 		UI->printBoard();
 		do {
 			Move m = UI->prompt();
+
+			// special moves
             Move withdrawal(10,10,10,10);
             Move draw(0,0,0,0);
             
