@@ -33,6 +33,7 @@ public: //valutiamo quali metodi trasformare in privati
 	ChessBoard();
 	virtual ~ChessBoard();
 	void switchPlayer();
+	player currentPlayer();
 
 	int doMove(Move m);
 

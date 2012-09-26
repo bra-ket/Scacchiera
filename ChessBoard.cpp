@@ -193,6 +193,10 @@ int ChessBoard::doMove(Move m) {
 		cout << "normal move" << endl;
 		if (!ps->isValid(m))
 			return 4; // invalid path
+
+		if (ps->getType() == 'P' and !isFree(m.getD()) and m.getS().x == m.getD().x )
+			return 4;
+
 		// the path is valid
 		cout << "moving piece" << endl;
 		movePiece(m); // moves the piece
@@ -625,7 +629,11 @@ void ChessBoard::promote(Position p, char type){ //condition already checked
 	if (type=='R') piece = new Rook (this->p);
 	this->emptyBox(p);
 	this->putPiece(piece,p);
-	}
+} // promote
+
+player ChessBoard::currentPlayer() {
+	return p;
+};
 	
 
 	
