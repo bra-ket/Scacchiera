@@ -26,7 +26,10 @@ Piece * Box::getPiece(){
 
 void Box::putPiece(Piece* q){
     p=q;
-    free=false;
+    if (q != NULL)
+    	free = false;
+    else
+    	free = true;
 }
 
 void Box::empty(){

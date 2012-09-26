@@ -140,10 +140,17 @@ int ChessBoard::doMove(Move m) {
 
 	cout << "player is moving an own piece" << endl;
 
-	if (!isFree(m.getD()) and pd->getPlayer() == p)
-		return 3; // player tries to capture an own piece
+	if (!isFree(m.getD())) {
+		cout << "destination not free" << endl;
+		if (pd->getPlayer() == p)
+				return 3; // player tries to capture an own piece
+	} // if
+
+	cout << "player is not trying to capture an own piece" << endl;
 
 	int castling = detectCastling(m);
+
+	cout << "detected castling?" << endl;
 
 	if (castling) {
 		movePiece(m); // moves the king
@@ -212,8 +219,9 @@ int ChessBoard::doMove(Move m) {
 
 		// checks for a check status
 		if (isCheck(p)) {
+			cout << "check!" << endl;
 			movePiece(m.getD(), m.getS()); // reverts the move
-			putPiece(pd, m.getS()); // restores the captured piece
+			putPiece(pd, m.getD()); // restores the captured piece
 			return 6;
 		} // if
 
@@ -492,7 +500,7 @@ Piece * ChessBoard::getPiece(int x, int y) {
 Piece * ChessBoard::getPiece (Position a) {
     if (!board[a.x-1][a.y-1]->isFree())
 		return (board[a.x-1][a.y-1]->getPiece());
-	else return 0;
+	else return NULL;
 }
 
 void ChessBoard::emptyBox(Position p){
