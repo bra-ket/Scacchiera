@@ -1,15 +1,8 @@
-/*
- * Box.cpp
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
-
 #include "Box.h"
 
 Box::Box() {
-    free=true;
-}
+    free = true;
+} // Box()
 
 Box::~Box() {
     if (!free) delete p;
