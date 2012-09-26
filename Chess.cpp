@@ -61,6 +61,7 @@ int main() {
 			} // switch
 		} while(result);
 		checkmate = CB->isCheckMate();
+		CB->switchPlayer();
 	} while (!checkmate);
 	UI->endGame();
 	return 0;

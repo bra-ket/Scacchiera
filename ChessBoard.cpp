@@ -123,7 +123,7 @@ int ChessBoard::doMove(Move m) {
 
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 
-	cout << "got piece on destination " << pd << " " << pd->getType() << endl;
+	cout << "got piece on destination " << pd << endl;
 
 	if (isFree(m.getS())) {
 		cout << "doMove returning 1" << endl;
@@ -133,7 +133,7 @@ int ChessBoard::doMove(Move m) {
 	if (ps->getPlayer() != p)
 		return 2; // player tries to move an opponent's piece
 
-	if (pd->getPlayer() == p)
+	if (!isFree(m.getD()) and pd->getPlayer() == p)
 		return 3; // player tries to capture an own piece
 
 	int castling = detectCastling(m);
@@ -473,7 +473,7 @@ Piece * ChessBoard::getPiece(int x, int y) {
 	else return 0;
 } // getPiece
 
-Piece * ChessBoard::getPiece (Position a){
+Piece * ChessBoard::getPiece (Position a) {
 	int x=a.x-1;
 	int y=a.y-1;
 	return this->getPiece(x,y);
