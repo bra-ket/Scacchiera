@@ -340,9 +340,9 @@ int ChessBoard::detectEnPassant(Move m) {
 		// the pawn is capturing another piece
 		return 0;
 
-    int c = (p == white) ? 1 : -1;
+	int c = (p == white) ? 1 : -1;
 
-    if (m.getS().y != 5 and m.getD().y ! = 5 + c)
+    if ( m.getS().y != 5 and m.getD().y != 5 + c)
     	// the moving pawn is not on the fifth rank
     	return 0;
 
@@ -350,7 +350,6 @@ int ChessBoard::detectEnPassant(Move m) {
     	// the move is not a pawn capture
     	return 0;
     
-
     if (this->isFree(m.getD().x,m.getS().y)==false and this->getPiece(m.getD().x,m.getS().y)->getType()=='P') {
     		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y));
     		if (pa->getEnPassant()==true) return 1;
