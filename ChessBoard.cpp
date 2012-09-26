@@ -513,11 +513,7 @@ void ChessBoard::movePiece(Position s, Position d) {
 } // movePiece
 
 void ChessBoard::movePiece(int sx,int sy,int dx, int dy) {
-	Position s,d;
-    s.x=sx;
-    s.y=sy;
-    d.x=dx;
-    d.y=dy;
+	Position s(sx,sy),d(dx,dy);
     this->movePiece(s,d);
 } // movePiece
 
