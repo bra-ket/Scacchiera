@@ -19,18 +19,20 @@ int main() {
 	int result = 0; // result of a move
 	bool checkmate = 0; // checkmate status
     int nplayer;
-    if (CB->currentPlayer()==white) nplayer=1;
-    if (CB->currentPlayer()==black) nplayer=2;
+    
     bool prematureEnding=false;
 
 	do {
 		UI->printBoard();
 		do {
 			Move m = UI->prompt();
+            if (CB->currentPlayer()==white) nplayer=1;
+            if (CB->currentPlayer()==black) nplayer=2;
             Move abandon(10,10,10,10);
             Move draw(0,0,0,0);
             
             if (m==abandon) {
+                
                 UI->endGame(nplayer+2); //abbandono
                 prematureEnding=true;
                 break;

@@ -182,7 +182,7 @@ void Interface::endGame(int code){
             std::cout<<"Il bianco si ritira, vittoria per il nero."<< std::endl;
             break;
         case 4:
-            std::cout<<"Il nero si ritira, vittoria nera."<< std::endl;
+            std::cout<<"Il nero si ritira, vittoria per il bianco."<< std::endl;
             break;
     } // switch
 
