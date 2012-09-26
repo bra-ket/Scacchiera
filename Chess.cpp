@@ -21,6 +21,7 @@ int main() {
     int nplayer;
     if (CB->currentPlayer()==white) nplayer=1;
     if (CB->currentPlayer()==black) nplayer=2;
+    bool prematureEnding=false;
 
 	do {
 		UI->printBoard();
@@ -31,10 +32,12 @@ int main() {
             
             if (m==abandon) {
                 UI->endGame(nplayer+2); //abbandono
+                prematureEnding=true;
                 break;
             }
             if (m==draw) {
                 UI->endGame(0); //patta
+                prematureEnding=true;
                 break;
                 }
             result = CB->doMove(m); //effettua la mossa, restituisce odice
@@ -78,11 +81,14 @@ int main() {
 					break;
 			} // switch
 		} while(result);
-		checkmate = CB->isCheckMate();
-		CB->switchPlayer();
-	} while (!checkmate);
+        
+		if (!prematureEnding) {
+            checkmate = CB->isCheckMate();
+            CB->switchPlayer();
+        }
+	} while (!checkmate and !prematureEnding);
     
-	UI->endGame(nplayer);
+	if (!prematureEnding) UI->endGame(nplayer);
     delete CB;
     delete UI;
 	return 0;
