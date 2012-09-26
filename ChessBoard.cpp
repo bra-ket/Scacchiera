@@ -196,8 +196,12 @@ int ChessBoard::doMove(Move m) {
 	} // if
 
 	// detects and manages an "en passant" capture
+	cout << "detect enpassant" << endl;
 
 	int enps = detectEnPassant(m);
+
+	cout << "detected enpassant: " << enps << endl;
+
 	if (enps) {
 		switch (enps) {
 		case -1:
@@ -307,9 +311,8 @@ int ChessBoard::doMove(Move m) {
 } // doMove()
 
 
-int ChessBoard::detectEnPassant(Move m){
-	// sostituire l'if con l'istruzione ? :
-    int c = (p == white) ? 1 : -1; // look, how smart!
+int ChessBoard::detectEnPassant(Move m) {
+    int c = (p == white) ? 1 : -1;
 
     if (m.getS().y!=5 and m.getD().y!=5+c)
         std::cout<<"EnPassant riga sbagliata";
