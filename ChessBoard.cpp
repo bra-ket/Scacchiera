@@ -348,30 +348,32 @@ int ChessBoard::detectCastling(Move m){
 			break;
 		}
 	}
+    if (nrook==0) return 0; //non un arrocco
+    if(this->getPiece(m.getS())->hasMoved()) return -1; //il pezzo era già stato mosso
 	
-	if (nrook==0) return 0; //non un arrocco
-	if(this->getPiece(m.getS())->hasMoved()) return -1;
-	if (nrook==1) {
-		if (this->getPiece(8,1)->hasMoved()) return -1;
-		if (this->isAttacked(1,7,black) or this->isAttacked(1,6,black) or this->isAttacked(1,5,black)) return -1;
-		if (!this->isFree(1,7) or !this->isFree(1,6)) return -1;
-	}
-	if (nrook==2) {
-		if (this->getPiece(1,1)->hasMoved()) return -1;
-		if (this->isAttacked(1,3,black) or this->isAttacked(1,4,black) or this->isAttacked(1,5,black)) return -1;
-		if (!this->isFree(1,2) or !this->isFree(1,3) or !this->isFree(1,4)) return -1;
-	}
-	if (nrook==3) {
-		if (this->getPiece(8,8)->hasMoved()) return -1;
-		if (this->isAttacked(8,7,white) or this->isAttacked(8,6,white) or this->isAttacked(8,5,white)) return -1;
-		if (!this->isFree(8,7) or !this->isFree(8,6)) return -1;
-	}
-	if (nrook==4) {
-		if (this->getPiece(1,8)->hasMoved()) return -1;
-		if (this->isAttacked(8,3,white) or this->isAttacked(8,4,white) or this->isAttacked(8,5,white)) return -1;
-		if (!this->isFree(8,2) or !this->isFree(8,3) or !this->isFree(8,4)) return -1;
-	}
-    for (int i=0; i<4; i++) delete castling[i];
+    switch (nrook) {
+        case 1:
+            if (this->getPiece(8,1)->hasMoved()) return -1;
+            if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black)) return -1;
+            if (!this->isFree(7,1) or !this->isFree(6,1)) return -1;
+            
+        case 2:
+            if (this->getPiece(1,1)->hasMoved()) return -1;
+            if (this->isAttacked(3,1,black) or this->isAttacked(4,1,black) or this->isAttacked(5,1,black)) return -1;
+            if (!this->isFree(2,1) or !this->isFree(3,1) or !this->isFree(4,1)) return -1;
+            
+        case 3:
+            if (this->getPiece(8,8)->hasMoved()) return -1;
+            if (this->isAttacked(7,8,white) or this->isAttacked(6,8,white) or this->isAttacked(5,8,white)) return -1;
+            if (!this->isFree(7,8) or !this->isFree(6,8)) return -1;
+            
+        case 4:
+            if (this->getPiece(1,8)->hasMoved()) return -1;
+            if (this->isAttacked(3,8,white) or this->isAttacked(4,8,white) or this->isAttacked(5,8,white)) return -1;
+            if (!this->isFree(2,8) or !this->isFree(3,8) or !this->isFree(4,8)) return -1;
+    }
+	
+	for (int i=0; i<4; i++) delete castling[i];
     
 	return nrook;
 }
