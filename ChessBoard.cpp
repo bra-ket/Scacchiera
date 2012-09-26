@@ -356,21 +356,25 @@ int ChessBoard::detectCastling(Move m){
             if (this->getPiece(8,1)->hasMoved()) return -1;
             if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black)) return -1;
             if (!this->isFree(7,1) or !this->isFree(6,1)) return -1;
+            break;
             
         case 2:
             if (this->getPiece(1,1)->hasMoved()) return -1;
             if (this->isAttacked(3,1,black) or this->isAttacked(4,1,black) or this->isAttacked(5,1,black)) return -1;
             if (!this->isFree(2,1) or !this->isFree(3,1) or !this->isFree(4,1)) return -1;
+            break;
             
         case 3:
             if (this->getPiece(8,8)->hasMoved()) return -1;
             if (this->isAttacked(7,8,white) or this->isAttacked(6,8,white) or this->isAttacked(5,8,white)) return -1;
             if (!this->isFree(7,8) or !this->isFree(6,8)) return -1;
+            break;
             
         case 4:
             if (this->getPiece(1,8)->hasMoved()) return -1;
             if (this->isAttacked(3,8,white) or this->isAttacked(4,8,white) or this->isAttacked(5,8,white)) return -1;
             if (!this->isFree(2,8) or !this->isFree(3,8) or !this->isFree(4,8)) return -1;
+            break;
     }
 	
 	for (int i=0; i<4; i++) delete castling[i];
