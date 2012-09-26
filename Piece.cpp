@@ -6,6 +6,7 @@
  */
 
 #include "Piece.h"
+#include <iostream>
 
 Piece::Piece() {
 	// TODO Auto-generated constructor stub
@@ -16,7 +17,7 @@ Piece::~Piece() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Piece::isValid(Move m){
+virtual bool Piece::isValid(Move m){
 	 Delta d=m.getDelta();
 	 for (int i=0; i < (int) possibleMoves.size(); i++)
 		 if (d.x==possibleMoves[i].x and d.y==possibleMoves[i].y)
@@ -36,6 +37,7 @@ player Piece::getPlayer() {
 
 void Piece::setMoved(){
 	moved=true;
+    std::cout<<"IL PEZZO È MOSSO "<<moved<<std::endl;
 }
 
 bool Piece::hasMoved(){

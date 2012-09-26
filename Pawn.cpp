@@ -6,6 +6,7 @@
  */
 
 #include "Pawn.h"
+#include <iostream>
 
 Pawn::Pawn(player p) {
     enPassant=false;
@@ -32,8 +33,9 @@ Pawn::~Pawn() {
 
 bool Pawn::isvalid(Move m) {
     Delta d=m.getDelta();
+    std::cout<<"PAWN!"<<std::endl;
     if (d.x==possibleMoves[0].x and d.y==possibleMoves[0].y) return true;
-    if (!this->hasMoved() and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
+    if (!(this->hasMoved()) and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
     else return false;
 }
 
