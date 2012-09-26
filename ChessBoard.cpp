@@ -116,7 +116,11 @@ bool ChessBoard::isFree(int x,int y){
 int ChessBoard::doMove(Move m) {
 	cout << "entered doMove" << endl;
 
+	cout << "getting piece on source:" << m.getS().x << " " << m.getS().y << endl;
+
 	Piece * ps = this->getPiece(m.getS()); // content on the source position
+
+	cout << "got piece on source " << ps << endl;
 
 	cout << "getting piece on destination:" << m.getD().x << " " << m.getD().y << endl;
 
