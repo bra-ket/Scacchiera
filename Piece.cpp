@@ -17,7 +17,7 @@ Piece::~Piece() {
 	// TODO Auto-generated destructor stub
 }
 
-virtual bool Piece::isValid(Move m){
+bool Piece::isValid(Move m){
 	 Delta d=m.getDelta();
 	 for (int i=0; i < (int) possibleMoves.size(); i++)
 		 if (d.x==possibleMoves[i].x and d.y==possibleMoves[i].y)

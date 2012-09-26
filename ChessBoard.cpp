@@ -129,8 +129,12 @@ int ChessBoard::doMove(Move m) {
 		return 1; // empty source position
 	}
 
+	cout << "source not free" << endl;
+
 	if (ps->getPlayer() != p)
 		return 2; // player tries to move an opponent's piece
+
+	cout << "player is moving an own piece" << endl;
 
 	if (!isFree(m.getD()) and pd->getPlayer() == p)
 		return 3; // player tries to capture an own piece

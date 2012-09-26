@@ -16,7 +16,7 @@ class Pawn: public Piece {
 public:
 	Pawn(player p);
 	virtual ~Pawn();
-    bool isvalid(Move m);
+    virtual bool isValid(Move m);
     bool getEnPassant();
 	void setEnPassant();
     void removeEnPassant();

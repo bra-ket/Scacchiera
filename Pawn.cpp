@@ -31,7 +31,7 @@ Pawn::~Pawn() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Pawn::isvalid(Move m) {
+bool Pawn::isValid(Move m) {
     Delta d=m.getDelta();
     std::cout<<"PAWN!"<<std::endl;
     if (d.x==possibleMoves[0].x and d.y==possibleMoves[0].y) return true;
