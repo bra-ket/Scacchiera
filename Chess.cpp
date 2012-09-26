@@ -36,6 +36,10 @@ int main() {
 			switch (result) {
 				case 0:
 					UI->validMove();
+                    player other;
+                    if (CB->currentPlayer()==white) other=black;
+                    if (CB->currentPlayer()==black) other=white;
+                    if(CB->isCheck(other)) UI->isCheck();
 					break;
 				case 1:
 					UI->noPiece();

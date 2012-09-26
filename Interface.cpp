@@ -79,7 +79,10 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     bool check=false;
     while (!check) {
         m.clear();
-        std::cout<<std::endl<<"Mossa: ";
+        std::cout<<std::endl<<"Giocatore ";
+        if (cb->currentPlayer()==white) std::cout<<"BIANCO";
+        if (cb->currentPlayer()==black) std::cout<<"NERO";
+        std::cout<<". Mossa: ";
         std::cin>>m;
         
         if (m=="XXXX") {
@@ -161,7 +164,7 @@ void Interface::noPiece(){
 }
 
 void Interface::validMove(){
-	std::cout<<"Mossa effettuata con successo"<<std::endl;
+	std::cout<<"Mossa effettuata con successo."<<std::endl;
 }
 
 void Interface::endGame(int code){
@@ -214,4 +217,11 @@ void Interface::castlingNotAllowed(){
 
 void Interface::enPassantNotAllowed(){
     std::cout<<"Questa mossa in en passant non è permessa. Riprovare."<<std::endl;
+}
+
+void Interface::isCheck(){
+    std::cout<<"Scacco al re ";
+    if (cb->currentPlayer()==white) std::cout<<"NERO";
+    if (cb->currentPlayer()==black) std::cout<<"BIANCO";
+    std::cout<<"."<<std::endl;
 }

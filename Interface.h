@@ -29,6 +29,7 @@ class Interface {
         void invalidPath();
         void obstructedPath();
         void moveCheck();
+        void isCheck(); //at the end of the move we have a check
         void castlingNotAllowed();
         void enPassantNotAllowed();
 		void validMove(); // prints a valid move notice
