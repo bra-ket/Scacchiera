@@ -312,26 +312,28 @@ int ChessBoard::detectEnPassant(Move m){
     int c = (p == white) ? 1 : -1; // look, how smart!
 
     if (m.getS().y!=5 and m.getD().y!=5+c)
+        std::cout<<"EnPassant riga sbagliata";
     	return 0;
-    if (abs(m.getS().x-m.getD().x)!=1)
+    if (m.getS().x-m.getD().x!=1 and m.getS().x-m.getD().x!=-1)
+        std::cout<<"EnPassant diverso da uno";
     	return 0;
-    if (this->isFree(m.getD().x,5+2*c)==false and this->getPiece(m.getD().x,5+2*c)->getType()=='P') {
-    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,5+2*c));
+    if (this->isFree(m.getD().x,5+c)==false and this->getPiece(m.getD().x,5+c)->getType()=='P') {
+    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,5+c));
     		if (pa->getEnPassant()==true) return 1;
     }
-
+    std::cout<<"EnPassant non riconosciuto";
     return -1;
 } // detectEnPassant()
 
 void ChessBoard::resetEnPassant(){
-    int c;
-    if (p==black) c=3;
-    if (p==white) c=6;
-    for (int i = 1; i < 9; i++) {
-    	if(!this->isFree(i,c) and this->getPiece(i,c)->getType()=='P') {
-    		Pawn * pa = (Pawn *) (this->getPiece(i,c));
-    		pa->removeEnPassant();
-    	}
+    for (int i=1; i<=8;i++){
+        for (int j=1; j<=8; j++){
+            if (!isFree(i,j) and getPiece(i, j)->getType()=='P') {
+                    Pawn * pointer =(Pawn*)getPiece(i,j);
+                    pointer->removeEnPassant();
+            }
+            
+        }
     }
 }
 

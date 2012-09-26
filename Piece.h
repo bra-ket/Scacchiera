@@ -31,8 +31,6 @@ public:
 	bool hasMoved();
 
     virtual bool isValid(Move m);
-
-    void promote(Piece * p, char type);
 };
 
 #endif /* PIECE_H_ */
