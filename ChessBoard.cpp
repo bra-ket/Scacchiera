@@ -31,51 +31,51 @@ ChessBoard::ChessBoard() {
     for (int i=0; i<8; i++) {
         Pawn * pw = new Pawn(white);
         Pawn * pb = new Pawn(black);
-        this->putPiece(pw, 1,i);
-        this->putPiece(pb, 6,i);
+        this->putPiece(pw, i,1);
+        this->putPiece(pb, i,6);
     }
     
     Rook * r1w = new Rook(white);
     this->putPiece(r1w, 0,0);
     Rook * r2w = new Rook(white);
-    this->putPiece(r2w, 0,7);
+    this->putPiece(r2w, 7,0);
     
     Rook * r1b = new Rook(black);
-    this->putPiece(r1b, 7,0);
+    this->putPiece(r1b, 0,7);
     Rook * r2b = new Rook(black);
     this->putPiece(r2b, 7,7);
     
     Knight * n1w = new Knight(white);
-    this->putPiece(n1w,0,1);
+    this->putPiece(n1w,1,0);
     Knight * n2w = new Knight(white);
-    this->putPiece(n2w,0,6);
+    this->putPiece(n2w,6,0);
     
     Knight * n1b = new Knight(black);
-    this->putPiece(n1b,7,1);
+    this->putPiece(n1b,1,7);
     Knight * n2b = new Knight(black);
-    this->putPiece(n2b,7,6);
+    this->putPiece(n2b,6,7);
     
     Bishop * b1w = new Bishop(white);
-    this->putPiece(b1w,0,2);
+    this->putPiece(b1w,2,0);
     Bishop * b2w = new Bishop(white);
-    this->putPiece(b2w,0,5);
+    this->putPiece(b2w,5,0);
     
     Bishop * b1b = new Bishop(black);
-    this->putPiece(b1b,7,2);
+    this->putPiece(b1b,2,7);
     Bishop * b2b = new Bishop(black);
-    this->putPiece(b2b,7,5);
+    this->putPiece(b2b,5,7);
     
     Queen * qw = new Queen(white);
-    this->putPiece(qw, 0,3);
+    this->putPiece(qw, 3,0);
     
     Queen * qb = new Queen(black);
-    this->putPiece(qb, 7,3);
+    this->putPiece(qb, 3,7);
     
     King * kw = new King(white);
-    this->putPiece(kw,0,4);
+    this->putPiece(kw,4,0);
     
     King * kb = new King(black);
-    this->putPiece(kb,7,4);
+    this->putPiece(kb,4,7);
     
     
     //TODO Generate all the pieces and alloc them

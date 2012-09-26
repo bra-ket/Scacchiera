@@ -18,7 +18,7 @@ Interface::~Interface() {
 
 void Interface::printBoard() {
         Position p;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 7; i >= 0; i--) {
 
                 // prints the upper horizontal row
                 for (int j = 0; j < 8; j++)
@@ -30,14 +30,14 @@ void Interface::printBoard() {
 
                 for (int j = 0; j < 8; j++) {
                     // horizontal scan
-                    if (cb->isFree(i,j)==true)
+                    if (cb->isFree(j,i)==true)
                         std::cout << "00" << "|"; // se la casella è vuota printa uno zero
                     else {
-                        if (cb->getPiece(i,j)->getPlayer()== white)
+                        if (cb->getPiece(j,i)->getPlayer()== white)
                             std::cout << "W"; // se è il pezzo è bianco
                         else std::cout << "B"; // se è il pezzo è nero
 
-                        std::cout << cb->getPiece(i,j)->getType() << "|"; // se c'è un pezzo printa il char del tipo di pezzo
+                        std::cout << cb->getPiece(j,i)->getType() << "|"; // se c'è un pezzo printa il char del tipo di pezzo
 
 
                     } // else
