@@ -598,13 +598,12 @@ bool ChessBoard::isCheck(player p){
 	}
 
 bool ChessBoard::simMove(Move m){
-	Piece * pd = this->getPiece(m.getD()); // content on the destination position
-	if (this->doMove(m)==6) return true; //under check
-	else {
-		Move b(m.getD(),m.getS()); //backwards move
-		putPiece(pd,m.getS().y,m.getD().x); //restore captured piece
-		return false;
-		}
+    Piece * pd = this->getPiece(m.getD());
+    movePiece(m); //moves
+    bool check=this->isCheck(p); //checks
+    movePiece(m.getD(), m.getS()); //reverts
+    putPiece(pd, m.getS()); //restores eventual taken piece
+    return check;
 	
 }
 
