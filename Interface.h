@@ -32,7 +32,7 @@ class Interface {
         void castlingNotAllowed();
         void enPassantNotAllowed();
 		void validMove(); // prints a valid move notice
-		void endGame();
+		void endGame(int code);
 		char getPromotionType();
 };
 

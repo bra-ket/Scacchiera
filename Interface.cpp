@@ -79,14 +79,28 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     bool check=false;
     while (!check) {
         m.clear();
-        std::cout<<"Mossa: ";
+        std::cout<<std::endl<<"Mossa: ";
         std::cin>>m;
+        
+        if (m=="XXXX") {
+            Move abandon (10,10,10,10);
+            return abandon;
+        }//rinuncia
+        
+        if (m=="0000") {
+            Move draw(0,0,0,0);
+            return draw;
+        }//patta
+        
         check=true;
-        if (m.size()!=4) check=false;
+        if (m.size()!=4) check=false; //lunghezza stringa
+        //controllo validità della stringa
         else if (m[0]!='a' and m[0]!='b' and m[0]!='c' and m[0]!='d' and m[0]!='e' and m[0]!='f' and m[0]!='g' and m[0]!='h') check=false;
         else if (atoi(&m[1])>8 or atoi(&m[1])<1) check=false;
         else if (m[2]!='a' and m[2]!='b' and m[2]!='c' and m[2]!='d' and m[2]!='e' and m[2]!='f' and m[2]!='g' and m[2]!='h') check=false;
         else if (atoi(&m[3])>8 or atoi(&m[3])<1) check=false;
+        
+        //se una delle condizioni non è valida, viene fatta reinserire la mossa
         if (check==false) std::cout<<"Mossa in formato non valido (es. a2a4). Riprovare."<<std::endl;
 
     }
@@ -150,8 +164,28 @@ void Interface::validMove(){
 	std::cout<<"Mossa effettuata con successo"<<std::endl;
 }
 
-void Interface::endGame(){
+void Interface::endGame(int code){
+    switch (code) {
+        case 0:
+            std::cout<<"È patta."<<std::cout;
+            break;
+        case 1:
+            std::cout<<"Scacco matto bianco."<<std::cout;
+            break;
+        case 2:
+            std::cout<<"Scacco matto nero"<<std::cout;
+            break;
+        case 3:
+            std::cout<<"Bianco si ritira, vittoria nera"<<std::cout;
+            break;
+        case 4:
+            std::cout<<"Nero si ritira, vittoria bianca"<<std::cout;
+            break;
+            
+        
+    }
     std::cout<<"Good game"<<std::endl;
+    
 }
 
 void Interface::wrongPlayer(){

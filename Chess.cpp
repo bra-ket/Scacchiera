@@ -23,6 +23,12 @@ int main() {
 		UI->printBoard();
 		do {
 			Move m = UI->prompt();
+            Move abandon(10,10,10,10);
+            Move draw(0,0,0,0);
+            if (CB->currentPlayer==white) int nplayer=1;
+            if (CB->currentPlayer==black) int nplayer=2;
+            if (m==abandon) UI->endGame(nplayer+2); //abbandono
+            if (m==draw) UI->endGame(0); //patta
 			result = CB->doMove(m);
 
 			switch (result) {
@@ -63,6 +69,6 @@ int main() {
 		checkmate = CB->isCheckMate();
 		CB->switchPlayer();
 	} while (!checkmate);
-	UI->endGame();
+	UI->endGame(nplayer);
 	return 0;
 } // main
