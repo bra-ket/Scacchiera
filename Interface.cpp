@@ -18,7 +18,7 @@ Interface::~Interface() {
 
 void Interface::printBoard() {
         Position p;
-        for (int i = 7; i >= 0; i--) {
+        for (int i = 8; i >= 1; i--) {
 
                 // prints the upper horizontal row
                 for (int j = 0; j < 8; j++)
@@ -28,7 +28,7 @@ void Interface::printBoard() {
                 // prints the left column element
                 std::cout << "|";
 
-                for (int j = 0; j < 8; j++) {
+                for (int j = 1; j < 9; j++) {
                     // horizontal scan
                     if (cb->isFree(j,i)==true)
                         std::cout << "00" << "|"; // se la casella è vuota printa uno zero
@@ -45,7 +45,7 @@ void Interface::printBoard() {
 
                 std::cout << std::endl;
 
-                for (int j = 0; j < 8; j++)
+                for (int j = 1; j < 9; j++)
                     std::cout << "|__";
                 std::cout << "|" << std::endl;
         } // for

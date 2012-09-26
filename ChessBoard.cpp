@@ -21,61 +21,61 @@ using namespace std;
 
 ChessBoard::ChessBoard() {
 	p = white;
-	Position pKingW(1,5);
-    Position pKingB(8,5);
+	Position pKingW(5,1);
+    Position pKingB(5,8);
     for (int i=0;i<8;i++){
         for (int j=0; j<8; j++){
             board[i][j]= new Box;
         }
     }
-    for (int i=0; i<8; i++) {
+    for (int i=1; i<9; i++) {
         Pawn * pw = new Pawn(white);
         Pawn * pb = new Pawn(black);
-        this->putPiece(pw, i,1);
-        this->putPiece(pb, i,6);
+        this->putPiece(pw, i,2);
+        this->putPiece(pb, i,7);
     }
     
     Rook * r1w = new Rook(white);
-    this->putPiece(r1w, 0,0);
+    this->putPiece(r1w, 1,1);
     Rook * r2w = new Rook(white);
-    this->putPiece(r2w, 7,0);
+    this->putPiece(r2w, 8,1);
     
     Rook * r1b = new Rook(black);
-    this->putPiece(r1b, 0,7);
+    this->putPiece(r1b, 1,8);
     Rook * r2b = new Rook(black);
-    this->putPiece(r2b, 7,7);
+    this->putPiece(r2b, 8,8);
     
     Knight * n1w = new Knight(white);
-    this->putPiece(n1w,1,0);
+    this->putPiece(n1w,2,1);
     Knight * n2w = new Knight(white);
-    this->putPiece(n2w,6,0);
+    this->putPiece(n2w,7,1);
     
     Knight * n1b = new Knight(black);
-    this->putPiece(n1b,1,7);
+    this->putPiece(n1b,2,8);
     Knight * n2b = new Knight(black);
-    this->putPiece(n2b,6,7);
+    this->putPiece(n2b,7,8);
     
     Bishop * b1w = new Bishop(white);
-    this->putPiece(b1w,2,0);
+    this->putPiece(b1w,3,1);
     Bishop * b2w = new Bishop(white);
-    this->putPiece(b2w,5,0);
+    this->putPiece(b2w,6,1);
     
     Bishop * b1b = new Bishop(black);
-    this->putPiece(b1b,2,7);
+    this->putPiece(b1b,3,8);
     Bishop * b2b = new Bishop(black);
-    this->putPiece(b2b,5,7);
+    this->putPiece(b2b,6,8);
     
     Queen * qw = new Queen(white);
-    this->putPiece(qw, 3,0);
+    this->putPiece(qw, 4,1);
     
     Queen * qb = new Queen(black);
-    this->putPiece(qb, 3,7);
+    this->putPiece(qb, 4,8);
     
     King * kw = new King(white);
-    this->putPiece(kw,4,0);
+    this->putPiece(kw,5,1);
     
     King * kb = new King(black);
-    this->putPiece(kb,4,7);
+    this->putPiece(kb,5,8);
     
     
     //TODO Generate all the pieces and alloc them
