@@ -249,7 +249,7 @@ void ChessBoard::resetEnPassant(){
     int c;
     if (p==black) c=3;
     if (p==white) c=6;
-    for (int i=1;i<=8;i++) {
+    for (int i = 1; i < 8; i++) {
     	if(!this->isFree(i,c) and this->getPiece(i,c)->getType()=='P') {
     		Pawn * pa = (Pawn *) (this->getPiece(i,c));
     		pa->removeEnPassant();
