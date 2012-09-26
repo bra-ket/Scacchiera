@@ -602,7 +602,7 @@ bool ChessBoard::simMove(Move m){
     movePiece(m); //moves
     bool check=this->isCheck(p); //checks
     movePiece(m.getD(), m.getS()); //reverts
-    putPiece(pd, m.getS()); //restores eventual taken piece
+    if (pd!=0) putPiece(pd, m.getS()); //restores eventual taken piece
     return check;
 	
 }
