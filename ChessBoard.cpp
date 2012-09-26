@@ -340,22 +340,24 @@ int ChessBoard::detectEnPassant(Move m) {
 		// the pawn is capturing another piece
 		return 0;
 
-	int c = (p == white) ? 1 : -1;
+	int c = (p == white) ? 1 : -1; //c=1 if white, c=-1 if black
 
     if ( m.getS().y != 5 and m.getD().y != 5 + c)
     	// the moving pawn is not on the fifth rank
     	return 0;
 
-    if (m.getS().x - m.getD().x != 1 and m.getS().x - m.getD().x != -1)
+    if (m.getDelta().x != 1 and m.getDelta().x != -1)
     	// the move is not a pawn capture
     	return 0;
     
-    if (this->isFree(m.getD().x,m.getS().y)==false and this->getPiece(m.getD().x,m.getS().y)->getType()=='P') {
-    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y));
-    		if (pa->getEnPassant()==true) return 1;
-            else std::cout<<"AAA";
+    Position takenPiece(m.getD().x,m.getS().y);
+    //where could be the pawn taken
+    
+    if (this->isFree(takenPiece)==false and this->getPiece(takenPiece)->getType()=='P' and this->getPiece(takenPiece)->getPlayer()!=p) {
+    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y)); //the pawn that could be taken
+    		if (pa->getEnPassant()==true) return 1; //taken
     }
-    return -1;
+    return -1; //invalid enpassant
 } // detectEnPassant()
 
 void ChessBoard::resetEnPassant(player p){
