@@ -165,7 +165,7 @@ int ChessBoard::doMove(Move m) {
 		case 1:
 			// white right
 			movePiece(m);
-			movePiece(1,1,6,1); // moves the white tower to the right
+			movePiece(8,1,6,1); // moves the white tower to the right
 			getPiece(6,1)->setMoved();
 			break;
 		case 2:
