@@ -169,45 +169,47 @@ int ChessBoard::doMove(Move m) {
 	} // if
 
 	// detects and manages an "en passant" capture
-	if (ps->getType() == 'P') {
-		int enps = detectEnPassant(m);
-		if (enps) {
-			switch (enps) {
-			case -1:
-				return 8;
-			case 1:
-				movePiece(m); // moves the attacker's pawn
-				pd = getPiece(m.getS().y, m.getD().x); // stores the captured pawn
-				emptyBox(m.getS().y, m.getD().x); // empties the captured position
-				if (isCheck(p)) {
-					movePiece(m.getD(), m.getS()); // reverts the attacker's move
-					putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
-					return 6;
-				} // if
-				break;
-			} // switch
-		} // if
+
+	int enps = detectEnPassant(m);
+	if (enps) {
+		switch (enps) {
+		case -1:
+			return 8;
+		case 1:
+			movePiece(m); // moves the attacker's pawn
+			pd = getPiece(m.getS().y, m.getD().x); // stores the captured pawn
+			emptyBox(m.getS().y, m.getD().x); // empties the captured position
+			if (isCheck(p)) {
+				movePiece(m.getD(), m.getS()); // reverts the attacker's move
+				putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
+				return 6;
+			} // if
+			break;
+		} // switch
 	} // if
 
 	else
 
 	{ // normal move
+		cout << "normal move" << endl;
 		if (!ps->isValid(m))
 			return 4; // invalid path
 		// the path is valid
+		cout << "moving piece" << endl;
 		movePiece(m); // moves the piece
+		cout << "piece moved" << endl;
 		// checks for a check status
 		if (isCheck(p)) {
 			movePiece(m.getD(), m.getS()); // reverts the move
 			putPiece(pd, m.getS()); // restores the captured piece
 			return 6;
 		} // if
-
+		cout << "checked for checks" << endl;
 		if (!ps->hasMoved())
 			ps->setMoved();
-
+		cout << "set moved" << endl;
 		resetEnPassant();
-
+		cout << "reset enps" << endl;
 		if (ps->getType() == 'P') {
 			if (m.getDelta().y == 2)
 				((Pawn*)ps)->setEnPassant(); // can be captured "en passant" on the next turn
