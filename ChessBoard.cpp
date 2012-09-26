@@ -216,9 +216,15 @@ int ChessBoard::doMove(Move m) {
 		if (!ps->isValid(m))
 			return 4; // invalid path
 
-		if (ps->getType() == 'P' and !isFree(m.getD()) and m.getS().x == m.getD().x )
-			// the pawn can't capture on forward
-			return 4;
+		if (ps->getType() == 'P') {
+			if (!isFree(m.getD()) and m.getS().x == m.getD().x)
+				// the pawn can't capture on forward
+				return 4;
+			if (isFree(m.getD()) and m.getS().x != m.getD().x)
+				// the pawn can't move on diagonal if it's not capturing
+				return 4;
+		} // if
+
 
 		if (ps->getType() == 'K' and isAttacked(m.getD(), oppositePlayer()))
 			// the king can't capture a defended piece
@@ -323,6 +329,7 @@ void ChessBoard::resetEnPassant(){
 }
 
 int ChessBoard::detectCastling(Move m){
+	cout << "detecting castling" << endl;
 	std::vector<Move *> castling(4);
 	castling[0]=new Move(5,1,7,1);
 	castling[1]=new Move(5,1,3,1);
@@ -330,7 +337,11 @@ int ChessBoard::detectCastling(Move m){
 	castling[3]=new Move(5,8,3,8);
 	
 	int nrook=0;
+
+	cout << m.getS().x << " " << m.getS().y << " " << m.getD().x << " " << m.getD().y << endl;
+
 	for(int i=0; i< (int)castling.size();i++){
+		cout << (*castling[i]).getS().x << " " << (*castling[i]).getS().y << " " << (*castling[i]).getD().x << " " << (*castling[i]).getD().y << endl;
 		if (*castling[i]==m) {
 			cout << "castling move!" << endl;
 			nrook=i+1;
