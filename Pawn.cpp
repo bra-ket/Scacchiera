@@ -38,7 +38,6 @@ Pawn::~Pawn() {
 
 bool Pawn::isValid(Move m) {
     Delta d=m.getDelta();
-    std::cout<<"PAWN!"<<std::endl;
     if (d==possibleMoves[0] or d==possibleMoves[2] or d==possibleMoves[3]) return true;
     if (!(this->hasMoved()) and d==possibleMoves[1]) return true;
     else return false;
