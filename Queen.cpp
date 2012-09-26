@@ -9,7 +9,7 @@
 
 Queen::Queen(player p) {
 	type='Q';
-    pla=p;
+    pl=p;
     Delta d;
     for (int i=0; i<56; i++) possibleMoves.push_back(d);
     for (int i=1; i<8; i++) {

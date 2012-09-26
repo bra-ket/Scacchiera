@@ -11,20 +11,20 @@
 Pawn::Pawn(player p) {
     enPassant=false;
 	type='P';
-    pla=p;
+    pl=p;
     Delta d;
     for (int i=0;i<5;i++) possibleMoves.push_back(d);
     possibleMoves[0].x=0;
     possibleMoves[1].x=0;
     possibleMoves[2].x=1;
     possibleMoves[3].x=-1;
-    if (pla==white) {
+    if (pl==white) {
 		possibleMoves[0].y=+1;
 		possibleMoves[1].y=+2;
         possibleMoves[2].y=1;
         possibleMoves[3].y=1;
     }
-    if (pla==black) {
+    if (pl==black) {
 		possibleMoves[0].y=-1;
 		possibleMoves[1].y=-2;
         possibleMoves[2].y=-1;

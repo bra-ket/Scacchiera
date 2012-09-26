@@ -31,7 +31,7 @@ char Piece::getType() {
 } // getType
 
 player Piece::getPlayer() {
-	return pla;
+	return pl;
 } // getType
 
 

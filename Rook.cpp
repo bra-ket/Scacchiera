@@ -9,7 +9,7 @@
 
 Rook::Rook(player p) {
     type='R';
-    pla=p;
+    pl=p;
     Delta d;
     for (int i=0; i<28; i++) possibleMoves.push_back(d);
     for (int i=1; i<8; i++) {

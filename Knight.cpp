@@ -28,7 +28,7 @@ Knight::Knight(player p) {
     possibleMoves[7].y=-1;
     
 	type='N';
-    pla=p;
+    pl=p;
 }
 
 Knight::~Knight() {

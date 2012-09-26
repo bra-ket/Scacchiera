@@ -15,7 +15,7 @@
 class Piece {
     
 protected:
-    player pla;
+    player pl;
     char type;
     bool moved;
     std::vector<Delta> possibleMoves; 

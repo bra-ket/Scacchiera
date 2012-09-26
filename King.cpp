@@ -9,7 +9,7 @@
 
 King::King(player p) {
 	type='K';
-    pla=p;
+    pl=p;
     Delta d;
     for (int i=0; i<8; i++) possibleMoves.push_back(d);
     possibleMoves[0].x=1;

@@ -159,32 +159,39 @@ int ChessBoard::doMove(Move m) {
 	cout << "detected castling?" << endl;
 
 	if (castling) {
-		movePiece(m); // moves the king
 		switch (castling) {
 		case -1:
 			return 7;
 		case 1:
 			// white right
+			movePiece(m);
 			movePiece(1,1,6,1); // moves the white tower to the right
 			getPiece(6,1)->setMoved();
 			break;
 		case 2:
 			// white left
+			movePiece(m);
 			movePiece(1,1,4,1); // moves the white tower to the left
 			getPiece(4,1)->setMoved();
 			break;
 		case 3:
 			// black right
+			movePiece(m);
 			movePiece(1,8,4,8); // moves the black tower to the right
 			getPiece(4,8)->setMoved();
 			break;
 		case 4:
 			// black left
+			movePiece(m);
 			movePiece(8,8,6,8); // moves the black tower to the left
 			getPiece(6,8)->setMoved();
 			break;
 		} // switch
-		moveKing(p,m.getD());
+
+		getPiece(m.getS())->setMoved();
+
+		moveKing(p, m.getD());
+
 		return 0;
 	} // if
 
@@ -525,6 +532,7 @@ bool ChessBoard::isAttacked(int x, int y, player attacker){
 }
 
 void ChessBoard::movePiece(Position s, Position d) {
+	cout << "emtpying " << s.x << " " << s.y << endl;
 	putPiece(getPiece(s), d);
 	emptyBox(s);
 } // movePiece

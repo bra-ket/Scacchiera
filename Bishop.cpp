@@ -1,15 +1,8 @@
-/*
- * Bishop.cpp
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
-
 #include "Bishop.h"
 
 Bishop::Bishop(player p) {
-	type='B';
-    pla=p;
+	type = 'B';
+    pl=p;
     Delta d;
     for (int i=0; i<32; i++) possibleMoves.push_back(d);
      for (int i=1; i<8; i++) {
