@@ -188,7 +188,7 @@ int ChessBoard::doMove(Move m) {
 			break;
 		} // switch
 
-		getPiece(m.getS())->setMoved();
+		getPiece(m.getD())->setMoved();
 
 		moveKing(p, m.getD());
 
