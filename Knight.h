@@ -15,7 +15,6 @@ class Knight: public Piece {
 public:
 	Knight(player p);
 	virtual ~Knight();
-    bool isvalid(Move m);
 };
 
 #endif /* KNIGHT_H_ */

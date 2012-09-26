@@ -25,8 +25,6 @@ class ChessBoard {
 private:
     player p;
     Box * board[8][8];
-    Piece * kingW;
-    Piece * kingB;
     Position pKingW;
     Position pKingB;
 

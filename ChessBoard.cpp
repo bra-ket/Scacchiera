@@ -94,9 +94,7 @@ bool ChessBoard::isFree(Position p) {
 }
 
 bool ChessBoard::isFree(int x,int y){
-	Position a;
-	a.x=x+1;
-	a.y=y+1;
+	Position a(x,y);
 	return (this->isFree(a));
 } // isFree()
 
@@ -466,19 +464,19 @@ void ChessBoard::putPiece(Piece * pc, Position ps) {
 } // putPiece()
 
 void ChessBoard::putPiece(Piece * pc, int x, int y){
-    board[x][y]->putPiece(pc);
+    Position p(x,y);
+    this->putPiece(pc, p);
 }
 
 Piece * ChessBoard::getPiece(int x, int y) {
-	if (!board[x][y]->isFree())
-		return (board[x][y]->getPiece());
-	else return 0;
+    Position p(x,y);
+	return (this->getPiece(p));
 } // getPiece
 
 Piece * ChessBoard::getPiece (Position a) {
-	int x=a.x-1;
-	int y=a.y-1;
-	return this->getPiece(x,y);
+    if (!board[a.x-1][a.y-1]->isFree())
+		return (board[a.x-1][a.y-1]->getPiece());
+	else return 0;
 }
 
 void ChessBoard::emptyBox(Position p){

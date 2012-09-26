@@ -9,19 +9,26 @@
 
 Knight::Knight(player p) {
     Delta d;
-    for (int i=0; i<56; i++) possibleMoves.push_back(d);
+    for (int i=0; i<8; i++) possibleMoves.push_back(d);
+    possibleMoves[0].x=2;
+    possibleMoves[0].y=1;
+    possibleMoves[1].x=1;
+    possibleMoves[1].y=2;
+    possibleMoves[2].x=-1;
+    possibleMoves[2].y=2;
+    possibleMoves[3].x=-2;
+    possibleMoves[3].y=1;
+    possibleMoves[4].x=-2;
+    possibleMoves[4].y=-1;
+    possibleMoves[5].x=1;
+    possibleMoves[5].y=-2;
+    possibleMoves[6].x=-1;
+    possibleMoves[6].y=-2;
+    possibleMoves[7].x=2;
+    possibleMoves[7].y=-1;
+    
 	type='N';
     pla=p;
-    for (int i=1; i<8; i++) {
-		possibleMoves[4*i].x=i;
-    	possibleMoves[4*i].y=i;
-    	possibleMoves[4*i+1].x=i;
-    	possibleMoves[4*i+1].y=-i;
-		possibleMoves[4*i+2].x=-i;
-    	possibleMoves[4*i+2].y=-i;
-    	possibleMoves[4*i+3].x=-i;
-    	possibleMoves[4*i+3].y=+i;
-		}
 }
 
 Knight::~Knight() {
