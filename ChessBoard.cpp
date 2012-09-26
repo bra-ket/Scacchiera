@@ -208,11 +208,11 @@ int ChessBoard::doMove(Move m) {
 			return 8;
 		case 1:
 			movePiece(m); // moves the attacker's pawn
-			pd = getPiece(m.getS().y, m.getD().x); // stores the captured pawn
-			emptyBox(m.getS().y, m.getD().x); // empties the captured position
+			pd = getPiece(m.getD().x, m.getS().y); // stores the captured pawn
+			emptyBox(m.getD().x, m.getS().y); // empties the captured position
 			if (isCheck(p)) {
 				movePiece(m.getD(), m.getS()); // reverts the attacker's move
-				putPiece(pd, m.getS().y, m.getD().x); // restore the captured piece
+				putPiece(pd, m.getD().x, m.getS().y); // restore the captured piece
 				return 6;
 			} // if
 			break;
@@ -290,11 +290,14 @@ int ChessBoard::doMove(Move m) {
 		if (!ps->hasMoved())
 			ps->setMoved();
 		cout << "set moved" << endl;
-		resetEnPassant();
+		resetEnPassant(this->oppositePlayer());
 		cout << "reset enps" << endl;
 		if (ps->getType() == 'P') {
-			if (m.getDelta().y == 2)
-				((Pawn*)ps)->setEnPassant(); // can be captured "en passant" on the next turn
+			if (abs(m.getDelta().y) == 2){
+                ((Pawn*)ps)->setEnPassant(); // can be captured "en passant" on the next turn
+                std::cout<<"En Passant has been set"<<std::endl;
+            }
+				
 			else if (m.getD().x == '1' or m.getD().y == '8')
 				return 9; // promotion
 		} // if
@@ -314,24 +317,26 @@ int ChessBoard::doMove(Move m) {
 int ChessBoard::detectEnPassant(Move m) {
     int c = (p == white) ? 1 : -1;
 
-    if (m.getS().y!=5 and m.getD().y!=5+c)
-        std::cout<<"EnPassant riga sbagliata";
+    if (m.getS().y!=5 and m.getD().y!=5+c){
     	return 0;
-    if (m.getS().x-m.getD().x!=1 and m.getS().x-m.getD().x!=-1)
-        std::cout<<"EnPassant diverso da uno";
-    	return 0;
-    if (this->isFree(m.getD().x,5+c)==false and this->getPiece(m.getD().x,5+c)->getType()=='P') {
-    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,5+c));
-    		if (pa->getEnPassant()==true) return 1;
     }
-    std::cout<<"EnPassant non riconosciuto";
+    if (m.getS().x-m.getD().x!=1 and m.getS().x-m.getD().x!=-1){
+    	return 0;
+    }
+    
+
+    if (this->isFree(m.getD().x,m.getS().y)==false and this->getPiece(m.getD().x,m.getS().y)->getType()=='P') {
+    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y));
+    		if (pa->getEnPassant()==true) return 1;
+            else std::cout<<"AAA";
+    }
     return -1;
 } // detectEnPassant()
 
-void ChessBoard::resetEnPassant(){
+void ChessBoard::resetEnPassant(player p){
     for (int i=1; i<=8;i++){
         for (int j=1; j<=8; j++){
-            if (!isFree(i,j) and getPiece(i, j)->getType()=='P') {
+            if (!isFree(i,j) and getPiece(i, j)->getType()=='P' and getPiece(i,j)->getPlayer()==p) {
                     Pawn * pointer =(Pawn*)getPiece(i,j);
                     pointer->removeEnPassant();
             }
