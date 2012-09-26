@@ -35,7 +35,19 @@ struct Delta {
     Delta(){
         x=0;
         y=0;
-    }
+    };
+    
+    Delta& operator=(const Delta &rhs) {
+        x = rhs.x;
+        y = rhs.y;
+        return *this;
+    };
+    
+    bool operator==(Delta &other) const {
+        if (other.x==x and other.y==y) return true;
+        
+        else return false;
+    };
 };
 
 

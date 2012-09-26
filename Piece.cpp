@@ -20,7 +20,7 @@ Piece::~Piece() {
 bool Piece::isValid(Move m){
 	 Delta d=m.getDelta();
 	 for (int i=0; i < (int) possibleMoves.size(); i++)
-		 if (d.x==possibleMoves[i].x and d.y==possibleMoves[i].y)
+		 if (d==possibleMoves[i])
 			 return true;
 	 return false;
 } // isValid();

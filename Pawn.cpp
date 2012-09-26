@@ -13,17 +13,22 @@ Pawn::Pawn(player p) {
 	type='P';
     pla=p;
     Delta d;
-    possibleMoves.push_back(d);
-    possibleMoves.push_back(d);
+    for (int i=0;i<5;i++) possibleMoves.push_back(d);
     possibleMoves[0].x=0;
     possibleMoves[1].x=0;
+    possibleMoves[2].x=1;
+    possibleMoves[3].x=-1;
     if (pla==white) {
 		possibleMoves[0].y=+1;
 		possibleMoves[1].y=+2;
+        possibleMoves[2].y=1;
+        possibleMoves[3].y=1;
     }
     if (pla==black) {
 		possibleMoves[0].y=-1;
 		possibleMoves[1].y=-2;
+        possibleMoves[2].y=-1;
+        possibleMoves[3].y=-1;
     }
 }
 
@@ -34,8 +39,8 @@ Pawn::~Pawn() {
 bool Pawn::isValid(Move m) {
     Delta d=m.getDelta();
     std::cout<<"PAWN!"<<std::endl;
-    if (d.x==possibleMoves[0].x and d.y==possibleMoves[0].y) return true;
-    if (!(this->hasMoved()) and d.x==possibleMoves[1].x and d.y==possibleMoves[1].y) return true;
+    if (d==possibleMoves[0] or d==possibleMoves[2] or d==possibleMoves[3]) return true;
+    if (!(this->hasMoved()) and d==possibleMoves[1]) return true;
     else return false;
 }
 
