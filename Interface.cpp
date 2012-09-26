@@ -170,24 +170,25 @@ void Interface::validMove(){
 void Interface::endGame(int code){
     switch (code) {
         case 0:
-            std::cout<<"È patta."<<std::cout;
+            std::cout<<"Partita patta."<< std::endl;
             break;
         case 1:
-            std::cout<<"Scacco matto bianco."<<std::cout;
+            std::cout<<"Scacco matto, vittoria per il bianco."<< std::endl;
             break;
         case 2:
-            std::cout<<"Scacco matto nero"<<std::cout;
+            std::cout<<"Scacco matto, vittoria per il nero."<< std::endl;
             break;
         case 3:
-            std::cout<<"Bianco si ritira, vittoria nera"<<std::cout;
+            std::cout<<"Il bianco si ritira, vittoria per il nero."<< std::endl;
             break;
         case 4:
-            std::cout<<"Nero si ritira, vittoria bianca"<<std::cout;
+            std::cout<<"Il nero si ritira, vittoria nera."<< std::endl;
             break;
-            
-        
-    }
-    std::cout<<"Good game"<<std::endl;
+    } // switch
+
+    printBoard();
+
+    std::cout <<"Good game!"<< std::endl;
     
 }
 

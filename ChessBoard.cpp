@@ -114,6 +114,7 @@ bool ChessBoard::isFree(int x,int y){
  * - 9: promotion
  */
 int ChessBoard::doMove(Move m) {
+
 	cout << "entered doMove" << endl;
 
 	cout << "getting piece on source:" << m.getS().x << " " << m.getS().y << endl;
@@ -211,6 +212,9 @@ int ChessBoard::doMove(Move m) {
 
 		if (ps->getType() == 'P' and !isFree(m.getD()) and m.getS().x == m.getD().x )
 			return 4;
+
+		if (ps->getType() == 'K' and isAttacked(m.getD(), oppositePlayer()))
+			return 6;
 
 		// the path is valid
 		cout << "moving piece" << endl;
@@ -597,7 +601,7 @@ bool ChessBoard::isCheckMate(player attacker) {
 } // isCheckmate
 
 bool ChessBoard::isCheckMate(){
-    return(this->isCheck(p));
+    return(isCheckMate(p));
 }
 
 void ChessBoard::moveKing(player p, Position d){
@@ -614,9 +618,7 @@ Position ChessBoard::getKingPosition(player p){
 }
 
 bool ChessBoard::isCheck(player p){
-    player attacker;
-	if (p==white) attacker=black;
-	else attacker=white;
+    player attacker = (p == white) ? black : white;
 	
 	cout << "checking for check" << endl;
 
@@ -651,6 +653,9 @@ player ChessBoard::currentPlayer() {
 	return p;
 };
 	
+player ChessBoard::oppositePlayer() {
+	return (p == white) ? black : white;
+};
 
 	
 	

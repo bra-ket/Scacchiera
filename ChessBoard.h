@@ -34,7 +34,7 @@ public: //valutiamo quali metodi trasformare in privati
 	virtual ~ChessBoard();
 	void switchPlayer();
 	player currentPlayer();
-
+	player oppositePlayer();
 	int doMove(Move m);
 
 	bool isFree(Position a);
