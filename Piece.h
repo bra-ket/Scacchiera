@@ -27,7 +27,7 @@ public:
 	player getPlayer();
 	char getType();
 
-	void setMoved();
+	virtual void setMoved();
 	bool hasMoved();
 
     virtual bool isValid(Move m);

@@ -18,6 +18,9 @@ int main() {
 	Interface * UI = new Interface(CB);
 	int result = 0; // result of a move
 	bool checkmate = 0; // checkmate status
+    int nplayer;
+    if (CB->currentPlayer()==white) nplayer=1;
+    if (CB->currentPlayer()==black) nplayer=2;
 
 	do {
 		UI->printBoard();
@@ -25,8 +28,7 @@ int main() {
 			Move m = UI->prompt();
             Move abandon(10,10,10,10);
             Move draw(0,0,0,0);
-            if (CB->currentPlayer==white) int nplayer=1;
-            if (CB->currentPlayer==black) int nplayer=2;
+            
             if (m==abandon) UI->endGame(nplayer+2); //abbandono
             if (m==draw) UI->endGame(0); //patta
 			result = CB->doMove(m);
