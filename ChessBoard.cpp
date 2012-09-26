@@ -211,15 +211,49 @@ int ChessBoard::doMove(Move m) {
 	else
 
 	{ // normal move
+
 		cout << "normal move" << endl;
 		if (!ps->isValid(m))
 			return 4; // invalid path
 
 		if (ps->getType() == 'P' and !isFree(m.getD()) and m.getS().x == m.getD().x )
+			// the pawn can't capture on forward
 			return 4;
 
 		if (ps->getType() == 'K' and isAttacked(m.getD(), oppositePlayer()))
+			// the king can't capture a defended piece
 			return 6;
+
+		// checking for obstructed path
+
+        int dx = m.getD().x - m.getS().x; // x distance
+        int dy = m.getD().y - m.getS().y; // y distance
+        char type = getPiece(m.getS())->getType();
+
+		if ((type == 'Q' or type == 'R' or type == 'B') and (abs(dx) > 1 or abs(dy) > 1)) {
+			cout << "checking for obstructed path" << endl;
+			// (1) only queens, rooks or bishops are subject to obstructed path issues
+			// (2) no need to check if the destination is an adjacent box
+
+		    // we have to scan each box between the source and the destination
+		    // so we define a step for each coordinate, depending on the path to be scanned
+			// if either dx or dy are zero, the corresponding step is set to zero and the coordinate will be kept constant
+			int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
+			int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
+
+			int i = sx, j = sy;
+
+			do {
+				if (!isFree(m.getS().x + i, m.getS().y + j))
+						return 5;
+				i += sx;
+				j += sy;
+				// while moving on the column i == dx == 0 but j != dy
+				// while moving on the row j == dy == 0 but x != dx
+				// while moving on the diagonal j != dy and x != dx
+				// when the attacking piece's position is reached i == dx and j == dx, the cycle exits
+			} while ((i != dx) or (j != dy));
+		} // if
 
 		// the path is valid
 		cout << "moving piece" << endl;
