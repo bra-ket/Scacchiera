@@ -76,5 +76,7 @@ int main() {
 		CB->switchPlayer();
 	} while (!checkmate);
 	UI->endGame(nplayer);
+    delete CB;
+    delete UI;
 	return 0;
 } // main

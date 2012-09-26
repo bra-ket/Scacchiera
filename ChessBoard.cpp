@@ -83,7 +83,12 @@ ChessBoard::ChessBoard() {
 }
 
 ChessBoard::~ChessBoard() {
-	// TODO Auto-generated destructor stub
+	for (int i=0; i<8; i++) {
+        for (int j=0;j<8;j++){
+            delete board[i][j];
+        }
+    }
+   
 }
 
 void ChessBoard::switchPlayer() {
