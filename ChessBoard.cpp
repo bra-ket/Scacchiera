@@ -340,13 +340,12 @@ int ChessBoard::detectEnPassant(Move m) {
 		// the pawn is capturing another piece
 		return 0;
 
-	int c = (p == white) ? 1 : -1; //c=1 if white, c=-1 if black
 
-    if ( m.getS().y != 5 and m.getD().y != 5 + c)
-    	// the moving pawn is not on the fifth rank
+    if ( m.getS().y != ((p == white) ? 5 : 4) and m.getD().y != ((p == white) ? 6 : 4)) 
+    	// the moving pawn is not on the right rank
     	return 0;
 
-    if (m.getDelta().x != 1 and m.getDelta().x != -1)
+    if (abs(m.getDelta().x) != 1)
     	// the move is not a pawn capture
     	return 0;
     
