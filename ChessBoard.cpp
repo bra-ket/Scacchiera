@@ -21,8 +21,9 @@ using namespace std;
 
 ChessBoard::ChessBoard() {
 	p = white;
-	Position pKingW(5,1);
-    Position pKingB(5,8);
+	pKingW = Position(5,1);
+    pKingB = Position(5,8);
+
     for (int i=0;i<8;i++){
         for (int j=0; j<8; j++){
             board[i][j]= new Box;
@@ -196,13 +197,16 @@ int ChessBoard::doMove(Move m) {
 		cout << "moving piece" << endl;
 		movePiece(m); // moves the piece
 		cout << "piece moved" << endl;
+
 		// checks for a check status
 		if (isCheck(p)) {
 			movePiece(m.getD(), m.getS()); // reverts the move
 			putPiece(pd, m.getS()); // restores the captured piece
 			return 6;
 		} // if
+
 		cout << "checked for checks" << endl;
+
 		if (!ps->hasMoved())
 			ps->setMoved();
 		cout << "set moved" << endl;
@@ -582,6 +586,9 @@ void ChessBoard::moveKing(player p, Position d){
 }
 
 Position ChessBoard::getKingPosition(player p){
+	cout << "entered getkingposition" << endl;
+	cout << pKingW.x << " " << pKingW.y << endl;
+	cout << pKingB.x << " " << pKingB.y << endl;
 	if (p == white) return pKingW;
 	else return pKingB;
 }
@@ -591,9 +598,14 @@ bool ChessBoard::isCheck(player p){
 	if (p==white) attacker=black;
 	else attacker=white;
 	
+	cout << "checking for check" << endl;
+
 	Position kp = this->getKingPosition(p);
+
+	cout << "got king position " << kp.x << " " << kp.y <<  endl;
+
 	return (isAttacked(kp,attacker));
-	}
+} // isCheck()
 
 bool ChessBoard::simMove(Move m){
     Piece * pd = this->getPiece(m.getD());
