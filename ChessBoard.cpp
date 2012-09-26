@@ -332,6 +332,7 @@ int ChessBoard::detectCastling(Move m){
 	int nrook=0;
 	for(int i=0; i< (int)castling.size();i++){
 		if (*castling[i]==m) {
+			cout << "castling move!" << endl;
 			nrook=i+1;
 			break;
 		}
