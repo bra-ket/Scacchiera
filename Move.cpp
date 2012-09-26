@@ -7,12 +7,10 @@ Move::Move(Position ns, Position nd){
         
 					
 Move::Move(int sx, int sy, int dx, int dy){
-    Position s(sx,sy);
-    Position d(dx,dy);
-	s.x=sx;
-	s.y=sy;
-	d.x=dx;
-	d.y=dy;
+    Position _s(sx,sy);
+    Position _d(dx,dy);
+	s=_s;
+    d=_d;
 }
 
 Move::~Move(){}

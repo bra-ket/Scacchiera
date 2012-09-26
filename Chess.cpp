@@ -29,9 +29,15 @@ int main() {
             Move abandon(10,10,10,10);
             Move draw(0,0,0,0);
             
-            if (m==abandon) UI->endGame(nplayer+2); //abbandono
-            if (m==draw) UI->endGame(0); //patta
-			result = CB->doMove(m);
+            if (m==abandon) {
+                UI->endGame(nplayer+2); //abbandono
+                break;
+            }
+            if (m==draw) {
+                UI->endGame(0); //patta
+                break;
+                }
+            result = CB->doMove(m); //effettua la mossa, restituisce odice
 
 			switch (result) {
 				case 0:
@@ -39,7 +45,7 @@ int main() {
                     player other;
                     if (CB->currentPlayer()==white) other=black;
                     if (CB->currentPlayer()==black) other=white;
-                    if(CB->isCheck(other)) UI->isCheck();
+                    if(CB->isCheck(other)) UI->isCheck(); //se ha messo sotto scacco il re avversario, avvisa
 					break;
 				case 1:
 					UI->noPiece();
@@ -75,6 +81,7 @@ int main() {
 		checkmate = CB->isCheckMate();
 		CB->switchPlayer();
 	} while (!checkmate);
+    
 	UI->endGame(nplayer);
     delete CB;
     delete UI;

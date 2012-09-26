@@ -85,12 +85,12 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
         std::cout<<". Mossa: ";
         std::cin>>m;
         
-        if (m=="XXXX") {
-            Move abandon (10,10,10,10);
+        if (m.compare("XXXX")==0) {
+            Move abandon(10,10,10,10);
             return abandon;
         }//rinuncia
         
-        if (m=="0000") {
+        if (m.compare("0000")==0) {
             Move draw(0,0,0,0);
             return draw;
         }//patta
