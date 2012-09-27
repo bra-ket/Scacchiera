@@ -22,73 +22,73 @@ using namespace std;
 ChessBoard::ChessBoard() {
 	p = white;
 	pKingW = Position(5,1);
-    pKingB = Position(5,8);
+	pKingB = Position(5,8);
 
-    for (int i=0;i<8;i++){
-        for (int j=0; j<8; j++){
-            board[i][j]= new Box;
-        }
-    }
-    for (int i=1; i<9; i++) {
-        Pawn * pw = new Pawn(white);
-        Pawn * pb = new Pawn(black);
-        this->putPiece(pw, i,2);
-        this->putPiece(pb, i,7);
-    }
-    
-    Rook * r1w = new Rook(white);
-    this->putPiece(r1w, 1,1);
-    Rook * r2w = new Rook(white);
-    this->putPiece(r2w, 8,1);
-    
-    Rook * r1b = new Rook(black);
-    this->putPiece(r1b, 1,8);
-    Rook * r2b = new Rook(black);
-    this->putPiece(r2b, 8,8);
-    
-    Knight * n1w = new Knight(white);
-    this->putPiece(n1w,2,1);
-    Knight * n2w = new Knight(white);
-    this->putPiece(n2w,7,1);
-    
-    Knight * n1b = new Knight(black);
-    this->putPiece(n1b,2,8);
-    Knight * n2b = new Knight(black);
-    this->putPiece(n2b,7,8);
-    
-    Bishop * b1w = new Bishop(white);
-    this->putPiece(b1w,3,1);
-    Bishop * b2w = new Bishop(white);
-    this->putPiece(b2w,6,1);
-    
-    Bishop * b1b = new Bishop(black);
-    this->putPiece(b1b,3,8);
-    Bishop * b2b = new Bishop(black);
-    this->putPiece(b2b,6,8);
-    
-    Queen * qw = new Queen(white);
-    this->putPiece(qw, 4,1);
-    
-    Queen * qb = new Queen(black);
-    this->putPiece(qb, 4,8);
-    
-    King * kw = new King(white);
-    this->putPiece(kw,5,1);
-    
-    King * kb = new King(black);
-    this->putPiece(kb,5,8);
-    
-    
-    //TODO Generate all the pieces and alloc them
+	for (int i=0;i<8;i++){
+		for (int j=0; j<8; j++){
+			board[i][j]= new Box;
+		}
+	}
+	for (int i=1; i<9; i++) {
+		Pawn * pw = new Pawn(white);
+		Pawn * pb = new Pawn(black);
+		this->putPiece(pw, i,2);
+		this->putPiece(pb, i,7);
+	}
+
+	Rook * r1w = new Rook(white);
+	this->putPiece(r1w, 1,1);
+	Rook * r2w = new Rook(white);
+	this->putPiece(r2w, 8,1);
+
+	Rook * r1b = new Rook(black);
+	this->putPiece(r1b, 1,8);
+	Rook * r2b = new Rook(black);
+	this->putPiece(r2b, 8,8);
+
+	Knight * n1w = new Knight(white);
+	this->putPiece(n1w,2,1);
+	Knight * n2w = new Knight(white);
+	this->putPiece(n2w,7,1);
+
+	Knight * n1b = new Knight(black);
+	this->putPiece(n1b,2,8);
+	Knight * n2b = new Knight(black);
+	this->putPiece(n2b,7,8);
+
+	Bishop * b1w = new Bishop(white);
+	this->putPiece(b1w,3,1);
+	Bishop * b2w = new Bishop(white);
+	this->putPiece(b2w,6,1);
+
+	Bishop * b1b = new Bishop(black);
+	this->putPiece(b1b,3,8);
+	Bishop * b2b = new Bishop(black);
+	this->putPiece(b2b,6,8);
+
+	Queen * qw = new Queen(white);
+	this->putPiece(qw, 4,1);
+
+	Queen * qb = new Queen(black);
+	this->putPiece(qb, 4,8);
+
+	King * kw = new King(white);
+	this->putPiece(kw,5,1);
+
+	King * kb = new King(black);
+	this->putPiece(kb,5,8);
+
+
+	//TODO Generate all the pieces and alloc them
 }
 
 ChessBoard::~ChessBoard() {
 	for (int i=0; i<8; i++) {
-        for (int j=0;j<8;j++){
-            delete board[i][j];
-        }
-    }
-   
+		for (int j=0;j<8;j++){
+			delete board[i][j];
+		}
+	}
+
 }
 
 void ChessBoard::switchPlayer() {
@@ -96,7 +96,7 @@ void ChessBoard::switchPlayer() {
 } // switchPlayer
 
 bool ChessBoard::isFree(Position p) {
-    return board[p.x-1][p.y-1]->isFree();
+	return board[p.x-1][p.y-1]->isFree();
 }
 
 bool ChessBoard::isFree(int x,int y){
@@ -149,7 +149,7 @@ int ChessBoard::doMove(Move m) {
 	if (!isFree(m.getD())) {
 		cout << "destination not free" << endl;
 		if (pd->getPlayer() == p)
-				return 3; // player tries to capture an own piece
+			return 3; // player tries to capture an own piece
 	} // if
 
 	cout << "player is not trying to capture an own piece" << endl;
@@ -247,18 +247,18 @@ int ChessBoard::doMove(Move m) {
 		} // if
 
 		// checking if the path is free
-        int dx = m.getDelta().x; // x distance
-        int dy = m.getDelta().y; // y distance
+		int dx = m.getDelta().x; // x distance
+		int dy = m.getDelta().y; // y distance
 
-        char type = getPiece(m.getS())->getType(); // type of the moving piece
+		char type = getPiece(m.getS())->getType(); // type of the moving piece
 
 		if ((type == 'Q' or type == 'R' or type == 'B') and (abs(dx) > 1 or abs(dy) > 1)) {
 			cout << "checking for obstructed path" << endl;
 			// (1) only queens, rooks or bishops are subject to obstructed path issues
 			// (2) no need to check the path if the destination is an adjacent box
 
-		    // we have to scan each box between the source and the destination
-		    // so we define a step for each coordinate, depending on the path to be scanned
+			// we have to scan each box between the source and the destination
+			// so we define a step for each coordinate, depending on the path to be scanned
 			// if either dx or dy are zero, the corresponding step is set to zero and the coordinate will be kept constant
 			int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
 			int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
@@ -267,8 +267,8 @@ int ChessBoard::doMove(Move m) {
 
 			do {
 				if (!isFree(m.getS().x + i, m.getS().y + j))
-				// found an occupied box
-						return 5;
+					// found an occupied box
+					return 5;
 				i += sx;
 				j += sy;
 				// while moving on the column i == dx == 0 but j != dy
@@ -312,10 +312,10 @@ int ChessBoard::doMove(Move m) {
 		if (ps->getType() == 'P') {
 			if (abs(m.getDelta().y) == 2) {
 				// en passant capture allowed on the next turn
-                ((Pawn*)ps)->setEnPassant();
-                std::cout<<"En Passant has been set"<<std::endl;
-            } // if
-				
+				((Pawn*)ps)->setEnPassant();
+				std::cout<<"En Passant has been set"<<std::endl;
+			} // if
+
 			else if (m.getD().x == '1' or m.getD().y == '8')
 				// pawn can be promoted
 				return 9;
@@ -325,7 +325,7 @@ int ChessBoard::doMove(Move m) {
 
 
 
-    return 0; // normal move executed
+	return 0; // normal move executed
 
 } // doMove()
 
@@ -341,34 +341,34 @@ int ChessBoard::detectEnPassant(Move m) {
 		return 0;
 
 
-    if ( m.getS().y != ((p == white) ? 5 : 4) and m.getD().y != ((p == white) ? 6 : 4)) 
-    	// the moving pawn is not on the right rank
-    	return 0;
+	if ( m.getS().y != ((p == white) ? 5 : 4) and m.getD().y != ((p == white) ? 6 : 3))
+		// vertical source or destination position not coherent with an en passant capture
+		return 0;
 
-    if (abs(m.getDelta().x) != 1)
-    	// the move is not a pawn capture
-    	return 0;
-    
-    Position takenPiece(m.getD().x,m.getS().y);
-    //where could be the pawn taken
-    
-    if (this->isFree(takenPiece)==false and this->getPiece(takenPiece)->getType()=='P' and this->getPiece(takenPiece)->getPlayer()!=p) {
-    		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y)); //the pawn that could be taken
-    		if (pa->getEnPassant()==true) return 1; //taken
-    }
-    return -1; //invalid enpassant
+	if (abs(m.getDelta().x) != 1)
+		// horizontal distance between source and destination is not coherent with a pawn attack
+		return 0;
+
+	Position takenPiece(m.getD().x,m.getS().y);
+	//where could be the pawn taken
+
+	if (this->isFree(takenPiece)==false and this->getPiece(takenPiece)->getType()=='P' and this->getPiece(takenPiece)->getPlayer()!=p) {
+		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y)); //the pawn that could be taken
+		if (pa->getEnPassant()==true) return 1; //taken
+	}
+	return -1; //invalid enpassant
 } // detectEnPassant()
 
 void ChessBoard::resetEnPassant(player p){
-    for (int i=1; i<=8;i++){
-        for (int j=1; j<=8; j++){
-            if (!isFree(i,j) and getPiece(i, j)->getType()=='P' and getPiece(i,j)->getPlayer()==p) {
-                    Pawn * pointer =(Pawn*)getPiece(i,j);
-                    pointer->removeEnPassant();
-            }
-            
-        }
-    }
+	for (int i=1; i<=8;i++){
+		for (int j=1; j<=8; j++){
+			if (!isFree(i,j) and getPiece(i, j)->getType()=='P' and getPiece(i,j)->getPlayer()==p) {
+				Pawn * pointer =(Pawn*)getPiece(i,j);
+				pointer->removeEnPassant();
+			}
+
+		}
+	}
 }
 
 int ChessBoard::detectCastling(Move m){
@@ -378,7 +378,7 @@ int ChessBoard::detectCastling(Move m){
 	castling[1]=new Move(5,1,3,1);
 	castling[2]=new Move(5,8,7,8);
 	castling[3]=new Move(5,8,3,8);
-	
+
 	int nrook=0;
 
 	cout << m.getS().x << " " << m.getS().y << " " << m.getD().x << " " << m.getD().y << endl;
@@ -391,180 +391,181 @@ int ChessBoard::detectCastling(Move m){
 			break;
 		}
 	}
-    if (nrook==0) return 0; //non un arrocco
-    if(this->getPiece(m.getS())->hasMoved()) return -1; //il pezzo era già stato mosso
-	
-    switch (nrook) {
-        case 1:
-            if (this->getPiece(8,1)->hasMoved()) return -1;
-            if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black)) return -1;
-            if (!this->isFree(7,1) or !this->isFree(6,1)) return -1;
-            break;
-            
-        case 2:
-            if (this->getPiece(1,1)->hasMoved()) return -1;
-            if (this->isAttacked(3,1,black) or this->isAttacked(4,1,black) or this->isAttacked(5,1,black)) return -1;
-            if (!this->isFree(2,1) or !this->isFree(3,1) or !this->isFree(4,1)) return -1;
-            break;
-            
-        case 3:
-            if (this->getPiece(8,8)->hasMoved()) return -1;
-            if (this->isAttacked(7,8,white) or this->isAttacked(6,8,white) or this->isAttacked(5,8,white)) return -1;
-            if (!this->isFree(7,8) or !this->isFree(6,8)) return -1;
-            break;
-            
-        case 4:
-            if (this->getPiece(1,8)->hasMoved()) return -1;
-            if (this->isAttacked(3,8,white) or this->isAttacked(4,8,white) or this->isAttacked(5,8,white)) return -1;
-            if (!this->isFree(2,8) or !this->isFree(3,8) or !this->isFree(4,8)) return -1;
-            break;
-    }
-	
+	if (nrook==0) return 0; //non un arrocco
+	if(this->getPiece(m.getS())->hasMoved()) return -1; //il pezzo era già stato mosso
+
+	switch (nrook) {
+	case 1:
+		if (this->getPiece(8,1)->hasMoved()) return -1;
+		if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black)) return -1;
+		if (!this->isFree(7,1) or !this->isFree(6,1)) return -1;
+		break;
+
+	case 2:
+		if (this->getPiece(1,1)->hasMoved()) return -1;
+		if (this->isAttacked(3,1,black) or this->isAttacked(4,1,black) or this->isAttacked(5,1,black)) return -1;
+		if (!this->isFree(2,1) or !this->isFree(3,1) or !this->isFree(4,1)) return -1;
+		break;
+
+	case 3:
+		if (this->getPiece(8,8)->hasMoved()) return -1;
+		if (this->isAttacked(7,8,white) or this->isAttacked(6,8,white) or this->isAttacked(5,8,white)) return -1;
+		if (!this->isFree(7,8) or !this->isFree(6,8)) return -1;
+		break;
+
+	case 4:
+		if (this->getPiece(1,8)->hasMoved()) return -1;
+		if (this->isAttacked(3,8,white) or this->isAttacked(4,8,white) or this->isAttacked(5,8,white)) return -1;
+		if (!this->isFree(2,8) or !this->isFree(3,8) or !this->isFree(4,8)) return -1;
+		break;
+	}
+
 	for (int i=0; i<4; i++) delete castling[i];
-    
+
 	return nrook;
 }
 
 bool ChessBoard::isAttacked(Position p, player attacker) {
-    vector<Position> atcPos = getAttackingPositions(p, attacker);
-    if (atcPos.size() > 0)
-        return true;
-    else
-        return false;
+	vector<Position> atcPos = getAttackingPositions(p, attacker);
+	if (atcPos.size() > 0)
+		return true;
+	else
+		return false;
 } // isAttacked
 
 vector<Position> ChessBoard::getAttackingPositions(Position p, player attacker) {
-        vector<Position> positions;
+	vector<Position> positions;
 
-    	if ( isValid(p.x + 1, p.x + 2)
-    			and !isFree(p.x + 1, p.y + 2)
-    			and getPiece(p.x + 1, p.y + 2)->getType()=='N'
-    			and getPiece(p.x + 1, p.y + 2)->getPlayer() == attacker )
-			positions.push_back(Position(p.x + 1, p.x + 2));
-    	if ( isValid(p.x + 1, p.y - 2)
-    			and !isFree(p.x + 1, p.y - 2)
-    			and getPiece(p.x + 1, p.y - 2)->getType()=='N'
-    			and getPiece(p.x + 1, p.y - 2)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x + 1, p.y - 2));
-    	if ( isValid(p.x - 1, p.y + 2)
-    			and !isFree(p.x - 1, p.y + 2)
-    			and getPiece(p.x - 1, p.y + 2)->getType()=='N'
-    			and getPiece(p.x - 1, p.y + 2)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x - 1, p.y + 2));
-    	if ( isValid(p.x - 1, p.y - 2)
-    			and !isFree(p.x - 1, p.y - 2)
-    			and getPiece(p.x - 1, p.y - 2)->getType()=='N'
-    			and getPiece(p.x - 1, p.y - 2)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x - 1, p.y - 2));
-    	if ( isValid(p.x + 2, p.y + 1)
-    			and !isFree(p.x + 2, p.y + 1)
-    			and getPiece(p.x + 2, p.y + 1)->getType()=='N'
-    			and getPiece(p.x + 2, p.y + 1)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x + 2, p.y + 1));
-    	if ( isValid(p.x + 2, p.y - 1)
-    			and !isFree(p.x + 2, p.y - 1)
-    			and getPiece(p.x + 2, p.y - 1)->getType()=='N'
-    			and getPiece(p.x + 2, p.y - 1)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x + 2, p.y - 1));
-    	if ( isValid(p.x - 2, p.y + 1)
-    			and !isFree(p.x - 2, p.y + 1)
-    			and getPiece(p.x - 2, p.y + 1)->getType()=='N'
-    			and getPiece(p.x - 2, p.y + 1)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x - 2, p.y + 1));
-    	if ( isValid(p.x - 2, p.y - 1)
-    			and !isFree(p.x - 2, p.y - 1)
-    			and getPiece(p.x - 2, p.y - 1)->getType()=='N'
-    			and getPiece(p.x - 2, p.y - 1)->getPlayer() == attacker )
-    		positions.push_back(Position(p.x - 2, p.y - 1));
+	// checks from attacks from knights
+	if ( isValid(p.x + 1, p.x + 2)
+			and !isFree(p.x + 1, p.y + 2)
+			and getPiece(p.x + 1, p.y + 2)->getType()=='N'
+					and getPiece(p.x + 1, p.y + 2)->getPlayer() == attacker )
+		positions.push_back(Position(p.x + 1, p.x + 2));
+	if ( isValid(p.x + 1, p.y - 2)
+			and !isFree(p.x + 1, p.y - 2)
+			and getPiece(p.x + 1, p.y - 2)->getType()=='N'
+					and getPiece(p.x + 1, p.y - 2)->getPlayer() == attacker )
+		positions.push_back(Position(p.x + 1, p.y - 2));
+	if ( isValid(p.x - 1, p.y + 2)
+			and !isFree(p.x - 1, p.y + 2)
+			and getPiece(p.x - 1, p.y + 2)->getType()=='N'
+					and getPiece(p.x - 1, p.y + 2)->getPlayer() == attacker )
+		positions.push_back(Position(p.x - 1, p.y + 2));
+	if ( isValid(p.x - 1, p.y - 2)
+			and !isFree(p.x - 1, p.y - 2)
+			and getPiece(p.x - 1, p.y - 2)->getType()=='N'
+					and getPiece(p.x - 1, p.y - 2)->getPlayer() == attacker )
+		positions.push_back(Position(p.x - 1, p.y - 2));
+	if ( isValid(p.x + 2, p.y + 1)
+			and !isFree(p.x + 2, p.y + 1)
+			and getPiece(p.x + 2, p.y + 1)->getType()=='N'
+					and getPiece(p.x + 2, p.y + 1)->getPlayer() == attacker )
+		positions.push_back(Position(p.x + 2, p.y + 1));
+	if ( isValid(p.x + 2, p.y - 1)
+			and !isFree(p.x + 2, p.y - 1)
+			and getPiece(p.x + 2, p.y - 1)->getType()=='N'
+					and getPiece(p.x + 2, p.y - 1)->getPlayer() == attacker )
+		positions.push_back(Position(p.x + 2, p.y - 1));
+	if ( isValid(p.x - 2, p.y + 1)
+			and !isFree(p.x - 2, p.y + 1)
+			and getPiece(p.x - 2, p.y + 1)->getType()=='N'
+					and getPiece(p.x - 2, p.y + 1)->getPlayer() == attacker )
+		positions.push_back(Position(p.x - 2, p.y + 1));
+	if ( isValid(p.x - 2, p.y - 1)
+			and !isFree(p.x - 2, p.y - 1)
+			and getPiece(p.x - 2, p.y - 1)->getType()=='N'
+					and getPiece(p.x - 2, p.y - 1)->getPlayer() == attacker )
+		positions.push_back(Position(p.x - 2, p.y - 1));
 
 
-        // checks from attacks from pawns
-        int dY = (attacker == white) ? 1 : -1;
-        if ( isValid(p.x + 1, p.y + dY)
-                        and !isFree(p.x + 1, p.y + dY)
-                        and getPiece(p.x + 1, p.y + dY)->getType()=='P'
-                        and getPiece(p.x + 1, p.x - dY)->getPlayer() == attacker )
-        	positions.push_back(Position(p.x + 1, p.y + dY));
-        if ( isValid(p.x - 1, p.y + dY)
-                        and !isFree(p.x - 1, p.y + dY)
-                        and getPiece(p.x - 1, p.y + dY)->getType()=='P'
-                        and getPiece(p.x - 1, p.x - dY)->getPlayer() == attacker )
-        	positions.push_back(Position(p.x - 1, p.y + dY));
+	// checks from attacks from pawns
+	int dY = (attacker == white) ? 1 : -1;
+	if ( isValid(p.x + 1, p.y + dY)
+			and !isFree(p.x + 1, p.y + dY)
+			and getPiece(p.x + 1, p.y + dY)->getType()=='P'
+			and getPiece(p.x + 1, p.x - dY)->getPlayer() == attacker )
+		positions.push_back(Position(p.x + 1, p.y + dY));
+	if ( isValid(p.x - 1, p.y + dY)
+			and !isFree(p.x - 1, p.y + dY)
+			and getPiece(p.x - 1, p.y + dY)->getType()=='P'
+			and getPiece(p.x - 1, p.x - dY)->getPlayer() == attacker )
+		positions.push_back(Position(p.x - 1, p.y + dY));
 
-        // checks for attacks from the King
-        // this could be included as a special case in the code which checks
-        // for attacks from the column, row, and diagonals but it's cleaner
-        // to do it in a separate block
-        Position q = getKingPosition(attacker);
-        if (       ( abs(p.x - q.x) == 1 and (p.y - q.y) == 1 ) // adjacent on a diagonal
-                        or ( abs(p.x - q.x) == 1 and (p.y - q.y) == 0 ) // adjacent on the row
-                        or ( abs(p.x - q.x) == 0 and (p.y - q.y) == 1 ) // adjacent on the column
-                ) // the attacker's king is on an adjacent cell
-        	positions.push_back(q);
+	// checks for attacks from the king
+	// this could be included as a special case in the code which checks
+	// for attacks from the column, row, and diagonals but it's cleaner
+	// to do it in a separate block
+	Position q = getKingPosition(attacker);
+	if (       ( abs(p.x - q.x) == 1 and (p.y - q.y) == 1 ) // adjacent on a diagonal
+			or ( abs(p.x - q.x) == 1 and (p.y - q.y) == 0 ) // adjacent on the row
+			or ( abs(p.x - q.x) == 0 and (p.y - q.y) == 1 ) // adjacent on the column
+	) // the attacker's king is on an adjacent cell
+		positions.push_back(q);
 
-        // checks for attacks from the column
-        for (int i = p.y + 1; i <= 8; i++)
-                if ( !isFree(p.x, i) ) {
-                	if (getPiece(p.x, i)->getPlayer() == attacker and (getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
-                		positions.push_back(Position(p.x, i));
-                	break;
-                } // if
-        for (int i = p.y - 1; i >= 1; i--)
-                if ( !isFree(p.x, i)) {
-                	if (getPiece(p.x, i)->getPlayer() == attacker and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
-                		positions.push_back(Position(p.x, i));
-                	break;
-                } // if
-        // checks for attacks from the row
-        for (int i = p.x + 1; i <= 8; i++)
-                if ( !isFree(i, p.y)) {
-                	if ( getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ))
-                		positions.push_back(Position(i, p.y));
-                	break;
-                } // if
-        for (int i = p.x - 1; i >= 1; i--)
-                if ( !isFree(i, p.y)) {
-                	if (getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
-                		positions.push_back(Position(i, p.y));
-					break;
-                } // if
+	// checks for attacks from rooks or queens on the column
+	for (int i = p.y + 1; i <= 8; i++)
+		if ( !isFree(p.x, i) ) {
+			if (getPiece(p.x, i)->getPlayer() == attacker and (getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
+				positions.push_back(Position(p.x, i));
+			break;
+		} // if
+	for (int i = p.y - 1; i >= 1; i--)
+		if ( !isFree(p.x, i)) {
+			if (getPiece(p.x, i)->getPlayer() == attacker and ( getPiece(p.x, i)->getType() == 'R' or getPiece(p.x, i)->getType() == 'Q' ))
+				positions.push_back(Position(p.x, i));
+			break;
+		} // if
+	// checks for attacks from rooks or queens on the rank
+	for (int i = p.x + 1; i <= 8; i++)
+		if ( !isFree(i, p.y)) {
+			if ( getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ))
+				positions.push_back(Position(i, p.y));
+			break;
+		} // if
+	for (int i = p.x - 1; i >= 1; i--)
+		if ( !isFree(i, p.y)) {
+			if (getPiece(i, p.y)->getPlayer() == attacker and ( getPiece(i, p.y)->getType() == 'R' or getPiece(i, p.y)->getType() == 'Q' ) )
+				positions.push_back(Position(i, p.y));
+			break;
+		} // if
 
-        // checks for attacks from the NE-SW diagonal
-        for (int i = 1; i <= min(8 - p.x, 8 - p.y); i++)
-                if ( !isFree(p.x + i, p.y + i)) {
-                	if (getPiece(p.x + i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x + i, p.y + i)->getType() == 'B' or getPiece(p.x + i, p.y + i)->getType() == 'Q' ) )
-                		positions.push_back(Position(p.x + i, p.y + i));
-                	break;
-                } // if
-        for (int i = 1; i <= min(p.x - 1, p.y - 1); i++)
-                if ( !isFree(p.x - i, p.y - i)) {
-                	if (getPiece(p.x - i, p.y - i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y - i)->getType() == 'B' or getPiece(p.x - i, p.y - i)->getType() == 'Q' ) )
-                		positions.push_back(Position(p.x - i, p.y - 1));
-                	break;
-                } // if
-        // checks for attacks from the NW-SE diagonal
-        for (int i = 1; i <= min(p.x - 1, 8 - p.y); i++)
-                if ( !isFree(p.x - i, p.y + i)) {
-                	if (getPiece(p.x - i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y + i)->getType() == 'B' or getPiece(p.x - i, p.y + i)->getType() == 'Q' ) )
-                		positions.push_back(Position(p.x - i, p.y + i));
-                	break;
-                } // if
-        for (int i = 1; i <= min(8 - p.x, p.y - 1); i++)
-                if ( !isFree(p.x + 1, p.y - 1)) {
-                	if (getPiece(p.x + 1, p.y - 1)->getPlayer() == attacker and ( getPiece(p.x + 1, p.y - 1)->getType() == 'B' or getPiece(p.x + 1, p.y - 1)->getType() == 'Q' ) )
-                		positions.push_back(Position(p.x + 1, p.y - 1));
-                	break;
-                } // if
+	// checks for attacks from bishops or queens on the NE-SW diagonal
+	for (int i = 1; i <= min(8 - p.x, 8 - p.y); i++)
+		if ( !isFree(p.x + i, p.y + i)) {
+			if (getPiece(p.x + i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x + i, p.y + i)->getType() == 'B' or getPiece(p.x + i, p.y + i)->getType() == 'Q' ) )
+				positions.push_back(Position(p.x + i, p.y + i));
+			break;
+		} // if
+	for (int i = 1; i <= min(p.x - 1, p.y - 1); i++)
+		if ( !isFree(p.x - i, p.y - i)) {
+			if (getPiece(p.x - i, p.y - i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y - i)->getType() == 'B' or getPiece(p.x - i, p.y - i)->getType() == 'Q' ) )
+				positions.push_back(Position(p.x - i, p.y - 1));
+			break;
+		} // if
+	// checks for attacks from bishops or queens on the NW-SE diagonal
+	for (int i = 1; i <= min(p.x - 1, 8 - p.y); i++)
+		if ( !isFree(p.x - i, p.y + i)) {
+			if (getPiece(p.x - i, p.y + i)->getPlayer() == attacker and ( getPiece(p.x - i, p.y + i)->getType() == 'B' or getPiece(p.x - i, p.y + i)->getType() == 'Q' ) )
+				positions.push_back(Position(p.x - i, p.y + i));
+			break;
+		} // if
+	for (int i = 1; i <= min(8 - p.x, p.y - 1); i++)
+		if ( !isFree(p.x + 1, p.y - 1)) {
+			if (getPiece(p.x + 1, p.y - 1)->getPlayer() == attacker and ( getPiece(p.x + 1, p.y - 1)->getType() == 'B' or getPiece(p.x + 1, p.y - 1)->getType() == 'Q' ) )
+				positions.push_back(Position(p.x + 1, p.y - 1));
+			break;
+		} // if
 
-        return positions;
+	return positions;
 
-} // checkAttackedPositions()
+} // getAttackedPositions()
 
 bool ChessBoard::isAttacked(int x, int y, player attacker){
-    Position p;
-    p.x=x;
-    p.y=y;
-    return(this->isAttacked(p,attacker));
+	Position p;
+	p.x=x;
+	p.y=y;
+	return(this->isAttacked(p,attacker));
 }
 
 void ChessBoard::movePiece(Position s, Position d) {
@@ -575,7 +576,7 @@ void ChessBoard::movePiece(Position s, Position d) {
 
 void ChessBoard::movePiece(int sx,int sy,int dx, int dy) {
 	Position s(sx,sy),d(dx,dy);
-    this->movePiece(s,d);
+	this->movePiece(s,d);
 } // movePiece
 
 void ChessBoard::movePiece(Move m){
@@ -589,23 +590,23 @@ void ChessBoard::putPiece(Piece * pc, Position ps) {
 } // putPiece()
 
 void ChessBoard::putPiece(Piece * pc, int x, int y){
-    Position p(x,y);
-    this->putPiece(pc, p);
+	Position p(x,y);
+	this->putPiece(pc, p);
 }
 
 Piece * ChessBoard::getPiece(int x, int y) {
-    Position p(x,y);
+	Position p(x,y);
 	return (this->getPiece(p));
 } // getPiece
 
 Piece * ChessBoard::getPiece (Position a) {
-    if (!board[a.x-1][a.y-1]->isFree())
+	if (!board[a.x-1][a.y-1]->isFree())
 		return (board[a.x-1][a.y-1]->getPiece());
 	else return NULL;
 }
 
 void ChessBoard::emptyBox(Position p){
-    board[p.x-1][p.y-1]->empty();
+	board[p.x-1][p.y-1]->empty();
 } // emptyBox
 
 void ChessBoard::emptyBox(int x, int y){
@@ -618,87 +619,110 @@ bool ChessBoard::isValid(int x, int y) {
 } // isValid
 
 bool ChessBoard::isCheckMate(player attacker) {
-        player defender = (attacker == white) ? black : white;
+	player defender = (attacker == white) ? black : white;
 
-        Position kp = this->getKingPosition(defender);
+	Position kp = this->getKingPosition(defender);
 
-        // checks if the king is attacked
-        if (!isAttacked(kp, attacker))
-                // the king is not under attack
-                return false;
-        // isvalid!
-        // checks if the king can move
-        if (            ( isValid(kp.x, kp.y + 1)       and ( isFree(kp.x, kp.y + 1)            or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker            )       and !isAttacked(kp.x, kp.y + 1, attacker)       ) // N
-                        or      ( isValid(kp.x + 1, kp.y + 1) and ( isFree(kp.x + 1, kp.y + 1)  or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y + 1, attacker)   ) // NE
-                        or      ( isValid(kp.x + 1, kp.y)       and ( isFree(kp.x + 1, kp.y)            or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x + 1, kp.y, attacker)               ) // E
-                        or      ( isValid(kp.x + 1, kp.y - 1) and ( isFree(kp.x + 1, kp.y - 1)  or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y - 1, attacker)   ) // SE
-                        or      ( isValid(kp.x, kp.y -1)                and ( isFree(kp.x, kp.y - 1)            or getPiece(kp.x, kp.y -1)->getPlayer() == attacker             )       and !isAttacked(kp.x, kp.y - 1, attacker)               ) // S
-                        or  ( isValid(kp.x - 1, kp.y -1)        and ( isFree(kp.x - 1, kp.y -1) or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker )       and !isAttacked(kp.x - 1, kp.y - 1, attacker)   ) // SW
-                        or  ( isValid(kp.x - 1, kp.y)   and ( isFree(kp.x - 1, kp.y)            or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x - 1, kp.y, attacker)               ) // W
-                        or  ( isValid(kp.x - 1, kp.y + 1)       and ( isFree(kp.x - 1, kp.y + 1)        or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x - 1, kp.y + 1, attacker)   ) // NW
-                )
-                        // the king can move on at least one adjacent box
-                        return false;
+	// checks if the king is attacked
+	if (!isAttacked(kp, attacker))
+		// the king is not under attack
+		return false;
+	// isvalid!
+	// checks if the king can move
+	if (            ( isValid(kp.x, kp.y + 1)       and ( isFree(kp.x, kp.y + 1)            or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker            )       and !isAttacked(kp.x, kp.y + 1, attacker)       ) // N
+			or      ( isValid(kp.x + 1, kp.y + 1) and ( isFree(kp.x + 1, kp.y + 1)  or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y + 1, attacker)   ) // NE
+			or      ( isValid(kp.x + 1, kp.y)       and ( isFree(kp.x + 1, kp.y)            or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x + 1, kp.y, attacker)               ) // E
+			or      ( isValid(kp.x + 1, kp.y - 1) and ( isFree(kp.x + 1, kp.y - 1)  or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y - 1, attacker)   ) // SE
+			or      ( isValid(kp.x, kp.y -1)                and ( isFree(kp.x, kp.y - 1)            or getPiece(kp.x, kp.y -1)->getPlayer() == attacker             )       and !isAttacked(kp.x, kp.y - 1, attacker)               ) // S
+			or  ( isValid(kp.x - 1, kp.y -1)        and ( isFree(kp.x - 1, kp.y -1) or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker )       and !isAttacked(kp.x - 1, kp.y - 1, attacker)   ) // SW
+			or  ( isValid(kp.x - 1, kp.y)   and ( isFree(kp.x - 1, kp.y)            or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x - 1, kp.y, attacker)               ) // W
+			or  ( isValid(kp.x - 1, kp.y + 1)       and ( isFree(kp.x - 1, kp.y + 1)        or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x - 1, kp.y + 1, attacker)   ) // NW
+	)
+		// the king can move on at least one adjacent box
+		return false;
 
-        vector<Position> atcPos = getAttackingPositions(kp, attacker);
+	vector<Position> atcPos = getAttackingPositions(kp, attacker);
 
-        if (atcPos.size() > 1)
-                // multiple attack, since the king can't move this is a checkmate situation
-                return true;
+	if (atcPos.size() > 1)
+		// multiple attack, since the king can't move this is a checkmate situation
+		return true;
 
-        // single attack, may not be a checkmate situation
-        Position ap = atcPos[0];
-        int dx = ap.x - kp.x; // x distance
-        int dy = ap.y - kp.y; // y distance
+	// single attack, may not be a checkmate situation
+	Position ap = atcPos[0];
+	int dx = ap.x - kp.x; // x distance
+	int dy = ap.y - kp.y; // y distance
 
-        if ((getPiece(ap)->getType() != 'N') and (abs(dx) > 1 or abs(dy) > 1)) {
-                // the attack may be shielded if
-                // (1) the attacker is not a knight
-                // (2) there is at least one space between the attacker and the king
+	if ((getPiece(ap)->getType() != 'N') and (abs(dx) > 1 or abs(dy) > 1)) {
+		// the attack may be shielded if
+		// (1) the attacker is not a knight
+		// (2) there is at least one space between the attacker and the king
 
 
-                // we have to scan each box between the attacker and the king
-                // so we define a step for each coordinate, depending on the path to be scanned
-                // if either dx or dy are zero, the corresponding step is set to zero and the coordinate will be kept constant
-                int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
-                int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
+		// we have to scan each box between the attacker and the king
+		// so we define a step for each coordinate, depending on the path to be scanned
+		// if either dx or dy are zero, the corresponding step is set to zero and the coordinate will be kept constant
+		int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
+		int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
 
-                int i = sx, j = sy;
+		int i = sx, j = sy;
 
-                do {
-                    if (isAttacked(ap.x + i, ap.y + j, defender)) {
-                        // the position is reachable from at least one defender's piece, but it may be pinned
-                        vector<Position> ps = getAttackingPositions(Position(ap.x + i, ap.y + j), defender);
-                        for (int k = 0; k < (int)ps.size(); k++)
-                            if (simMove(Move(ps[k], Position(ap.x + i, ap.y + j))))
-                                // the attack can be shielded
-                                return false;
-                    } // if
+		do {
+			if (isAttacked(ap.x + i, ap.y + j, defender)) {
+				// the position is reachable from at least one defender's piece, but it may be pinned
+				vector<Position> ps = getAttackingPositions(Position(ap.x + i, ap.y + j), defender);
+				for (int k = 0; k < (int)ps.size(); k++)
+					if (simMove(Move(ps[k], Position(ap.x + i, ap.y + j))))
+						// the attack can be shielded
+						return false;
+			} // if
 
-                    i += sx;
-                    j += sy;
+			i += sx;
+			j += sy;
 
-                // while moving on the column i == dx == 0 but j != dy
-                // while moving on the row j == dy == 0 but x != dx
-                // while moving on the diagonal j != dy and x != dx
-                // when the attacking piece's position is reached i == dx and j == dx, the cycle exits
-                } while ((i != dx) or (j != dy));
-        } // if
+			// while moving on the column i == dx == 0 but j != dy
+			// while moving on the row j == dy == 0 but x != dx
+			// while moving on the diagonal j != dy and x != dx
+			// when the attacking piece's position is reached i == dx and j == dx, the cycle exits
+		} while ((i != dx) or (j != dy));
+	} // if
 
-        // the attack can't be shielded
-        // the only remaining possibility is that the attacking piece can be taken
-        // the case in which the piece can be taken by the king itself is managed in the first if-block
-        vector<Position> ps = getAttackingPositions(Position(ap), defender);
-        for (int k = 0; k < (int)ps.size(); k++)
-            if (simMove(Move(ps[k], ap)))
-            	// the attacker can be taken
-                return false;
+	// the attack can't be shielded
+	// the only remaining possibility is that the attacking piece can be captured
 
-        return true;
+	// the case in which the piece can be taken by the king itself is managed in the first if-block
+
+	// the case in which the attacking piece is a pawn that can be captured en passant has to be managed separately
+	if (getPiece(ap)->getType() == 'P' and ((Pawn*) getPiece(ap))->getEnPassant()) {
+		// the pawn could be taken enPassant
+		bool sim_r = false;
+		bool sim_l = false;
+
+		Piece* pd = getPiece(ap); // stores the captured pawn
+		emptyBox(ap); // empties the captured piece's position
+		if (!isFree(ap.x + 1, ap.y) and getPiece(ap.x + 1, ap.y)->getPlayer() == defender and getPiece(ap.x + 1, ap.y)->getType() == 'P')
+			// possible capture from the right
+			sim_r = simMove(Move(ap.x + 1, ap.y, ap.x, ap.y - ((attacker == white) ? 1 : -1))); // simulates the capture
+		if (!isFree(ap.x - 1, ap.y) and getPiece(ap.x - 1, ap.y)->getPlayer() == defender and getPiece(ap.x - 1, ap.y)->getType() == 'P')
+			// possible capture from the left
+			sim_l = simMove(Move(ap.x - 1, ap.y, ap.x, ap.y - ((attacker == white) ? 1 : -1))); // simulates the capture
+		putPiece(pd, ap); // restores the captured piece
+		if (sim_r or sim_l)
+			// the attacker pawn can be captured en passant
+			return false;
+	} // if
+
+	vector<Position> ps = getAttackingPositions(ap, defender);
+
+	for (int k = 0; k < (int)ps.size(); k++)
+		if (simMove(Move(ps[k], ap)))
+			// the attacker can be taken
+			return false;
+
+	return true;
 } // isCheckmate
 
 bool ChessBoard::isCheckMate(){
-    return(isCheckMate(p));
+	return(isCheckMate(p));
 }
 
 void ChessBoard::moveKing(player p, Position d){
@@ -715,8 +739,8 @@ Position ChessBoard::getKingPosition(player p){
 }
 
 bool ChessBoard::isCheck(player p){
-    player attacker = (p == white) ? black : white;
-	
+	player attacker = (p == white) ? black : white;
+
 	cout << "checking for check" << endl;
 
 	Position kp = this->getKingPosition(p);
@@ -727,17 +751,17 @@ bool ChessBoard::isCheck(player p){
 } // isCheck()
 
 bool ChessBoard::simMove(Move m){
-    Piece * pd = this->getPiece(m.getD());
-    movePiece(m); //moves
-    bool check=this->isCheck(p); //checks
-    movePiece(m.getD(), m.getS()); //reverts
-    if (pd!=0) putPiece(pd, m.getS()); //restores eventual taken piece
-    return check;
-	
+	Piece * pd = this->getPiece(m.getD());
+	movePiece(m); //moves
+	bool check=this->isCheck(p); //checks
+	movePiece(m.getD(), m.getS()); //reverts
+	if (pd!=0) putPiece(pd, m.getS()); //restores eventual taken piece
+	return check;
+
 }
 
 void ChessBoard::promote(Position p, char type){ //condition already checked
-    Piece* piece=NULL;
+	Piece* piece=NULL;
 	if (type=='B') piece = new Bishop (this->p);
 	if (type=='N') piece = new Knight (this->p);
 	if (type=='Q') piece = new Queen (this->p);
@@ -749,10 +773,10 @@ void ChessBoard::promote(Position p, char type){ //condition already checked
 player ChessBoard::currentPlayer() {
 	return p;
 };
-	
+
 player ChessBoard::oppositePlayer() {
 	return (p == white) ? black : white;
 };
 
-	
+
 	

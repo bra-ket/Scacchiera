@@ -1,3 +1,0 @@
-Cerca di sistemare bene la cosa dei pezzi (quindi con l'opportuna dichiarazione dell'array possibile moves etc.)
-
-inizia a predisporre il metodo per il controllo dell'en passant
