@@ -94,7 +94,6 @@ int main() {
 
 				case 9:
 					// player got a pawn promoted
-                    std::cout<<"TRE"<<std::endl;
 					char type = UI->getPromotionType();
 					if (type !='X')
 						// the player actually wants to promote the pawn

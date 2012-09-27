@@ -62,8 +62,8 @@ char Interface::getPromotionType(){
 	bool ok=false;
     char m;
 	do {
-		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere";
-		std::cin.get(m);
+		std::cout<<"Promuovi? B per alfiere, Q per regina, N per cavallo, R per torre, X per non promuovere"<<std::endl;
+		cin>>m;
 		if (m=='b') m='B';
 		if (m=='q') m='Q';
 		if (m=='n') m='N';
