@@ -13,66 +13,10 @@ Interface::Interface(ChessBoard * board) {
     cb=board; //alla fine è l'unica cosa che deve fare
 }
 
-Interface::~Interface() {
+Interface::~Interface(){
+    
 }
 
-void Interface::printBoard() {
-        Position p;
-
-       // prints x coordinates
-        std::cout << "  ";
-        for (char c = 'a'; c <= 'h'; c++)
-        	std::cout << "  " << c << "  ";
-        std::cout << endl;
-
-        // prints the upper horizontal row
-        std::cout << "  ";
-        for (int j = 0; j < 8; j++)
-            std::cout << " ____";
-        std::cout << endl;
-
-
-        for (int i = 8; i >= 1; i--) {
-        		std::cout << i << " ";
-
-                // prints the left column element
-                std::cout << "|";
-
-                for (int j = 1; j < 9; j++) {
-                    // horizontal scan
-
-
-                    if (cb->isFree(j,i)==true)
-                        std::cout << "    " << "|"; // se la casella è vuota printa uno zero
-                    else {
-                        if (cb->getPiece(j,i)->getPlayer()== white)
-                            std::cout << " W"; // se è il pezzo è bianco
-                        else std::cout << " B"; // se è il pezzo è nero
-
-                        std::cout << cb->getPiece(j,i)->getType() << " |"; // se c'è un pezzo printa il char del tipo di pezzo
-
-
-                    } // else
-
-                } // for
-
-                std::cout << " " << i;
-
-                std::cout << std::endl;
-
-                std::cout << "  ";
-
-                for (int j = 1; j < 9; j++)
-                    std::cout << "|____";
-                std::cout << "|" << std::endl;
-        } // for
-
-        // prints x coordinates
-        std::cout << "  ";
-        for (char c = 'a'; c <= 'h'; c++)
-        	std::cout << "  " << c << "  ";
-        std::cout << endl;
-} // printBoard()
 
 Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     std::string m;
@@ -186,7 +130,7 @@ void Interface::endGame(int code){
             break;
     } // switch
 
-    printBoard();
+    std::cout<<*cb<<std::endl;
 
     std::cout <<"Good game!"<< std::endl;
     

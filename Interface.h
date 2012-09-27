@@ -22,7 +22,6 @@ class Interface {
 		Interface(ChessBoard * board);
 		virtual ~Interface();
 		Move prompt();
-		void printBoard(); // prints the current state of the chessboard
         void noPiece(); // prints an invalid move notice
         void wrongPlayer();
         void selfCapture();
