@@ -1,9 +1,3 @@
-/*
- * UI.cpp
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
 
 #include "Interface.h"
 
@@ -89,7 +83,7 @@ char Interface::getPromotionType(){
 }
 
 void Interface::noPiece(){
-	std::cout<<"Quella casella è vuota. Riprovare."<<std::endl;
+	std::cout<<"Non c'è nessun pezzo da spostare. Riprovare."<<std::endl;
 }
 
 void Interface::validMove(){

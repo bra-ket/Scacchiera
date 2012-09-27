@@ -1,9 +1,4 @@
-/*
- * Piece.cpp
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
+
 
 #include "Piece.h"
 #include <iostream>

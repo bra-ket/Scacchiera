@@ -1,9 +1,3 @@
-/*
- * Rook.h
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #ifndef ROOK_H_
 #define ROOK_H_

@@ -1,9 +1,4 @@
-/*
- * Interface.h
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
+
 
 #ifndef INTERFACE_H_
 #define INTERFACE_H_

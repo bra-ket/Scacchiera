@@ -1,10 +1,3 @@
-/*
- * ChessBoard.cpp
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
-
 
 #include "Box.h"
 #include "Move.h"
@@ -290,7 +283,7 @@ int ChessBoard::doMove(Move m) {
 	} // else
 
 
-
+    delete pd; //deletes taken piece
 	return 0; // normal move executed
 
 } // doMove()

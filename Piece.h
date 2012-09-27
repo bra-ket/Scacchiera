@@ -1,9 +1,3 @@
-/*
- * Piece.h
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
 
 #ifndef PIECE_H_
 #define PIECE_H_

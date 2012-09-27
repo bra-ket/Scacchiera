@@ -1,9 +1,3 @@
-/*
- * Queen.cpp
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #include "Queen.h"
 

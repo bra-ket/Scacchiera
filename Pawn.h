@@ -1,9 +1,3 @@
-/*
- * Pawn.h
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #ifndef PAWN_H_
 #define PAWN_H_

@@ -1,9 +1,3 @@
-/*
- * King.h
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #ifndef KING_H_
 #define KING_H_

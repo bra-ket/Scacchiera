@@ -1,10 +1,3 @@
-/*
- * structures.h
- *
- *  Created on: 16/giu/2012
- *      Author: massimiliano
- */
-
 #ifndef STRUCTURES_H_
 #define STRUCTURES_H_
 

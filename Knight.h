@@ -1,9 +1,4 @@
-/*
- * Knight.h
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
+
 
 #ifndef KNIGHT_H_
 #define KNIGHT_H_

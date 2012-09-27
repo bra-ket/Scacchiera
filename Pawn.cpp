@@ -1,9 +1,3 @@
-/*
- * Pawn.cpp
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #include "Pawn.h"
 #include <iostream>

@@ -1,9 +1,3 @@
-/*
- * Queen.h
- *
- *  Created on: 20/lug/2012
- *      Author: massimiliano
- */
 
 #ifndef QUEEN_H_
 #define QUEEN_H_
