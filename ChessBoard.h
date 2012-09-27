@@ -77,6 +77,66 @@ public:
 	bool isCheck(player p);
 	bool isFree(int x, int y);
 	Piece * getPiece(int x, int y);
+    
+    friend ostream& operator<<(ostream& out,  ChessBoard& cb) // output
+    {
+        Position p;
+        
+        // prints x coordinates
+        out << "  ";
+        for (char c = 'a'; c <= 'h'; c++)
+        out << "  " << c << "  ";
+        out << endl;
+        
+        // prints the upper horizontal row
+        out << "  ";
+        for (int j = 0; j < 8; j++)
+        out << " ____";
+        out << endl;
+        
+        
+        for (int i = 8; i >= 1; i--) {
+            out << i << " ";
+            
+            // prints the left column element
+            out << "|";
+            
+            for (int j = 1; j < 9; j++) {
+                // horizontal scan
+                
+                
+                if (cb.isFree(j,i)==true)
+                    out << "    " << "|"; // se la casella è vuota printa uno zero
+                else {
+                    if (cb.getPiece(j,i)->getPlayer()== white)
+                        out << " W"; // se è il pezzo è bianco
+                    else out << " B"; // se è il pezzo è nero
+                    
+                    out << cb.getPiece(j,i)->getType() << " |"; // se c'è un pezzo printa il char del tipo di pezzo
+                    
+                    
+                } // else
+                
+            } // for
+            
+            out << " " << i;
+            
+            out << std::endl;
+            
+            out << "  ";
+            
+            for (int j = 1; j < 9; j++)
+                out << "|____";
+            out << "|" << std::endl;
+        } // for
+        
+        // prints x coordinates
+        out << "  ";
+        for (char c = 'a'; c <= 'h'; c++)
+        out << "  " << c << "  ";
+        out << endl;
+        return out;
+    }
 
 }; // ChessBoard()
 
