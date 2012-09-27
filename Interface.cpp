@@ -10,7 +10,7 @@
 int lettertonumber(char l);
 
 Interface::Interface(ChessBoard * board) {
-    cb=board; //alla fine è l'unica cosa che deve fare
+    cb=board; 
 }
 
 Interface::~Interface(){
@@ -88,18 +88,6 @@ char Interface::getPromotionType(){
 	
 }
 
-int lettertonumber(char l) { //converte la lettera nella coordinata
-    if (l=='a') return 1;
-    if (l=='b') return 2;
-    if (l=='c') return 3;
-    if (l=='d') return 4;
-    if (l=='e') return 5;
-    if (l=='f') return 6;
-    if (l=='g') return 7;
-    if (l=='h') return 8;
-    return -1;
-}
-
 void Interface::noPiece(){
 	std::cout<<"Quella casella è vuota. Riprovare."<<std::endl;
 }
@@ -166,4 +154,16 @@ void Interface::isCheck(){
     if (cb->currentPlayer()==white) std::cout<<"NERO";
     if (cb->currentPlayer()==black) std::cout<<"BIANCO";
     std::cout<<"."<<std::endl;
+}
+
+int lettertonumber(char l) { //converte la lettera nella coordinata
+    if (l=='a') return 1;
+    if (l=='b') return 2;
+    if (l=='c') return 3;
+    if (l=='d') return 4;
+    if (l=='e') return 5;
+    if (l=='f') return 6;
+    if (l=='g') return 7;
+    if (l=='h') return 8;
+    return -1;
 }

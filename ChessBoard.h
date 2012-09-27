@@ -53,8 +53,6 @@ private:
     // -1: presa en passant non permessa
     // 0: non e` una presa en passant
     // 1: e` una presa en passant valida
-    // pensa a come implementare il logging delle mosse perche` qui ci serve
-    // in linea di massima io farei una classe apposta per la singola entry che contenga la Move e l'eventuale pezzo preso
     bool isAttacked(Position p, player attacker);
     bool isAttacked(int x, int y, player attacker);
 	bool isCheckMate(player p);

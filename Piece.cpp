@@ -16,14 +16,6 @@ Piece::~Piece(){
     
 }
 
-bool Piece::isValid(Move m){
-	 Delta d=m.getDelta();
-	 for (int i=0; i < (int) possibleMoves.size(); i++)
-		 if (d==possibleMoves[i])
-			 return true;
-	 return false;
-} // isValid();
-
 
 char Piece::getType() {
 	return type;
@@ -41,3 +33,12 @@ void Piece::setMoved(){
 bool Piece::hasMoved(){
 	return moved;
 }
+
+
+bool Piece::isValid(Move m){
+    Delta d=m.getDelta();
+    for (int i=0; i < (int) possibleMoves.size(); i++)
+        if (d==possibleMoves[i])
+            return true;
+    return false;
+} // isValid();
