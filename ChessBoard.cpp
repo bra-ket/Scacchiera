@@ -120,43 +120,23 @@ bool ChessBoard::isFree(int x,int y){
  */
 int ChessBoard::doMove(Move m) {
 
-	cout << "entered doMove" << endl;
-
-	cout << "getting piece on source:" << m.getS().x << " " << m.getS().y << endl;
-
-	Piece * ps = this->getPiece(m.getS()); // content on the source position
-
-	cout << "got piece on source " << ps << endl;
-
-	cout << "getting piece on destination:" << m.getD().x << " " << m.getD().y << endl;
+    Piece * ps = this->getPiece(m.getS()); // content on the source position
 
 	Piece * pd = this->getPiece(m.getD()); // content on the destination position
 
-	cout << "got piece on destination " << pd << endl;
-
 	if (isFree(m.getS())) {
-		cout << "doMove returning 1" << endl;
 		return 1; // empty source position
 	}
-
-	cout << "source not free" << endl;
 
 	if (ps->getPlayer() != p)
 		return 2; // player tries to move an opponent's piece
 
-	cout << "player is moving an own piece" << endl;
-
 	if (!isFree(m.getD())) {
-		cout << "destination not free" << endl;
 		if (pd->getPlayer() == p)
 			return 3; // player tries to capture an own piece
 	} // if
 
-	cout << "player is not trying to capture an own piece" << endl;
-
 	int castling = detectCastling(m);
-
-	cout << "detected castling?" << endl;
 
 	if (castling) {
 		switch (castling) {
@@ -196,11 +176,8 @@ int ChessBoard::doMove(Move m) {
 	} // if
 
 	// detects and manages an "en passant" capture
-	cout << "detect enpassant" << endl;
 
 	int enps = detectEnPassant(m);
-
-	cout << "detected enpassant: " << enps << endl;
 
 	if (enps) {
 		switch (enps) {
@@ -222,8 +199,6 @@ int ChessBoard::doMove(Move m) {
 	else
 
 	{ // normal move
-
-		cout << "normal move" << endl;
 
 		// checking if the path is allowed for the piece
 		if (!ps->isValid(m))
@@ -253,7 +228,6 @@ int ChessBoard::doMove(Move m) {
 		char type = getPiece(m.getS())->getType(); // type of the moving piece
 
 		if ((type == 'Q' or type == 'R' or type == 'B') and (abs(dx) > 1 or abs(dy) > 1)) {
-			cout << "checking for obstructed path" << endl;
 			// (1) only queens, rooks or bishops are subject to obstructed path issues
 			// (2) no need to check the path if the destination is an adjacent box
 
@@ -279,19 +253,16 @@ int ChessBoard::doMove(Move m) {
 		} // if
 
 		// the path is valid
-		cout << "moving piece" << endl;
 		movePiece(m); // moves the piece
 
 		// if the moved piece is a king, updates its position
 		if (ps->getType() == 'K')
 			moveKing(p, m.getD());
 
-		cout << "piece moved" << endl;
 
 		// checks for a check status
 		if (isCheck(p)) {
 			// check! rollbacks the move
-			cout << "check!" << endl;
 			movePiece(m.getD(), m.getS()); // reverts the move
 			putPiece(pd, m.getD()); // restores the captured piece
 			if (ps->getType() == 'K')
@@ -299,26 +270,21 @@ int ChessBoard::doMove(Move m) {
 			return 6;
 		} // if
 
-		cout << "checked for checks" << endl;
 
 		if (!ps->hasMoved())
 			ps->setMoved();
-		cout << "set moved" << endl;
 		resetEnPassant(this->oppositePlayer());
-		cout << "reset enps" << endl;
-
-
+        
 		// checking for special cases about pawns
 		if (ps->getType() == 'P') {
 			if (abs(m.getDelta().y) == 2) {
 				// en passant capture allowed on the next turn
 				((Pawn*)ps)->setEnPassant();
-				std::cout<<"En Passant has been set"<<std::endl;
 			} // if
-
-			else if (m.getD().x == '1' or m.getD().y == '8')
+            
+			if (m.getD().y == 1 or m.getD().y == 8) return 9;
 				// pawn can be promoted
-				return 9;
+				
 		} // if
 
 	} // else
@@ -372,7 +338,6 @@ void ChessBoard::resetEnPassant(player p){
 }
 
 int ChessBoard::detectCastling(Move m){
-	cout << "detecting castling" << endl;
 	std::vector<Move *> castling(4);
 	castling[0]=new Move(5,1,7,1);
 	castling[1]=new Move(5,1,3,1);
@@ -381,12 +346,8 @@ int ChessBoard::detectCastling(Move m){
 
 	int nrook=0;
 
-	cout << m.getS().x << " " << m.getS().y << " " << m.getD().x << " " << m.getD().y << endl;
-
 	for(int i=0; i< (int)castling.size();i++){
-		cout << (*castling[i]).getS().x << " " << (*castling[i]).getS().y << " " << (*castling[i]).getD().x << " " << (*castling[i]).getD().y << endl;
 		if (*castling[i]==m) {
-			cout << "castling move!" << endl;
 			nrook=i+1;
 			break;
 		}
@@ -569,7 +530,6 @@ bool ChessBoard::isAttacked(int x, int y, player attacker){
 }
 
 void ChessBoard::movePiece(Position s, Position d) {
-	cout << "emtpying " << s.x << " " << s.y << endl;
 	putPiece(getPiece(s), d);
 	emptyBox(s);
 } // movePiece
@@ -731,9 +691,6 @@ void ChessBoard::moveKing(player p, Position d){
 }
 
 Position ChessBoard::getKingPosition(player p){
-	cout << "entered getkingposition" << endl;
-	cout << pKingW.x << " " << pKingW.y << endl;
-	cout << pKingB.x << " " << pKingB.y << endl;
 	if (p == white) return pKingW;
 	else return pKingB;
 }
@@ -741,11 +698,8 @@ Position ChessBoard::getKingPosition(player p){
 bool ChessBoard::isCheck(player p){
 	player attacker = (p == white) ? black : white;
 
-	cout << "checking for check" << endl;
 
 	Position kp = this->getKingPosition(p);
-
-	cout << "got king position " << kp.x << " " << kp.y <<  endl;
 
 	return (isAttacked(kp,attacker));
 } // isCheck()

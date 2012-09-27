@@ -8,13 +8,12 @@
 #include "Piece.h"
 #include <iostream>
 
-Piece::Piece() {
-	// TODO Auto-generated constructor stub
+Piece::Piece(){
 
 }
 
-Piece::~Piece() {
-	// TODO Auto-generated destructor stub
+Piece::~Piece(){
+    
 }
 
 bool Piece::isValid(Move m){
@@ -37,7 +36,6 @@ player Piece::getPlayer() {
 
 void Piece::setMoved(){
 	moved=true;
-    std::cout<<"IL PEZZO È MOSSO "<<moved<<std::endl;
 }
 
 bool Piece::hasMoved(){

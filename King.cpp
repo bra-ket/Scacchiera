@@ -31,9 +31,6 @@ King::King(player p) {
  
 }
 
-King::~King() {
-	// TODO Auto-generated destructor stub
-}
 
 
 

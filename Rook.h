@@ -15,7 +15,6 @@
 class Rook: public Piece {
 public:
 	Rook(player p);
-	virtual ~Rook();
 };
 
 #endif /* ROOK_H_ */

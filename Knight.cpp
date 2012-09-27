@@ -30,8 +30,3 @@ Knight::Knight(player p) {
 	type='N';
     pl=p;
 }
-
-Knight::~Knight() {
-	// TODO Auto-generated destructor stub
-}
-

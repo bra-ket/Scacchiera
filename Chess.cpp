@@ -2,11 +2,13 @@
 #include "ChessBoard.h"
 
 int main() {
+
 	// creating the chessboard
 	ChessBoard * CB = new ChessBoard();
 
 	// creating the interface
 	Interface * UI = new Interface(CB);
+
 
 
 	int outcome = 0; // result of the move
@@ -92,6 +94,7 @@ int main() {
 
 				case 9:
 					// player got a pawn promoted
+                    std::cout<<"TRE"<<std::endl;
 					char type = UI->getPromotionType();
 					if (type !='X')
 						// the player actually wants to promote the pawn

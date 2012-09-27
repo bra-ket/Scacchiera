@@ -33,9 +33,6 @@ Queen::Queen(player p) {
 		}
 }
 
-Queen::~Queen() {
-	// TODO Auto-generated destructor stub
-}
 
 
 

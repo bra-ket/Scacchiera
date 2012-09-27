@@ -27,7 +27,3 @@ Rook::Rook(player p) {
 
 }
 
-Rook::~Rook() {
-	// TODO Auto-generated destructor stub
-}
-

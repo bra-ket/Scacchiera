@@ -14,7 +14,6 @@
 class Queen: public Piece {
 public:
 	Queen(player p);
-	virtual ~Queen();
 };
 
 #endif /* QUEEN_H_ */

@@ -32,9 +32,6 @@ Pawn::Pawn(player p) {
     }
 }
 
-Pawn::~Pawn() {
-	// TODO Auto-generated destructor stub
-}
 
 bool Pawn::isValid(Move m) {
     Delta d=m.getDelta();

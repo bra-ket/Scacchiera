@@ -15,7 +15,6 @@
 class King: public Piece {
 public:
 	King(player p);
-	virtual ~King();
 };
 
 #endif /* KING_H_ */
