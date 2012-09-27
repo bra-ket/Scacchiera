@@ -9,10 +9,10 @@ class Pawn: public Piece {
 
 public:
 	Pawn(player p);
-    bool isValid(Move m);
-    bool getEnPassant();
-	void setEnPassant();
-    void removeEnPassant();
+    bool isValid(Move m); // checks if m is a valid move for the Pawn
+    bool getEnPassant(); // returns true if the pawn can be captured en-passant
+	void setEnPassant(); // flags the pawn when it can be captured en-passant
+    void removeEnPassant(); // removes the flag
 };
 
 #endif /* PAWN_H_ */

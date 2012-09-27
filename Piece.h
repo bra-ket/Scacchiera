@@ -18,12 +18,20 @@ protected:
 public:
 	Piece();
 	virtual ~Piece();
+
+	// returns owner player
 	player getPlayer();
+
+	// returns type ID
 	char getType();
 
+	// sets the piece as moved
 	virtual void setMoved();
+
+	// returns true if the piece has moved before, false otherwise
 	bool hasMoved();
 
+	// virtual to allow late-binding
     virtual bool isValid(Move m);
 };
 

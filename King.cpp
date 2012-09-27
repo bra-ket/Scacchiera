@@ -5,6 +5,7 @@ King::King(player p) {
 	type='K';
     pl=p;
     Delta d;
+    // creating array of possible moves
     for (int i=0; i<8; i++) possibleMoves.push_back(d);
     possibleMoves[0].x=1;
     possibleMoves[0].y=1;

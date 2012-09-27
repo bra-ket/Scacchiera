@@ -5,6 +5,7 @@ Queen::Queen(player p) {
 	type='Q';
     pl=p;
     Delta d;
+    // creating array of possible mvoes
     for (int i=0; i<56; i++) possibleMoves.push_back(d);
     for (int i=1; i<8; i++) {
 		int j=8*(i-1);

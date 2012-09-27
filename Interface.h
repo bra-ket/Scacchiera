@@ -15,7 +15,6 @@ class Interface {
 
 	public:
 		Interface(ChessBoard * board);
-		virtual ~Interface();
 		Move prompt();
         void noPiece(); // prints an invalid move notice
         void wrongPlayer();

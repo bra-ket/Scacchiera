@@ -12,13 +12,13 @@ Pawn::Pawn(player p) {
     possibleMoves[1].x=0;
     possibleMoves[2].x=1;
     possibleMoves[3].x=-1;
-    if (pl==white) { //il pedone bianco può solo andare avanti
+    if (pl==white) { // white pawn can move only towards the top
 		possibleMoves[0].y=+1;
 		possibleMoves[1].y=+2;
         possibleMoves[2].y=1;
         possibleMoves[3].y=1;
     }
-    if (pl==black) { //il nero solo indietro
+    if (pl==black) { // black pawn can move only towards the bottom
 		possibleMoves[0].y=-1;
 		possibleMoves[1].y=-2;
         possibleMoves[2].y=-1;
@@ -31,7 +31,7 @@ bool Pawn::isValid(Move m) {
     Delta d=m.getDelta();
     if (d==possibleMoves[0] or d==possibleMoves[2] or d==possibleMoves[3]) return true;
     if (!(this->hasMoved()) and d==possibleMoves[1]) return true;
-    //mossa doppia richiede che non si sia mai mosso
+    // can't move of two if it's not the first move
     else return false;
 }
 

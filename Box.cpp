@@ -1,11 +1,13 @@
 #include "Box.h"
 
 Box::Box() {
-	free = true; //in the beginning, the box is free
+	// the box is created free
+	free = true;
 } // Box()
 
 Box::~Box() {
-	if (!free) //if it's not free delete the piece on it
+	// if the box is not free, deletes the piece on it
+	if (!free)
 		delete p;
 } // ~Box()
 
@@ -15,20 +17,28 @@ bool Box::isFree() {
 
 Piece* Box::getPiece () {
 	if (!free)
+		// returns the pointer to the piece
 		return p;
 	else
-		return 0; //if it's free, pointer to null
+		// if the box is free, returns a null pointer
+		return 0;
+
 } // getPiece()
 
 void Box::putPiece(Piece* q) {
+	// assigns the pointer
 	p = q; 
+	// set the status
 	if (q != NULL)
 		free = false;
-	else //if it's null pointer, the box is still free
+	else
+		// null pointer, the box is still free
 		free = true;
 } // putPiece()
 
 void Box::empty() {
-	p = NULL; //only change the pointer to null, the piece could be still living on some other boxes
-	free = true; //the box is again free
+	// piece is not destroyed
+	p = NULL;
+	// updating status
+	free = true;
 } // emtpy();

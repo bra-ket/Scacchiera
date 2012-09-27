@@ -2,10 +2,12 @@
 #include "Rook.h"
 
 Rook::Rook(player p) {
+	// creating array of possible moves
     type='R';
     pl=p;
     Delta d;
-    for (int i=0; i<28; i++) possibleMoves.push_back(d);
+    for (int i=0; i<28; i++)
+    	possibleMoves.push_back(d);
     for (int i=1; i<8; i++) {
 		int j=4*(i-1);
 		possibleMoves[j].x=i;
@@ -16,7 +18,7 @@ Rook::Rook(player p) {
     	possibleMoves[j+2].y=0;
     	possibleMoves[j+3].x=0;
     	possibleMoves[j+3].y=+i;
-		}
+	} // for
 
 
 }

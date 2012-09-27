@@ -25,8 +25,8 @@ Delta Move::getDelta(){
 	  
 Position Move::getS(){
 	return s;
-	}
+}
 
 Position Move::getD(){
 	return d;
-	}
+}

@@ -1,16 +1,11 @@
 
 #include "Interface.h"
 
-int lettertonumber(char l);
+int lettertonumber(char l); // converts an x coordinate letter to the corresponding number
 
 Interface::Interface(ChessBoard * board) {
-    cb=board; 
-}
-
-Interface::~Interface(){
-    
-}
-
+    cb = board;
+} // Interface
 
 Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
     std::string m;
@@ -24,29 +19,29 @@ Move Interface::prompt(){ //presumiamo un formato es. "a4b3"
         std::cin>>m;
         
         if (m.compare("XXXX")==0) {
-            Move abandon(10,10,10,10); //fake move just to notify of abandon 
+            Move abandon(10,10,10,10); //fake move just to notify a withdrawal
             return abandon;
-        }//abandon
+        } // withdrawal
         
         if (m.compare("0000")==0) {
-            Move draw(0,0,0,0); //fake move just to notify of draw 
+            Move draw(0,0,0,0); //fake move just to notify a draw
             return draw;
-        }//draw
+        } //draw
         
         check=true;
-        if (m.size()!=4) check=false; //string lenght
+
+        if (m.size()!=4) check=false; //string length
         
         else if (m[0]!='a' and m[0]!='b' and m[0]!='c' and m[0]!='d' and m[0]!='e' and m[0]!='f' and m[0]!='g' and m[0]!='h') check=false;
         else if (atoi(&m[1])>8 or atoi(&m[1])<1) check=false;
         else if (m[2]!='a' and m[2]!='b' and m[2]!='c' and m[2]!='d' and m[2]!='e' and m[2]!='f' and m[2]!='g' and m[2]!='h') check=false;
         else if (atoi(&m[3])>8 or atoi(&m[3])<1) check=false;
-        //check if string is valid 
+        // check if the string is valid
         
         if (check==false) std::cout<<"Mossa in formato non valido (es. a2a4). Riprovare."<<std::endl;
-        //if it's not ok, redo
+        // string not valid, ask again
 
     }
-        
         
     Position in,fin;
     in.x=lettertonumber(m[0]);
@@ -150,7 +145,7 @@ void Interface::isCheck(){
     std::cout<<"."<<std::endl;
 }
 
-int lettertonumber(char l) { //converte la lettera nella coordinata
+int lettertonumber(char l) {
     if (l=='a') return 1;
     if (l=='b') return 2;
     if (l=='c') return 3;

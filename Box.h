@@ -13,10 +13,10 @@ public:
 	Box();
 	virtual ~Box();
 
-	// returns true if the box is free
+	// returns true if the box is free, false otherwise
 	bool isFree();
 
-	// returns the content of the box, if any, otherwise returns
+	// returns the content of the box, if any, otherwise returns null
 	Piece * getPiece();
 
 	// puts the piece referenced by q in the box

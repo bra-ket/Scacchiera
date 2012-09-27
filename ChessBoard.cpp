@@ -1,34 +1,28 @@
-
-#include "Box.h"
-#include "Move.h"
 #include "ChessBoard.h"
-#include "Pawn.h"
-#include "structures.h"
-#include "Knight.h"
-#include "Queen.h"
-#include "Rook.h"
-#include "Bishop.h"
-#include "King.h"
+
 
 using namespace std;
 
 ChessBoard::ChessBoard() {
-	p = white;
+	cpl = white;
 	pKingW = Position(5,1);
 	pKingB = Position(5,8);
 
-	for (int i=0;i<8;i++){
-		for (int j=0; j<8; j++){
-			board[i][j]= new Box;
-		}
-	}
+	for (int i = 0; i < 8; i++){
+		for (int j = 0; j < 8; j++)
+			// creating boxes
+			board[i][j] = new Box;
+	} // for
+
+	// creating pawns
 	for (int i=1; i<9; i++) {
 		Pawn * pw = new Pawn(white);
 		Pawn * pb = new Pawn(black);
 		this->putPiece(pw, i,2);
 		this->putPiece(pb, i,7);
-	}
+	} // for
 
+	// creating rooks
 	Rook * r1w = new Rook(white);
 	this->putPiece(r1w, 1,1);
 	Rook * r2w = new Rook(white);
@@ -39,6 +33,7 @@ ChessBoard::ChessBoard() {
 	Rook * r2b = new Rook(black);
 	this->putPiece(r2b, 8,8);
 
+	// creating knights
 	Knight * n1w = new Knight(white);
 	this->putPiece(n1w,2,1);
 	Knight * n2w = new Knight(white);
@@ -49,6 +44,7 @@ ChessBoard::ChessBoard() {
 	Knight * n2b = new Knight(black);
 	this->putPiece(n2b,7,8);
 
+	// creating bishops
 	Bishop * b1w = new Bishop(white);
 	this->putPiece(b1w,3,1);
 	Bishop * b2w = new Bishop(white);
@@ -59,12 +55,14 @@ ChessBoard::ChessBoard() {
 	Bishop * b2b = new Bishop(black);
 	this->putPiece(b2b,6,8);
 
+	// creating queens
 	Queen * qw = new Queen(white);
 	this->putPiece(qw, 4,1);
 
 	Queen * qb = new Queen(black);
 	this->putPiece(qb, 4,8);
 
+	// creating kings
 	King * kw = new King(white);
 	this->putPiece(kw,5,1);
 
@@ -72,117 +70,114 @@ ChessBoard::ChessBoard() {
 	this->putPiece(kb,5,8);
 
 
-	//TODO Generate all the pieces and alloc them
-}
+
+} // ChessBoard
 
 ChessBoard::~ChessBoard() {
-	for (int i=0; i<8; i++) {
-		for (int j=0;j<8;j++){
+	// deleting boxes
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++)
 			delete board[i][j];
-		}
-	}
+	} // for
 
-}
+} // ~ChessBoard
 
 void ChessBoard::switchPlayer() {
-	p = (p == white ? black : white);
+	cpl = (cpl == white ? black : white);
 } // switchPlayer
 
 bool ChessBoard::isFree(Position p) {
+	// array indexes are one unit less than each coordinate
 	return board[p.x-1][p.y-1]->isFree();
-}
+} // isFree
 
 bool ChessBoard::isFree(int x,int y){
 	Position a(x,y);
-	return (this->isFree(a));
+	return (isFree(a));
 } // isFree()
 
-
-/* performs a move on the chessboard
- * return values:
- * - 0: valid move
- * - 1: no piece to move
- * - 2: player tries to move an opponent's piece
- * - 3: player tries to capture an own piece
- * - 4: invalid move due to invalid path
- * - 5: invalid move due to obstructed path
- * - 6: check on the player's move
- * - 7: castling not allowed
- * - 8: en passant not allowed
- * - 9: promotion
- */
 int ChessBoard::doMove(Move m) {
 
-    Piece * ps = this->getPiece(m.getS()); // content on the source position
+    Piece * ps = this->getPiece(m.getS()); // content of the source position
 
-	Piece * pd = this->getPiece(m.getD()); // content on the destination position
+	Piece * pd = this->getPiece(m.getD()); // content of the destination position
 
 	if (isFree(m.getS())) {
-		return 1; // empty source position
-	}
-
-	if (ps->getPlayer() != p)
-		return 2; // player tries to move an opponent's piece
-
-	if (!isFree(m.getD())) {
-		if (pd->getPlayer() == p)
-			return 3; // player tries to capture an own piece
+		// source position is emtpy
+		return 1;
 	} // if
 
+	if (ps->getPlayer() != cpl)
+		// player tries to move an opponent's piece
+		return 2;
+
+	if (!isFree(m.getD())) {
+		if (pd->getPlayer() == cpl)
+			// player tries to move onto an own piece
+			return 3;
+	} // if
+
+	// test the Move for castlings
 	int castling = detectCastling(m);
 
 	if (castling) {
+		// the Move is a castling
 		switch (castling) {
 		case -1:
+			// now allowed
 			return 7;
 		case 1:
 			// white right
 			movePiece(m);
 			movePiece(8,1,6,1); // moves the white tower to the right
-			getPiece(6,1)->setMoved();
+			getPiece(6,1)->setMoved(); // sets the rook as moved
 			break;
 		case 2:
 			// white left
 			movePiece(m);
 			movePiece(1,1,4,1); // moves the white tower to the left
-			getPiece(4,1)->setMoved();
+			getPiece(4,1)->setMoved(); // sets the rook as moved
 			break;
 		case 3:
 			// black right
 			movePiece(m);
 			movePiece(1,8,4,8); // moves the black tower to the right
-			getPiece(4,8)->setMoved();
+			getPiece(4,8)->setMoved(); // sets the rook as moved
 			break;
 		case 4:
 			// black left
 			movePiece(m);
 			movePiece(8,8,6,8); // moves the black tower to the left
-			getPiece(6,8)->setMoved();
+			getPiece(6,8)->setMoved(); // sets the rook as moved
 			break;
 		} // switch
 
+		// sets the King as moved and updates its position
 		getPiece(m.getD())->setMoved();
+		moveKing(cpl, m.getD());
 
-		moveKing(p, m.getD());
-
+		// regular move
 		return 0;
 	} // if
 
-	// detects and manages an "en passant" capture
-
+	// tests for an en-passant capture
 	int enps = detectEnPassant(m);
 
 	if (enps) {
+		// en-passant capture detected
 		switch (enps) {
 		case -1:
+			// now allowed
 			return 8;
 		case 1:
+			// allowed
 			movePiece(m); // moves the attacker's pawn
 			pd = getPiece(m.getD().x, m.getS().y); // stores the captured pawn
 			emptyBox(m.getD().x, m.getS().y); // empties the captured position
-			if (isCheck(p)) {
-				movePiece(m.getD(), m.getS()); // reverts the attacker's move
-				putPiece(pd, m.getD().x, m.getS().y); // restore the captured piece
+			if (isCheck(cpl)) {
+				// check on the player's king, rollbacking the move
+				movePiece(m.getD(), m.getS()); // reverting the attacker's move
+				putPiece(pd, m.getD().x, m.getS().y); // restoring the captured piece
 				return 6;
 			} // if
 			break;
@@ -208,9 +203,9 @@ int ChessBoard::doMove(Move m) {
 				// the pawn can't move on diagonal if it's not capturing
 				return 4;
 
-			int step = (p == white) ? 1 : -1;
+			int step = (cpl == white) ? 1 : -1;
 			if (m.getDelta().y == 2 and !isFree(m.getS().x, m.getS().y + step))
-				// the pawn tries to move of two but the path blocked
+				// the pawn tries to move of two but the path is blocked
 				return 6;
 		} // if
 
@@ -230,6 +225,7 @@ int ChessBoard::doMove(Move m) {
 			int sx = (dx == 0) ? 0 : ((dx > 0) ? 1 : -1);
 			int sy = (dy == 0) ? 0 : ((dy > 0) ? 1 : -1);
 
+			// starting with the adjacent box
 			int i = sx, j = sy;
 
 			do {
@@ -241,7 +237,7 @@ int ChessBoard::doMove(Move m) {
 				// while moving on the column i == dx == 0 but j != dy
 				// while moving on the row j == dy == 0 but x != dx
 				// while moving on the diagonal j != dy and x != dx
-				// when the attacking piece's position is reached i == dx and j == dx, the cycle exits
+				// when the destination position is reached i == dx and j == dx, the cycle exits
 			} while ((i != dx) or (j != dy));
 		} // if
 
@@ -250,41 +246,45 @@ int ChessBoard::doMove(Move m) {
 
 		// if the moved piece is a king, updates its position
 		if (ps->getType() == 'K')
-			moveKing(p, m.getD());
-
+			moveKing(cpl, m.getD());
 
 		// checks for a check status
-		if (isCheck(p)) {
-			// check! rollbacks the move
+		if (isCheck(cpl)) {
+			// player's under check, rollbacking the move
 			movePiece(m.getD(), m.getS()); // reverts the move
 			putPiece(pd, m.getD()); // restores the captured piece
 			if (ps->getType() == 'K')
-				moveKing(p, m.getS());
+				// restores the previous king position
+				moveKing(cpl, m.getS());
 			return 6;
 		} // if
 
-
+		// updating moved flag
 		if (!ps->hasMoved())
 			ps->setMoved();
+
+		// resetting en-passant flags
 		resetEnPassant(this->oppositePlayer());
         
-		// checking for special cases about pawns
+		// special cases for the pawn
 		if (ps->getType() == 'P') {
 			if (abs(m.getDelta().y) == 2) {
+				// moved of two
 				// en passant capture allowed on the next turn
 				((Pawn*)ps)->setEnPassant();
 			} // if
             
-			if (m.getD().y == 1 or m.getD().y == 8) return 9;
+			if (m.getD().y == 1 or m.getD().y == 8)
 				// pawn can be promoted
+				return 9;
 				
 		} // if
 
 	} // else
 
 
-    delete pd; //deletes taken piece
-	return 0; // normal move executed
+    delete pd; // deletes the captured piece, if any
+	return 0; // regular move
 
 } // doMove()
 
@@ -300,7 +300,7 @@ int ChessBoard::detectEnPassant(Move m) {
 		return 0;
 
 
-	if ( m.getS().y != ((p == white) ? 5 : 4) and m.getD().y != ((p == white) ? 6 : 3))
+	if ( m.getS().y != ((cpl == white) ? 5 : 4) and m.getD().y != ((cpl == white) ? 6 : 3))
 		// vertical source or destination position not coherent with an en passant capture
 		return 0;
 
@@ -308,51 +308,72 @@ int ChessBoard::detectEnPassant(Move m) {
 		// horizontal distance between source and destination is not coherent with a pawn attack
 		return 0;
 
-	Position takenPiece(m.getD().x,m.getS().y);
-	//where could be the pawn taken
+	// possible position of the attacked pawn
+	Position takenPiece(m.getD().x, m.getS().y);
 
-	if (this->isFree(takenPiece)==false and this->getPiece(takenPiece)->getType()=='P' and this->getPiece(takenPiece)->getPlayer()!=p) {
-		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y)); //the pawn that could be taken
-		if (pa->getEnPassant()==true) return 1; //taken
-	}
-	return -1; //invalid enpassant
+	if (this->isFree(takenPiece) == false and this->getPiece(takenPiece)->getType()=='P' and this->getPiece(takenPiece)->getPlayer() != cpl) {
+		// the pawn is on the right place for an en-passant capture
+		Pawn * pa = (Pawn *)(this->getPiece(m.getD().x,m.getS().y));
+
+		if (pa->getEnPassant() == true)
+			// the pawn can actually be taken
+			return 1; //taken
+	} // if
+
+	return -1;
+	//invalid enpassant
 } // detectEnPassant()
 
 void ChessBoard::resetEnPassant(player p){
-	for (int i=1; i<=8;i++){
-		for (int j=1; j<=8; j++){
+	for (int i = 1; i <= 8;i++){
+		for (int j = 1; j <= 8; j++){
 			if (!isFree(i,j) and getPiece(i, j)->getType()=='P' and getPiece(i,j)->getPlayer()==p) {
 				Pawn * pointer =(Pawn*)getPiece(i,j);
 				pointer->removeEnPassant();
-			}
+			} // if
 
-		}
-	}
-}
+		} // for
+	} // for
+} // resetEnPassant
 
 int ChessBoard::detectCastling(Move m){
 	std::vector<Move *> castling(4);
+
+	// possible castling moves
 	castling[0]=new Move(5,1,7,1);
 	castling[1]=new Move(5,1,3,1);
 	castling[2]=new Move(5,8,7,8);
 	castling[3]=new Move(5,8,3,8);
 
-	int nrook=0;
+	int nrook = 0;
 
-	for(int i=0; i< (int)castling.size();i++){
+	for(int i = 0; i< (int)castling.size(); i++) {
 		if (*castling[i]==m) {
-			nrook=i+1;
+			nrook = i+1;
 			break;
-		}
-	}
-	if (nrook==0) return 0; //non un arrocco
-	if(this->getPiece(m.getS())->hasMoved()) return -1; //il pezzo era già stato mosso
+		} // if
+	} // for
+
+	if (nrook == 0)
+		// not a castling
+		return 0;
+
+	if(this->getPiece(m.getS())->hasMoved())
+		// king has moved before
+		return -1;
 
 	switch (nrook) {
 	case 1:
-		if (this->getPiece(8,1)->hasMoved()) return -1;
-		if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black)) return -1;
-		if (!this->isFree(7,1) or !this->isFree(6,1)) return -1;
+		if (this->getPiece(8,1)->hasMoved())
+			// rook has moved before
+			return -1;
+		if (this->isAttacked(7,1,black) or this->isAttacked(6,1,black) or this->isAttacked(5,1,black))
+			// the king's path is attacked
+			return -1;
+
+		if (!this->isFree(7,1) or !this->isFree(6,1))
+			// the king's path is obstructed
+			return -1;
 		break;
 
 	case 2:
@@ -372,16 +393,18 @@ int ChessBoard::detectCastling(Move m){
 		if (this->isAttacked(3,8,white) or this->isAttacked(4,8,white) or this->isAttacked(5,8,white)) return -1;
 		if (!this->isFree(2,8) or !this->isFree(3,8) or !this->isFree(4,8)) return -1;
 		break;
-	}
+	} // switch
 
-	for (int i=0; i<4; i++) delete castling[i];
+	for (int i=0; i<4; i++)
+		delete castling[i];
 
 	return nrook;
-}
+} // detectEnPassant
 
 bool ChessBoard::isAttacked(Position p, player attacker) {
 	vector<Position> atcPos = getAttackingPositions(p, attacker);
 	if (atcPos.size() > 0)
+		// at least one attack on p by attacker
 		return true;
 	else
 		return false;
@@ -582,14 +605,43 @@ bool ChessBoard::isCheckMate(player attacker) {
 		return false;
 	// isvalid!
 	// checks if the king can move
-	if (            ( isValid(kp.x, kp.y + 1)       and ( isFree(kp.x, kp.y + 1)            or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker            )       and !isAttacked(kp.x, kp.y + 1, attacker)       ) // N
-			or      ( isValid(kp.x + 1, kp.y + 1) and ( isFree(kp.x + 1, kp.y + 1)  or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y + 1, attacker)   ) // NE
-			or      ( isValid(kp.x + 1, kp.y)       and ( isFree(kp.x + 1, kp.y)            or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x + 1, kp.y, attacker)               ) // E
-			or      ( isValid(kp.x + 1, kp.y - 1) and ( isFree(kp.x + 1, kp.y - 1)  or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker        )       and !isAttacked(kp.x + 1, kp.y - 1, attacker)   ) // SE
-			or      ( isValid(kp.x, kp.y -1)                and ( isFree(kp.x, kp.y - 1)            or getPiece(kp.x, kp.y -1)->getPlayer() == attacker             )       and !isAttacked(kp.x, kp.y - 1, attacker)               ) // S
-			or  ( isValid(kp.x - 1, kp.y -1)        and ( isFree(kp.x - 1, kp.y -1) or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker )       and !isAttacked(kp.x - 1, kp.y - 1, attacker)   ) // SW
-			or  ( isValid(kp.x - 1, kp.y)   and ( isFree(kp.x - 1, kp.y)            or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker            )       and !isAttacked(kp.x - 1, kp.y, attacker)               ) // W
-			or  ( isValid(kp.x - 1, kp.y + 1)       and ( isFree(kp.x - 1, kp.y + 1)        or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker        )       and !isAttacked(kp.x - 1, kp.y + 1, attacker)   ) // NW
+	if (   (isValid(kp.x, kp.y + 1)
+			and (isFree(kp.x, kp.y + 1) or getPiece(kp.x, kp.y + 1)->getPlayer() == attacker)
+			and !isAttacked(kp.x, kp.y + 1, attacker)) // N
+
+			or
+			(isValid(kp.x + 1, kp.y + 1)
+			and (isFree(kp.x + 1, kp.y + 1) or getPiece(kp.x + 1, kp.y + 1)->getPlayer() == attacker)
+			and !isAttacked(kp.x + 1, kp.y + 1, attacker)) // NE
+
+			or
+			(isValid(kp.x + 1, kp.y)
+			and ( isFree(kp.x + 1, kp.y) or getPiece(kp.x + 1, kp.y)->getPlayer() == attacker)
+			and !isAttacked(kp.x + 1, kp.y, attacker)) // E
+
+			or
+			(isValid(kp.x + 1, kp.y - 1)
+			and ( isFree(kp.x + 1, kp.y - 1) or getPiece(kp.x + 1, kp.y - 1)->getPlayer() == attacker)
+			and !isAttacked(kp.x + 1, kp.y - 1, attacker)) // SE
+
+			or
+			(isValid(kp.x, kp.y -1)
+			and ( isFree(kp.x, kp.y - 1) or getPiece(kp.x, kp.y -1)->getPlayer() == attacker)
+			and !isAttacked(kp.x, kp.y - 1, attacker)) // S
+
+			or
+			(isValid(kp.x - 1, kp.y -1)
+			and ( isFree(kp.x - 1, kp.y -1) or getPiece(kp.x - 1, kp.y -1)->getPlayer() == attacker)
+			and !isAttacked(kp.x - 1, kp.y - 1, attacker)) // SW
+
+			or
+			(isValid(kp.x - 1, kp.y)
+			and ( isFree(kp.x - 1, kp.y) or getPiece(kp.x - 1, kp.y)->getPlayer() == attacker)
+			and !isAttacked(kp.x - 1, kp.y, attacker)) // W
+
+			or
+			(isValid(kp.x - 1, kp.y + 1) and ( isFree(kp.x - 1, kp.y + 1) or getPiece(kp.x - 1, kp.y + 1)->getPlayer() == attacker)
+			and !isAttacked(kp.x - 1, kp.y + 1, attacker)) // NW
 	)
 		// the king can move on at least one adjacent box
 		return false;
@@ -675,7 +727,7 @@ bool ChessBoard::isCheckMate(player attacker) {
 } // isCheckmate
 
 bool ChessBoard::isCheckMate(){
-	return(isCheckMate(p));
+	return(isCheckMate(cpl));
 }
 
 void ChessBoard::moveKing(player p, Position d){
@@ -700,29 +752,29 @@ bool ChessBoard::isCheck(player p){
 bool ChessBoard::simMove(Move m){
 	Piece * pd = this->getPiece(m.getD());
 	movePiece(m); //moves
-	bool check=this->isCheck(p); //checks
+	bool check=this->isCheck(cpl); //checks
 	movePiece(m.getD(), m.getS()); //reverts
-	if (pd!=0) putPiece(pd, m.getS()); //restores eventual taken piece
+	if (pd!=0) putPiece(pd, m.getS()); //restore captured piece, if any
 	return check;
 
 }
 
-void ChessBoard::promote(Position p, char type){ //condition already checked
+void ChessBoard::promote(Position pos, char type){
 	Piece* piece=NULL;
-	if (type=='B') piece = new Bishop (this->p);
-	if (type=='N') piece = new Knight (this->p);
-	if (type=='Q') piece = new Queen (this->p);
-	if (type=='R') piece = new Rook (this->p);
-	this->emptyBox(p);
-	this->putPiece(piece,p);
+	if (type=='B') piece = new Bishop (cpl);
+	if (type=='N') piece = new Knight (cpl);
+	if (type=='Q') piece = new Queen (cpl);
+	if (type=='R') piece = new Rook (cpl);
+	this->emptyBox(pos);
+	this->putPiece(piece,pos);
 } // promote
 
 player ChessBoard::currentPlayer() {
-	return p;
+	return cpl;
 };
 
 player ChessBoard::oppositePlayer() {
-	return (p == white) ? black : white;
+	return (cpl == white) ? black : white;
 };
 
 
