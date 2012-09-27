@@ -15,7 +15,8 @@ int main() {
     bool endg = false; // is set to true in case of withdrawal or drawn match
 
 	do {
-        std::cout<<*CB<<std::endl;
+		// printing the ChessBoard
+        std::cout<< *CB <<std::endl;
 		do {
 			Move m = UI->prompt();
 

@@ -63,6 +63,8 @@ private:
 	void moveKing(player p, Position d);
 	vector<Position> getAttackingPositions(Position p, player attacker);
 	bool simMove(Move m); // simulates a Move to test if it puts the player's king under check
+	bool isFree(int x, int y);
+	Piece * getPiece(int x, int y);
     
 public:
 	ChessBoard();
@@ -75,8 +77,7 @@ public:
     void resetEnPassant(player p);
     bool isCheckMate();
 	bool isCheck(player p);
-	bool isFree(int x, int y);
-	Piece * getPiece(int x, int y);
+
     
     friend ostream& operator<<(ostream& out,  ChessBoard& cb) // output
     {
